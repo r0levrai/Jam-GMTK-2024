@@ -9,12 +9,22 @@ public class Draw : MonoBehaviour
     public bool drawable;
 
     [System.Serializable]
+    public struct UnitySuxxWith2DVector
+    {
+        public Vector3[] points;
+        public UnitySuxxWith2DVector(Vector3[] a)
+        {
+            points = a;
+        }
+    }
+
+    [System.Serializable]
     public struct LineRendererData
     {
-        public Vector3[][] linesPoints;
+        public UnitySuxxWith2DVector[] linesPoints;
         public float[] linesWidth;
         public int[] linesColorIndex;
-        public LineRendererData(Vector3[][] a, float[] b, int[] c)
+        public LineRendererData(UnitySuxxWith2DVector[] a, float[] b, int[] c)
         {
             linesPoints = a;
             linesWidth = b;
@@ -192,7 +202,7 @@ public class Draw : MonoBehaviour
 
     public LineRendererData GetDrawingData()
     {
-        Vector3[][] linesPoints = new Vector3[linesListUndo.Count][];
+        UnitySuxxWith2DVector[] linesPoints = new UnitySuxxWith2DVector[linesListUndo.Count];
         float[] linesWidth = new float[linesListUndo.Count];
         int[] linesColorIndex = new int[linesListUndo.Count];
         for (int i = 0; i < linesListUndo.Count;i++)
@@ -205,10 +215,10 @@ public class Draw : MonoBehaviour
                 linesColorIndex[i] = 1;
             if (action.material.name == "BrushMatWhite (Instance)")
                 linesColorIndex[i] = 2;
-            linesPoints[i] = new Vector3[action.positionCount];
+            linesPoints[i] = new UnitySuxxWith2DVector(new Vector3[action.positionCount]);
             for (int j = 0; j < action.positionCount;j++)
             {
-                linesPoints[i][j] = action.GetPosition(j);
+                linesPoints[i].points[j] = action.GetPosition(j);
             }
         }
 
@@ -226,7 +236,7 @@ public class Draw : MonoBehaviour
                 Destroy(linesListUndo[i].gameObject);
             }
         }
-        Vector3[][] linesPoints = data.linesPoints;
+        UnitySuxxWith2DVector[] linesPoints = data.linesPoints;
         float[] linesWidth = data.linesWidth;
         int[] linesColorIndex = data.linesColorIndex;
         for (int i = 0; i < linesPoints.Length; i++)
@@ -234,9 +244,9 @@ public class Draw : MonoBehaviour
             colorIndex = linesColorIndex[i];
             currentWidth = linesWidth[i];
             CreateBrush(pos,rotation,scale);
-            for (int j = 0; j < linesPoints[i].Length;j++)
+            for (int j = 0; j < linesPoints[i].points.Length;j++)
             {
-                Vector3 previouspos = linesPoints[i][j];
+                Vector3 previouspos = linesPoints[i].points[j];
                 AddAPointSet(j,previouspos);
             }
             linesListUndo.Add(currentLineRenderer);
