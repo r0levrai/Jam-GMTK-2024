@@ -16,8 +16,12 @@ public class Draw : MonoBehaviour
 
     Vector2 lastPos;
 
+    public static Draw Instance;
+
     private void Awake()
     {
+        if (Instance == null) Instance = this;
+
         currentWidth = 0.2f;
         colorIndex = 0;
         linesListUndo = new List<LineRenderer>();
@@ -58,7 +62,7 @@ public class Draw : MonoBehaviour
 
     void CreateBrush()
     {
-        GameObject brushInstance = Instantiate(brush[colorIndex]);
+        GameObject brushInstance = Instantiate(brush[colorIndex], transform);
         currentLineRenderer = brushInstance.GetComponent<LineRenderer>();
         currentLineRenderer.startWidth = currentWidth;
         currentLineRenderer.endWidth = currentWidth;
