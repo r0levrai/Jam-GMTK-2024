@@ -70,7 +70,7 @@ public class Draw : MonoBehaviour
 
     }
 
-    void AddAPoint(Vector2 pointPos)
+    void AddAPoint(Vector3 pointPos)
     {
         currentLineRenderer.positionCount++;
         int positionIndex = currentLineRenderer.positionCount - 1;
@@ -82,7 +82,7 @@ public class Draw : MonoBehaviour
         Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
         if (lastPos != mousePos)
         {
-            AddAPoint(mousePos);
+            AddAPoint(new Vector3(mousePos[0], mousePos[1],- linesListUndo.Count));
             lastPos = mousePos;
         }
     }
