@@ -7,7 +7,6 @@ public class Draw : MonoBehaviour
     public Camera m_camera;
     public GameObject[] brush;
     public bool drawable;
-    public bool debug;
 
     List<LineRenderer> linesListUndo;
     List<LineRenderer> linesListRedo;
@@ -63,7 +62,6 @@ public class Draw : MonoBehaviour
         currentLineRenderer = brushInstance.GetComponent<LineRenderer>();
         currentLineRenderer.startWidth = currentWidth;
         currentLineRenderer.endWidth = currentWidth;
-        //debug = currentLineRenderer.GetComponent<Material>().name == "BrushMatRed";
 
         //because you gotta have 2 points to start a line renderer, 
         Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
@@ -185,11 +183,11 @@ public class Draw : MonoBehaviour
         {
             LineRenderer action = linesListRedo[linesListRedo.Count - 1];
             linesWidth[i] = action.startWidth;
-            if (action.GetComponent<Material>().name == "BrushMatBlack")
+            if (action.material.name == "BrushMatBlack (Instance)")
                 linesColorIndex[i] = 0;
-            if (action.GetComponent<Material>().name == "BrushMatRed")
+            if (action.material.name == "BrushMatRed (Instance)")
                 linesColorIndex[i] = 1;
-            if (action.GetComponent<Material>().name == "BrushMatWhite")
+            if (action.material.name == "BrushMatWhite (Instance)")
                 linesColorIndex[i] = 2;
             linesPoints[i] = new Vector3[action.positionCount];
             for (int j = 0; j < action.positionCount;j++)
@@ -200,6 +198,23 @@ public class Draw : MonoBehaviour
 
         LineRendererData data = new LineRendererData(linesPoints, linesWidth, linesColorIndex);
         return data;
+    }
+
+    public void SetDrawingData(LineRendererData data)
+    {
+        Vector3[][] linesPoints = data.linesPoints;
+        float[] linesWidth = data.linesWidth;
+        int[] linesColorIndex = data.linesColorIndex;
+        for (int i = 0; i < linesPoints.Length; i++)
+        {
+            colorIndex = linesColorIndex[i];
+            currentWidth = linesWidth[i];
+            CreateBrush();
+            for (int j = 0; j < linesPoints[i].Length;j++)
+            {
+                AddAPoint(linesPoints[i][j]);
+            }
+        }
     }
 
 }
