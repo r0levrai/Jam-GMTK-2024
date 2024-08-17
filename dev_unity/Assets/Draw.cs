@@ -236,6 +236,7 @@ public class Draw : MonoBehaviour
                 Destroy(linesListUndo[i].gameObject);
             }
         }
+        linesListUndo.Clear();
         UnitySuxxWith2DVector[] linesPoints = data.linesPoints;
         float[] linesWidth = data.linesWidth;
         int[] linesColorIndex = data.linesColorIndex;
