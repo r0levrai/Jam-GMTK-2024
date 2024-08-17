@@ -1,0 +1,59 @@
+.basic-button {
+    -unity-font: url("project://database/Assets/Font/NanumPenScript-Regular.ttf?fileID=12800000&guid=d341cf114415f8a41b0a11a54f6fed77&type=3#NanumPenScript-Regular");
+    font-size: 100px;
+    -unity-text-align: middle-center;
+    background-color: rgba(254, 255, 199, 0);
+    background-image: url("project://database/Assets/Texture/Submit.png?fileID=2800000&guid=030ec949411adb54295d55c6ac14b00f&type=3#Submit");
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-font-definition: url("project://database/Assets/Font/NanumPenScript-Regular%20SDF%201.asset?fileID=11400000&guid=6a1362e9f2196ac4c9fa0ecb2c4b1338&type=2#NanumPenScript-Regular SDF 1");
+    width: 365px;
+    height: 115px;
+    rotate: -1deg;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.basic-button:hover {
+    background-color: rgba(0, 0, 0, 0);
+    scale: 1.1 1.1;
+    rotate: 3deg;
+}
+
+.basic-button:active {
+    background-color: rgba(0, 0, 0, 0);
+    -unity-background-image-tint-color: rgb(253, 211, 147);
+    scale: 1 1;
+    rotate: -2deg;
+}
+
+.tool-selector-button {
+    font-size: 100px;
+    rotate: -30deg;
+    translate: 0 0;
+    display: flex;
+    height: 164px;
+    width: 569px;
+    color: rgba(27, 27, 27, 0);
+    margin-top: -50px;
+}
+
+.tool-selector-button:hover {
+    translate: 40px -23px;
+}
+
+.tool-selector-button:checked {
+    translate: 130px -75px;
+    color: rgba(27, 27, 27, 0);
+}
+
+.tool-selector-button:focus {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.unity-radio-button__input {
+    display: none;
+    opacity: 1;
+    visibility: hidden;
+}
