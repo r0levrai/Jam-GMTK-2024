@@ -212,6 +212,14 @@ public class Draw : MonoBehaviour
 
     public void SetDrawingData(LineRendererData data,Vector3 pos, Quaternion rotation, Vector3 scale)
     {
+        //clear the previous objects.
+        if (linesListUndo.Count>0)
+        {
+            for (int i = 0; i < linesListUndo.Count; i++)
+            {
+                Destroy(linesListUndo[i].gameObject);
+            }
+        }
         Vector3[][] linesPoints = data.linesPoints;
         float[] linesWidth = data.linesWidth;
         int[] linesColorIndex = data.linesColorIndex;
