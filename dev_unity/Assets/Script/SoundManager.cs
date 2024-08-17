@@ -45,7 +45,7 @@ public class SoundManager : MonoSingleton<SoundManager>
         
     }
 
-    public void PlaySound(string audioClip, int pitch = 1)
+    public void PlaySound(string audioClip, float pitch = 1)
     {
         var currentClip = clips.Find(c => c.name == audioClip);
         Debug.Log(soundEffectSource.isPlaying);
@@ -119,6 +119,16 @@ public class SoundManager : MonoSingleton<SoundManager>
         StopAllCoroutines();
         var newClip = musics.Find(c => c.name == audioClip);
         StartCoroutine(FadeMusic(newClip, timeToFade));
+    }
+
+    public void PlayMusicByZoomIndex(int index, float timeToFade = 3)
+    {
+        switch (index)
+        {
+            case 0: PlayMusicWithFade("main", timeToFade); break;
+            case 1: PlayMusicWithFade("main2", timeToFade); break;
+            case 2: PlayMusicWithFade("main", timeToFade); break;
+		}
     }
 
 }

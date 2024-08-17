@@ -91,6 +91,8 @@ public class ZoomManager : MonoBehaviour
 		{
 			zoomLevelQueue.Enqueue((int)evt.newValue);
 		}
+
+		SoundManager.Instance.PlaySound("duringZoom");
 	}
 
 	private void ProcessNextZoomLevel()
@@ -107,6 +109,8 @@ public class ZoomManager : MonoBehaviour
 			{
 				StartCoroutine(TransitionToNextImage(targetIndex));
 			}
+			SoundManager.Instance.PlaySound("zoom", Random.Range(-.95f, 1.05f));
+			SoundManager.Instance.PlayMusicByZoomIndex(targetIndex, transitionDuration);
 		}
 		//if (Camera.main.orthographicSize < bounds.size.y / 4) //if (Camera.main.orthographicSize > bounds.size.y / 2)
 	}
