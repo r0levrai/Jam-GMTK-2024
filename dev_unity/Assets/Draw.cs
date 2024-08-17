@@ -8,6 +8,20 @@ public class Draw : MonoBehaviour
     public GameObject[] brush;
     public bool drawable;
 
+    [System.Serializable]
+    public struct LineRendererData
+    {
+        public Vector3[][] linesPoints;
+        public float[] linesWidth;
+        public int[] linesColorIndex;
+        public LineRendererData(Vector3[][] a, float[] b, int[] c)
+        {
+            linesPoints = a;
+            linesWidth = b;
+            linesColorIndex = c;
+        }
+    }
+
     List<LineRenderer> linesListUndo;
     List<LineRenderer> linesListRedo;
     LineRenderer currentLineRenderer;
@@ -165,19 +179,6 @@ public class Draw : MonoBehaviour
         }
     }
 
-    public struct LineRendererData
-    {
-        public LineRendererData(Vector3[][] a, float[] b, int[] c )
-        {
-            linesPoints = a;
-            linesWidth = b;
-            linesColorIndex = c; 
-        }
-        public Vector3[][] linesPoints { get;}
-        public float[] linesWidth { get; }
-        public int[] linesColorIndex { get; }
-    }
-
     public LineRendererData GetDrawingData()
     {
         Vector3[][] linesPoints = new Vector3[linesListUndo.Count][];
@@ -185,7 +186,7 @@ public class Draw : MonoBehaviour
         int[] linesColorIndex = new int[linesListUndo.Count];
         for (int i = 0; i < linesListUndo.Count;i++)
         {
-            LineRenderer action = linesListRedo[linesListRedo.Count - 1];
+            LineRenderer action = linesListUndo[linesListUndo.Count - 1];
             linesWidth[i] = action.startWidth;
             if (action.material.name == "BrushMatBlack (Instance)")
                 linesColorIndex[i] = 0;
