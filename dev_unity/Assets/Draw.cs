@@ -226,8 +226,11 @@ public class Draw : MonoBehaviour
         return data;
     }
 
-    public void SetDrawingData(LineRendererData data,Vector3 pos, Quaternion rotation, Vector3 scale)
+    public void SetDrawingData(LineRendererData data)
     {
+        Vector3 pos = transform.position;
+        Quaternion rotation = transform.rotation;
+        Vector3 scale = transform.localScale;
         //clear the previous objects.
         if (linesListUndo.Count>0)
         {
