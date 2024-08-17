@@ -83,10 +83,10 @@ public class Draw : MonoBehaviour
             currentLineRenderer.transform.localScale = scale;
         }
 
-        //because you gotta have 2 points to start a line renderer, 
-        Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
         if (drawable)
         {
+            //because you gotta have 2 points to start a line renderer, 
+            Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
             if (linesListUndo.Count == 0)
             {
                 currentLineRenderer.SetPosition(0, new Vector3(mousePos[0], mousePos[1], 1));
@@ -104,6 +104,12 @@ public class Draw : MonoBehaviour
     {
         currentLineRenderer.positionCount++;
         int positionIndex = currentLineRenderer.positionCount - 1;
+        currentLineRenderer.SetPosition(positionIndex, pointPos);
+    }
+    void AddAPointSet(int positionIndex, Vector3 pointPos)
+    {
+        if (positionIndex>=2)
+            currentLineRenderer.positionCount++;
         currentLineRenderer.SetPosition(positionIndex, pointPos);
     }
 
@@ -231,7 +237,7 @@ public class Draw : MonoBehaviour
             for (int j = 0; j < linesPoints[i].Length;j++)
             {
                 Vector3 previouspos = linesPoints[i][j];
-                AddAPoint(previouspos);
+                AddAPointSet(j,previouspos);
             }
             linesListUndo.Add(currentLineRenderer);
             currentLineRenderer = null;
