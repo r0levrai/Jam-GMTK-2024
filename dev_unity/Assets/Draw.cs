@@ -213,7 +213,9 @@ public class Draw : MonoBehaviour
             CreateBrush();
             for (int j = 0; j < linesPoints[i].Length;j++)
             {
-                AddAPoint(linesPoints[i][j]);
+                Vector3 previouspos = linesPoints[i][j];
+                previouspos
+                AddAPoint(previouspos);
             }
         }
     }
