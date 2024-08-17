@@ -50,7 +50,7 @@ public class Draw : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            CreateBrush();
+            CreateBrush(transform.position,transform.rotation, transform.localScale);
             linesListRedo.Clear();
         }
         else if (Input.GetKey(KeyCode.Mouse0))
@@ -70,24 +70,33 @@ public class Draw : MonoBehaviour
         }
     }
 
-    void CreateBrush()
+    void CreateBrush(Vector3 pos, Quaternion rotation, Vector3 scale)
     {
         GameObject brushInstance = Instantiate(brush[colorIndex]);
         currentLineRenderer = brushInstance.GetComponent<LineRenderer>();
         currentLineRenderer.startWidth = currentWidth;
         currentLineRenderer.endWidth = currentWidth;
+        if (!drawable)
+        {
+            currentLineRenderer.transform.position = pos;
+            currentLineRenderer.transform.rotation = rotation;
+            currentLineRenderer.transform.localScale = scale;
+        }
 
         //because you gotta have 2 points to start a line renderer, 
         Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
-        if (linesListUndo.Count == 0)
+        if (drawable)
         {
-            currentLineRenderer.SetPosition(0, new Vector3(mousePos[0], mousePos[1],1));
-            currentLineRenderer.SetPosition(1, new Vector3(mousePos[0], mousePos[1],1));
-        }
-        else
-        {
-            currentLineRenderer.SetPosition(0, new Vector3(mousePos[0], mousePos[1], 1f / linesListUndo.Count - 1));
-            currentLineRenderer.SetPosition(1, new Vector3(mousePos[0], mousePos[1], 1f / linesListUndo.Count - 1));
+            if (linesListUndo.Count == 0)
+            {
+                currentLineRenderer.SetPosition(0, new Vector3(mousePos[0], mousePos[1], 1));
+                currentLineRenderer.SetPosition(1, new Vector3(mousePos[0], mousePos[1], 1));
+            }
+            else
+            {
+                currentLineRenderer.SetPosition(0, new Vector3(mousePos[0], mousePos[1], 1f / linesListUndo.Count - 1));
+                currentLineRenderer.SetPosition(1, new Vector3(mousePos[0], mousePos[1], 1f / linesListUndo.Count - 1));
+            }
         }
     }
 
@@ -182,7 +191,7 @@ public class Draw : MonoBehaviour
         int[] linesColorIndex = new int[linesListUndo.Count];
         for (int i = 0; i < linesListUndo.Count;i++)
         {
-            LineRenderer action = linesListUndo[linesListUndo.Count - 1];
+            LineRenderer action = linesListUndo[i];
             linesWidth[i] = action.startWidth;
             if (action.material.name == "BrushMatBlack (Instance)")
                 linesColorIndex[i] = 0;
@@ -201,7 +210,7 @@ public class Draw : MonoBehaviour
         return data;
     }
 
-    public void SetDrawingData(LineRendererData data)
+    public void SetDrawingData(LineRendererData data,Vector3 pos, Quaternion rotation, Vector3 scale)
     {
         Vector3[][] linesPoints = data.linesPoints;
         float[] linesWidth = data.linesWidth;
@@ -210,13 +219,14 @@ public class Draw : MonoBehaviour
         {
             colorIndex = linesColorIndex[i];
             currentWidth = linesWidth[i];
-            CreateBrush();
+            CreateBrush(pos,rotation,scale);
             for (int j = 0; j < linesPoints[i].Length;j++)
             {
                 Vector3 previouspos = linesPoints[i][j];
-                previouspos
                 AddAPoint(previouspos);
             }
+            linesListUndo.Add(currentLineRenderer);
+            currentLineRenderer = null;
         }
     }
 

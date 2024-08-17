@@ -13,6 +13,6 @@ public class TestExportImportData : MonoBehaviour
     {
         Draw.LineRendererData data = drawable.GetDrawingData();
         debug = data;
-        replicator.SetDrawingData(data);
+        replicator.SetDrawingData(data, replicator.transform.position, replicator.transform.rotation, replicator.transform.localScale);
     }
 }

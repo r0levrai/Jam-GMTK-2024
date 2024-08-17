@@ -1713,6 +1713,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawable: {fileID: 358453429}
   replicator: {fileID: 2020273335}
+  debug:
+    linesWidth: []
+    linesColorIndex: 
 --- !u!4 &1699681928
 Transform:
   m_ObjectHideFlags: 0
