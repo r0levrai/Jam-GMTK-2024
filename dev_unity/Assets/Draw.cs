@@ -6,13 +6,14 @@ public class Draw : MonoBehaviour
 {
     public Camera m_camera;
     public GameObject[] brush;
+    public bool drawable;
+    public bool debug;
 
     List<LineRenderer> linesListUndo;
     List<LineRenderer> linesListRedo;
     LineRenderer currentLineRenderer;
     float currentWidth;
     int colorIndex;
-
 
     Vector2 lastPos;
 
@@ -22,10 +23,11 @@ public class Draw : MonoBehaviour
         colorIndex = 0;
         linesListUndo = new List<LineRenderer>();
         linesListRedo = new List<LineRenderer>();
+
     }
     private void Update()
     {
-        if (m_camera.ScreenToWorldPoint(Input.mousePosition)[1]<3)
+        if (m_camera.ScreenToWorldPoint(Input.mousePosition)[1]<3 && drawable)
         {
             Drawing();
         }
@@ -37,8 +39,6 @@ public class Draw : MonoBehaviour
         {
             CreateBrush();
             linesListRedo.Clear();
-            currentLineRenderer.startWidth = currentWidth;
-            currentLineRenderer.endWidth = currentWidth;
         }
         else if (Input.GetKey(KeyCode.Mouse0))
         {
@@ -61,13 +61,22 @@ public class Draw : MonoBehaviour
     {
         GameObject brushInstance = Instantiate(brush[colorIndex]);
         currentLineRenderer = brushInstance.GetComponent<LineRenderer>();
+        currentLineRenderer.startWidth = currentWidth;
+        currentLineRenderer.endWidth = currentWidth;
+        //debug = currentLineRenderer.GetComponent<Material>().name == "BrushMatRed";
 
         //because you gotta have 2 points to start a line renderer, 
         Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
-
-        currentLineRenderer.SetPosition(0, mousePos);
-        currentLineRenderer.SetPosition(1, mousePos);
-
+        if (linesListUndo.Count == 0)
+        {
+            currentLineRenderer.SetPosition(0, new Vector3(mousePos[0], mousePos[1],1));
+            currentLineRenderer.SetPosition(1, new Vector3(mousePos[0], mousePos[1],1));
+        }
+        else
+        {
+            currentLineRenderer.SetPosition(0, new Vector3(mousePos[0], mousePos[1], 1f / linesListUndo.Count - 1));
+            currentLineRenderer.SetPosition(1, new Vector3(mousePos[0], mousePos[1], 1f / linesListUndo.Count - 1));
+        }
     }
 
     void AddAPoint(Vector3 pointPos)
@@ -82,60 +91,115 @@ public class Draw : MonoBehaviour
         Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
         if (lastPos != mousePos)
         {
-            AddAPoint(new Vector3(mousePos[0], mousePos[1],- linesListUndo.Count));
+            if (linesListUndo.Count==0)
+                AddAPoint(new Vector3(mousePos[0], mousePos[1], 1));
+            else
+                AddAPoint(new Vector3(mousePos[0], mousePos[1], 1f/linesListUndo.Count-1));
             lastPos = mousePos;
         }
     }
 
     void BrushWidthScale(float scale)
     {
-        currentWidth *= scale;
+        if (drawable)
+            currentWidth *= scale;
     }
 
     public void OnButtonWidthUpPress()
     {
-        BrushWidthScale(2);
+        if (drawable)
+            BrushWidthScale(2);
     }
 
     public void OnButtonWidthDownPress()
     {
-        BrushWidthScale(0.5f);
+        if (drawable)
+            BrushWidthScale(0.5f);
     }
 
     public void OnButtonBrushBlackPress()
     {
-        colorIndex = 0;
+        if (drawable)
+            colorIndex = 0;
     }
 
     public void OnButtonBrushRedPress()
     {
-        colorIndex = 1;
+        if (drawable)
+            colorIndex = 1;
     }
 
     public void OnButtonBrushWhitePress()
     {
-        colorIndex = 2;
+        if (drawable)
+            colorIndex = 2;
     }
 
     public void OnButtonUndoPress()
     {
-        if (linesListUndo.Count > 0)
+        if (drawable)
         {
-            LineRenderer action = linesListUndo[linesListUndo.Count - 1];
-            linesListUndo.RemoveAt(linesListUndo.Count - 1);
-            linesListRedo.Add(action);
-            action.enabled = false;
+            if (linesListUndo.Count > 0)
+            {
+                LineRenderer action = linesListUndo[linesListUndo.Count - 1];
+                linesListUndo.RemoveAt(linesListUndo.Count - 1);
+                linesListRedo.Add(action);
+                action.enabled = false;
+            }
         }
     }
 
     public void OnButtonRedoPress()
     {
-        if (linesListRedo.Count > 0)
+        if (drawable)
         {
-            LineRenderer action = linesListRedo[linesListRedo.Count - 1];
-            linesListRedo.RemoveAt(linesListRedo.Count - 1);
-            linesListUndo.Add(action);
-            action.enabled = true;
+            if (linesListRedo.Count > 0)
+            {
+                LineRenderer action = linesListRedo[linesListRedo.Count - 1];
+                linesListRedo.RemoveAt(linesListRedo.Count - 1);
+                linesListUndo.Add(action);
+                action.enabled = true;
+            }
         }
     }
+
+    public struct LineRendererData
+    {
+        public LineRendererData(Vector3[][] a, float[] b, int[] c )
+        {
+            linesPoints = a;
+            linesWidth = b;
+            linesColorIndex = c; 
+        }
+        public Vector3[][] linesPoints { get;}
+        public float[] linesWidth { get; }
+        public int[] linesColorIndex { get; }
+    }
+
+    public LineRendererData GetDrawingData()
+    {
+        Vector3[][] linesPoints = new Vector3[linesListUndo.Count][];
+        float[] linesWidth = new float[linesListUndo.Count];
+        int[] linesColorIndex = new int[linesListUndo.Count];
+        for (int i = 0; i < linesListUndo.Count;i++)
+        {
+            LineRenderer action = linesListRedo[linesListRedo.Count - 1];
+            linesWidth[i] = action.startWidth;
+            if (action.GetComponent<Material>().name == "BrushMatBlack")
+                linesColorIndex[i] = 0;
+            if (action.GetComponent<Material>().name == "BrushMatRed")
+                linesColorIndex[i] = 1;
+            if (action.GetComponent<Material>().name == "BrushMatWhite")
+                linesColorIndex[i] = 2;
+            linesPoints[i] = new Vector3[action.positionCount];
+            for (int j = 0; j < action.positionCount;j++)
+            {
+                linesPoints[i][j] = action.GetPosition(j);
+            }
+        }
+
+        LineRendererData data = new LineRendererData(linesPoints, linesWidth, linesColorIndex);
+        return data;
+    }
+
 }
