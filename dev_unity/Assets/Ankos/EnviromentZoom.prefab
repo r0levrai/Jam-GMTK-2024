@@ -106,6 +106,7 @@ MonoBehaviour:
   zoomSpeed: 0.001
   moveSpeed: 10
   transitionDuration: 0.6
+  spaceAround: 0.9
   currentIndex: 1
   targetZoom: 1
 --- !u!1 &962818032902649590

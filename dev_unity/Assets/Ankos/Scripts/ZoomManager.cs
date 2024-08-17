@@ -13,6 +13,7 @@ public class ZoomManager : MonoBehaviour
 	[SerializeField] private float zoomSpeed = 0.1f;
 	[SerializeField] private float moveSpeed = 1f;
 	[SerializeField] private float transitionDuration = 0.6f;
+	[SerializeField] private float spaceAround = 0f;
 
 	[HideInInspector] public int currentIndex = 1;
 	[HideInInspector] public float targetZoom = 0;
@@ -122,8 +123,8 @@ public class ZoomManager : MonoBehaviour
 	private Vector3 ClampPositionToBounds(Vector3 newPosition)
 	{
 		Vector3 objectSize = environment[currentIndex].GetComponent<SpriteRenderer>().bounds.size / 2;
-		Vector3 minScreenBounds = cam.ViewportToWorldPoint(new Vector3(0, 0, cam.nearClipPlane));
-		Vector3 maxScreenBounds = cam.ViewportToWorldPoint(new Vector3(1, 1, cam.nearClipPlane));
+		Vector3 minScreenBounds = cam.ViewportToWorldPoint(new Vector3(0, 0, cam.nearClipPlane)) * spaceAround;
+		Vector3 maxScreenBounds = cam.ViewportToWorldPoint(new Vector3(1, 1, cam.nearClipPlane)) * spaceAround;
 		Vector3 clampedPosition = newPosition;
 
 		clampedPosition.x = Mathf.Clamp(newPosition.x, minScreenBounds.x + (maxScreenBounds.x - minScreenBounds.x) - objectSize.x, maxScreenBounds.x - (maxScreenBounds.x - minScreenBounds.x) + objectSize.x);
