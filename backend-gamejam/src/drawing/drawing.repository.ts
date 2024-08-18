@@ -30,12 +30,17 @@ export class DrawingRepository extends Repository<Drawing> {
     }
 
     async findLast10Drawings(): Promise<Drawing[]> {
-        return await this.find({
-            order: {
-                createdDate: "DESC"
-            },
-            take: 10
-        });
+        try {
+            return await this.find({
+                order: {
+                    createdDate: "DESC"
+                },
+                take: 10
+            });
+        } catch (error) {
+            console.error("Error fetching the last 10 drawings:", error);
+            throw new Error("Could not fetch the last 10 drawings");
+        }
     }
 
     async findFirst10Drawings(): Promise<Drawing[]> {

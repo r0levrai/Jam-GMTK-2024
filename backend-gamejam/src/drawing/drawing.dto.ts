@@ -4,8 +4,10 @@ import { Points, Vector3 } from "./drawing.entity";
 export class DrawingDto {
     @IsNotEmpty()
     linesPoints: Points[];
+
     @IsNotEmpty()
     linesWidth: number[];
+    
     @IsNotEmpty()
     linesColorIndex: number[];
 
