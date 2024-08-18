@@ -1,7 +1,7 @@
-import { Vector3 } from "./drawing.entity";
+import { Points, Vector3 } from "./drawing.entity";
 
 export class DrawingDto {
-    linesPoints: Vector3[][];
+    linesPoints: Points[];
     linesWidth: number[];
     linesColorIndex: number[];
     userName: string;
