@@ -157,14 +157,22 @@ public class Draw : MonoBehaviour
         BrushWidthScale(2);
 	}
 
-	public void OnMediumBrushPress()
-	{
-		BrushWidthScale(1);
-	}
-
 	public void OnButtonWidthDownPress()
     {
         BrushWidthScale(0.5f);
+    }
+
+    public void OnSmallBrushPress()
+    {
+        currentWidth = 0.1f;
+    }
+    public void OnMediumBrushPress()
+    {
+        currentWidth = 0.4f;
+    }
+    public void OnLargeBrushPress()
+    {
+        currentWidth = 0.8f;
     }
 
     public void OnButtonBrushBlackPress()
@@ -180,6 +188,11 @@ public class Draw : MonoBehaviour
     public void OnButtonBrushWhitePress()
     {
         colorIndex = 2;
+    }
+
+    public void OnButtonBrushBluePress()
+    {
+        colorIndex = 3;
     }
 
     public void OnButtonUndoPress()
@@ -219,6 +232,8 @@ public class Draw : MonoBehaviour
                 linesColorIndex[i] = 1;
             if (action.material.name == "BrushMatWhite (Instance)")
                 linesColorIndex[i] = 2;
+            if (action.material.name == "BrushMatBlue (Instance)")
+                linesColorIndex[i] = 3;
             linesPoints[i] = new UnitySuxxWith2DVector(new Vector3[action.positionCount]);
             for (int j = 0; j < action.positionCount;j++)
             {

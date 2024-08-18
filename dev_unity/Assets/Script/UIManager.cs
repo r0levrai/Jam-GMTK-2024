@@ -35,13 +35,13 @@ public class UIManager : MonoBehaviour
 		submitButton.clicked += () => GameplayManager.Instance.Submit();
 		pensilBlack.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushBlackPress();});
 		pensilRed.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushRedPress();});
-		//pensilBlue.RegisterCallback<ClickEvent>(evt => { Draw.Instance.;});
+		pensilBlue.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushBluePress(); });
 		pensilWhite.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushWhitePress();});
 		//eraser.RegisterCallback<ClickEvent>(evt => { Draw.Instance.;});
 		undoButton.clicked += () => Draw.Instance.OnButtonUndoPress();
-		smallBrush.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonWidthDownPress(); });
+		smallBrush.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnSmallBrushPress(); });
 		mediumBrush.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnMediumBrushPress(); });
-		bigBrush.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonWidthUpPress(); });
+		bigBrush.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnLargeBrushPress(); });
 
 		RegisterMouseEvent(submitButton);
 		RegisterMouseEvent(pensilBlack);
