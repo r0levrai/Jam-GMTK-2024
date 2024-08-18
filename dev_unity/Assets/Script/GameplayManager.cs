@@ -72,12 +72,13 @@ public class GameplayManager : MonoBehaviour
 
 		StartCoroutine(ShowStampedText(note));
     }
+
 	private IEnumerator ShowStampedText(int note)
 	{
         switch (note)
 		{
 			case <= 0:
-				stampedLabel.text = $"{note}/10<br>I didn't know that existed...";
+				stampedLabel.text = $"{note}/10<br>What a score...";
 				note = 0;
 				break;
 			case 1:
