@@ -1,5 +1,5 @@
 db:
-  host: 'khaled@2a01:e0a:352:ad00:5e75:81b1:a027:b08'
+  host: '2a01:e0a:352:ad00:5e75:81b1:a027:b08'
   username: 'server'
   password: 'Tiptoeing1-Scouts6-Faculty6-Acetone4-Mobility9'
   synchronize: true
