@@ -16,7 +16,7 @@ public class ZoomManager : MonoBehaviour
 	}
 
 	[SerializeField] private UIDocument uiDocument;
-	public ZoomLevel[] zoomLevels;
+	[SerializeField] private ZoomLevel[] zoomLevels;
 	[SerializeField] private InputAction zoomAction;
 	[SerializeField] private InputAction moveAction;
 	[SerializeField] private float zoomScroll = 0.1f;
@@ -24,8 +24,12 @@ public class ZoomManager : MonoBehaviour
 	[SerializeField] private float zoomDuration = 0.15f;
 	[SerializeField] private float spaceAround = 0f;
 
-	[HideInInspector] public float targetZoomValue = 1f;
+	public float currentUnitScaleInMeter
+	{
+		get => zoomLevels[(int)targetZoomValue].refUnitInMeter / zoomLevels[(int)targetZoomValue].spriteRenderer.transform.localScale.x;
+	}
 	
+	private float targetZoomValue = 1f;
 	private float zoomValue = 0f;
 	private float zoomVelocity = 0f;
 	private Slider zoomSlider;
@@ -79,6 +83,7 @@ public class ZoomManager : MonoBehaviour
 
 	private void Update()
 	{
+		Debug.Log(currentUnitScaleInMeter);
 		if (Mathf.Abs(zoomValue - targetZoomValue) > 0.01f)
 		{
 			zoomValue = Mathf.SmoothDamp(zoomValue, targetZoomValue, ref zoomVelocity, zoomDuration);
@@ -132,7 +137,7 @@ public class ZoomManager : MonoBehaviour
 			int index = System.Array.IndexOf(zoomLevels, level);
 			float normalizedValue = Mathf.InverseLerp(index, index+1, value);
 
-			float scale = level.zoomCurve.Evaluate(normalizedValue) * (level.maxScale - level.minScale) + level.minScale;
+			float scale = (level.zoomCurve.Evaluate(normalizedValue) * (level.maxScale - level.minScale)) + level.minScale;
 			level.spriteRenderer.transform.localScale = Vector3.one * scale /*  * level.refUnitInMeter*/;
 			level.spriteRenderer.gameObject.SetActive(scale > 0.01f && value>=index && value<=index+1);
 		}

@@ -15,4 +15,5 @@
             <ui:RadioButton name="BigBrush" focusable="false" class="size-selector-button big-brush" />
         </ui:GroupBox>
     </ui:GroupBox>
+    <ui:Button text="Next" name="Next" class="basic-button" style="position: absolute; bottom: 20px; right: 20px; align-items: flex-end; justify-content: flex-start; align-self: flex-end; left: auto; display: none;" />
 </ui:UXML>

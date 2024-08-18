@@ -10,7 +10,8 @@ public class UIManager : MonoBehaviour
 
 		promptLabel = uiMainDocument.rootVisualElement.Q<Label>("Prompt");
 		submitButton = uiMainDocument.rootVisualElement.Q<Button>("Submit");
-		GroupBox toolGroup = uiMainDocument.rootVisualElement.Q<GroupBox>("ToolSelection");
+		nextButton = uiMainDocument.rootVisualElement.Q<Button>("Next");
+		toolGroup = uiMainDocument.rootVisualElement.Q<GroupBox>("ToolSelection");
 		pensilBlack = toolGroup.Q<RadioButton>("PencilBlack");
 		pensilRed = toolGroup.Q<RadioButton>("PencilRed");
 		pensilBlue = toolGroup.Q<RadioButton>("PencilBlue");
@@ -25,7 +26,8 @@ public class UIManager : MonoBehaviour
 
 	[SerializeField] private UIDocument uiMainDocument;
 	private Label promptLabel;
-	private Button submitButton;
+	private Button submitButton, nextButton;
+	private GroupBox toolGroup;
 	private RadioButton pensilBlack, pensilRed, pensilBlue, pensilWhite, eraser;
 	private Button undoButton;
 	private RadioButton smallBrush, mediumBrush, bigBrush;
@@ -33,6 +35,7 @@ public class UIManager : MonoBehaviour
 	private void Start()
 	{
 		submitButton.clicked += () => GameplayManager.Instance.Submit();
+		nextButton.clicked += () => Debug.Log("next step !");
 		pensilBlack.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushBlackPress();});
 		pensilRed.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushRedPress();});
 		pensilBlue.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushBluePress(); });
@@ -65,5 +68,17 @@ public class UIManager : MonoBehaviour
 	{
 		//animation ???
 		promptLabel.text = title;
+		SoundManager.Instance.PlaySound("write");
+	}
+
+	public void ActiveTools(bool active = true)
+	{
+		submitButton.style.display = active ? DisplayStyle.Flex : DisplayStyle.None;
+		toolGroup.style.display = active ? DisplayStyle.Flex : DisplayStyle.None;
+		Draw.Instance.drawable = active;
+	}
+	public void ActiveNextButton(bool active = true)
+	{
+		nextButton.style.display = active ? DisplayStyle.Flex : DisplayStyle.None;
 	}
 }
