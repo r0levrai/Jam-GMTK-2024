@@ -103,8 +103,13 @@ public class Draw : MonoBehaviour
             Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
             if (linesListUndo.Count == 0)
             {
-                currentLineRenderer.SetPosition(0, new Vector3(mousePos[0], mousePos[1], 1));
-                currentLineRenderer.SetPosition(1, new Vector3(mousePos[0], mousePos[1], 1));
+                currentLineRenderer.SetPosition(0, new Vector3(mousePos[0], mousePos[1],-0.15f));
+                currentLineRenderer.SetPosition(1, new Vector3(mousePos[0], mousePos[1],-0.15f));
+            }
+            else if (linesListUndo.Count == 1)
+            {
+                currentLineRenderer.SetPosition(0, new Vector3(mousePos[0], mousePos[1],-0.2f));
+                currentLineRenderer.SetPosition(1, new Vector3(mousePos[0], mousePos[1],-0.2f));
             }
             else
             {
@@ -133,7 +138,9 @@ public class Draw : MonoBehaviour
         if (lastPos != mousePos)
         {
             if (linesListUndo.Count==0)
-                AddAPoint(new Vector3(mousePos[0], mousePos[1], 1));
+                AddAPoint(new Vector3(mousePos[0], mousePos[1], -0.15f));
+            else if (linesListUndo.Count == 1)
+                AddAPoint(new Vector3(mousePos[0], mousePos[1], -0.2f));
             else
                 AddAPoint(new Vector3(mousePos[0], mousePos[1], 1f/linesListUndo.Count-1));
             lastPos = mousePos;
