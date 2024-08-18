@@ -16,7 +16,7 @@ public class ZoomManager : MonoBehaviour
 	}
 
 	[SerializeField] private UIDocument uiDocument;
-	public ZoomLevel[] zoomLevels;
+	[SerializeField] private ZoomLevel[] zoomLevels;
 	[SerializeField] private InputAction zoomAction;
 	[SerializeField] private InputAction moveAction;
 	[SerializeField] private float zoomScroll = 0.1f;
@@ -24,13 +24,12 @@ public class ZoomManager : MonoBehaviour
 	[SerializeField] private float zoomDuration = 0.15f;
 	[SerializeField] private float spaceAround = 0f;
 
-	[HideInInspector] public float targetZoomValue = 1f;
 	public float currentUnitScaleInMeter
 	{
-		get => zoomLevels[(int)targetZoomValue].refUnitInMeter * zoomLevels[(int)targetZoomValue].spriteRenderer.transform.localScale.x;
-		//get => zoomLevels[(int)targetZoomValue].refUnitInMeter * ((zoomLevels[(int)targetZoomValue].zoomCurve.Evaluate(zoomValue) * (zoomLevels[(int)targetZoomValue].maxScale - zoomLevels[(int)targetZoomValue].minScale)) + zoomLevels[(int)targetZoomValue].minScale);
+		get => zoomLevels[(int)targetZoomValue].refUnitInMeter / zoomLevels[(int)targetZoomValue].spriteRenderer.transform.localScale.x;
 	}
 	
+	private float targetZoomValue = 1f;
 	private float zoomValue = 0f;
 	private float zoomVelocity = 0f;
 	private Slider zoomSlider;

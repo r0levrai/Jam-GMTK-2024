@@ -44,7 +44,7 @@ public class GameplayManager : MonoBehaviour
 	public void NewGame()
     {
         objectIndex = UnityEngine.Random.Range(0, listObjects.Count);
-		UIManager.Instance.FillTitle($"Draw {listObjects[objectIndex].name} to scale!");
+		UIManager.Instance.FillTitle($"Draw {listObjects[objectIndex].name}<br>to scale!");
 		referenceSprite.sprite = listObjects[objectIndex].spriteObject;
 		UIManager.Instance.ActiveTools(true);
 	}
@@ -175,7 +175,8 @@ public class GameplayManager : MonoBehaviour
 		}
 
 		//grow ref image
-		referenceSprite.transform.position = new Vector3(-1.5f, boundsSizeDrawing.Item1.min.y, 0);
+		referenceSprite.transform.position = new Vector3(-1.9f, boundsSizeDrawing.Item1.min.y, 0);
+		if (!isVertical) referenceSprite.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
 		float targetHeight = (listObjects[objectIndex].sizeInMeter / ZoomManager.Instance.currentUnitScaleInMeter) / referenceSprite.sprite.bounds.size.y;
 		Vector3 initialScale = new((listObjects[objectIndex].sizeInMeter / ZoomManager.Instance.currentUnitScaleInMeter) / referenceSprite.sprite.bounds.size.x, 0,1);
 		float initialHeight = initialScale.y;
