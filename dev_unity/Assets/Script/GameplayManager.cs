@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,9 +11,17 @@ public class GameplayManager : MonoBehaviour
 	[SerializeField] private List<ListSprites> stickers;
 	[SerializeField] private UIDocument uiDocument;
 
-    private int objectIndex;
+
+	[SerializeField] private SpriteRenderer referenceSprite;
+	[SerializeField] private RectTransform playerSize;
+	[SerializeField] private TMP_Text playerSizeText;
+	[SerializeField] private RectTransform trueSize;
+	[SerializeField] private TMP_Text trueSizeText;
+
+	private int objectIndex;
 	private Label stampedLabel;
 	private VisualElement imageContainer;
+	private AnimationCurve curve = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
 
 	public static GameplayManager Instance;
 	private void Awake()
@@ -27,17 +36,22 @@ public class GameplayManager : MonoBehaviour
 		var root = uiDocument.rootVisualElement;
 		stampedLabel = root.Q<Label>("stampedLabel");
 		imageContainer = root.Q<VisualElement>("sticker");
+
+		playerSize.localScale = Vector3.zero;
+		trueSize.localScale = Vector3.zero;
 	}
 
 	public void NewGame()
     {
         objectIndex = UnityEngine.Random.Range(0, listObjects.Count);
 		UIManager.Instance.FillTitle($"Draw {listObjects[objectIndex].name} to scale!");
-    }
+		referenceSprite.sprite = listObjects[objectIndex].spriteObject;
+		UIManager.Instance.ActiveTools(true);
+	}
 
 	public (Bounds, Vector3) CheckSize()
     {
-        LineRenderer[] renderers = Draw.Instance.gameObject.GetComponentsInChildren<LineRenderer>();
+        LineRenderer[] renderers = Draw.Instance.linesListUndo.ToArray();
         if (!(renderers != null && renderers.Length > 0)) return (new Bounds(), Vector3.zero);
 
         Bounds lineBounds = renderers[0].bounds;
@@ -46,13 +60,16 @@ public class GameplayManager : MonoBehaviour
             lineBounds.Encapsulate(renderers[i].bounds);
 		}
 
-        Vector3 sizeobject = lineBounds.size * ZoomManager.Instance.zoomLevels[(int)ZoomManager.Instance.targetZoomValue].refUnitInMeter * (ZoomManager.Instance.targetZoomValue-(int)ZoomManager.Instance.targetZoomValue+1);
+		Vector3 sizeobject = lineBounds.size * ZoomManager.Instance.currentUnitScaleInMeter;
 
         return (lineBounds, sizeobject);
 	}
 
-    public void Submit()
+	private int note = 0;
+	public void Submit()
     {
+		UIManager.Instance.ActiveTools(false);
+
         (Bounds, Vector3) boundsSizeDrawing = CheckSize();
 
         float sizeDrawn;
@@ -65,15 +82,17 @@ public class GameplayManager : MonoBehaviour
             sizeDrawn = boundsSizeDrawing.Item2.x;
         }
 
-        float tailleReal = listObjects[objectIndex].sizeInMeter;
-        int note;
-        if (sizeDrawn > tailleReal) note = (int)((sizeDrawn - ((sizeDrawn - tailleReal) * 2)) * 10 / tailleReal) + 1;
-        else note = (int)(sizeDrawn *10 / tailleReal) +1;
+        float realSize = listObjects[objectIndex].sizeInMeter;
+		trueSizeText.text = $"{realSize} m";
+		playerSizeText.text = $"{sizeDrawn} m";
 
-		StartCoroutine(ShowStampedText(note));
+        if (sizeDrawn > realSize) note = (int)((sizeDrawn - ((sizeDrawn - realSize) * 2)) * 10 / realSize) + 1;
+        else note = (int)(sizeDrawn *10 / realSize) +1;
+
+		StartCoroutine(EndAnimation(boundsSizeDrawing, isVertical));
     }
-
-	private IEnumerator ShowStampedText(int note)
+	
+	private IEnumerator ShowStampedText()
 	{
         switch (note)
 		{
@@ -142,10 +161,74 @@ public class GameplayManager : MonoBehaviour
 		imageContainer.style.opacity = 1;
 	}
 
+	private IEnumerator EndAnimation((Bounds, Vector3) boundsSizeDrawing, bool isVertical = true)
+	{
+		float elapsedTime = 0.0f, duration;
+		
+		//show player size
+		duration = .2f;
+		while (elapsedTime < duration)
+		{
+			elapsedTime += Time.deltaTime;
+			playerSize.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, curve.Evaluate(elapsedTime / duration));
+			yield return null;
+		}
+
+		//grow ref image
+		referenceSprite.transform.position = new Vector3(-1.5f, boundsSizeDrawing.Item1.min.y, 0);
+		float targetHeight = (listObjects[objectIndex].sizeInMeter / ZoomManager.Instance.currentUnitScaleInMeter) / referenceSprite.sprite.bounds.size.y;
+		Vector3 initialScale = new((listObjects[objectIndex].sizeInMeter / ZoomManager.Instance.currentUnitScaleInMeter) / referenceSprite.sprite.bounds.size.x, 0,1);
+		float initialHeight = initialScale.y;
+		
+		duration = 1;
+		elapsedTime = 0;
+		while (elapsedTime < duration)
+		{
+			elapsedTime += Time.deltaTime;
+			float newHeight = Mathf.Lerp(initialHeight, targetHeight*0.8f, elapsedTime / duration);
+			referenceSprite.transform.localScale = new Vector3(initialScale.x, newHeight, initialScale.z);
+			yield return null;
+		}
+		duration = 1;
+		elapsedTime = 0;
+		initialHeight += targetHeight * 0.8f;
+		Transform camTransform = Camera.main.transform;
+		Vector3 originalPosCam = camTransform.position;
+		float sizePOVCam = Camera.main.orthographicSize;
+		while (elapsedTime < duration)
+		{
+			elapsedTime += Time.deltaTime;
+			float newHeight = Mathf.Lerp(initialHeight, targetHeight, elapsedTime / duration);
+			referenceSprite.transform.localScale = new Vector3(initialScale.x, newHeight, initialScale.z);
+			camTransform.localPosition = Vector3.Lerp(camTransform.localPosition, originalPosCam + UnityEngine.Random.insideUnitSphere * 1, Time.deltaTime * 3);
+			Camera.main.orthographicSize -= 0.1f * Time.deltaTime * 3;
+			yield return null;
+		}
+		referenceSprite.transform.localScale = new Vector3(initialScale.x, targetHeight, initialScale.z);
+		camTransform.localPosition = originalPosCam;
+		Camera.main.orthographicSize = sizePOVCam;
+
+		//show true size
+		duration = .2f;
+		elapsedTime = 0;
+		while (elapsedTime < duration)
+		{
+			elapsedTime += Time.deltaTime;
+			trueSize.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, curve.Evaluate(elapsedTime / duration));
+			yield return null;
+		}
+		yield return new WaitForSeconds(.5f);
+
+		yield return StartCoroutine(ShowStampedText());
+
+		UIManager.Instance.ActiveNextButton(true);
+	}
+
 	[Serializable]
     public struct ObjectToDrawn {
         public string name;
         public float sizeInMeter;
+		public Sprite spriteObject;
     }
 
 	[Serializable]

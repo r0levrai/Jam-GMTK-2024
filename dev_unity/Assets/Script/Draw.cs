@@ -32,7 +32,7 @@ public class Draw : MonoBehaviour
         }
     }
 
-    List<LineRenderer> linesListUndo;
+    public List<LineRenderer> linesListUndo;
     List<LineRenderer> linesListRedo;
     LineRenderer currentLineRenderer;
     float currentWidth;

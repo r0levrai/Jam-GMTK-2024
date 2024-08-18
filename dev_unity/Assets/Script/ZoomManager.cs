@@ -25,6 +25,11 @@ public class ZoomManager : MonoBehaviour
 	[SerializeField] private float spaceAround = 0f;
 
 	[HideInInspector] public float targetZoomValue = 1f;
+	public float currentUnitScaleInMeter
+	{
+		get => zoomLevels[(int)targetZoomValue].refUnitInMeter * zoomLevels[(int)targetZoomValue].spriteRenderer.transform.localScale.x;
+		//get => zoomLevels[(int)targetZoomValue].refUnitInMeter * ((zoomLevels[(int)targetZoomValue].zoomCurve.Evaluate(zoomValue) * (zoomLevels[(int)targetZoomValue].maxScale - zoomLevels[(int)targetZoomValue].minScale)) + zoomLevels[(int)targetZoomValue].minScale);
+	}
 	
 	private float zoomValue = 0f;
 	private float zoomVelocity = 0f;
@@ -79,6 +84,7 @@ public class ZoomManager : MonoBehaviour
 
 	private void Update()
 	{
+		Debug.Log(currentUnitScaleInMeter);
 		if (Mathf.Abs(zoomValue - targetZoomValue) > 0.01f)
 		{
 			zoomValue = Mathf.SmoothDamp(zoomValue, targetZoomValue, ref zoomVelocity, zoomDuration);
@@ -132,7 +138,7 @@ public class ZoomManager : MonoBehaviour
 			int index = System.Array.IndexOf(zoomLevels, level);
 			float normalizedValue = Mathf.InverseLerp(index, index+1, value);
 
-			float scale = level.zoomCurve.Evaluate(normalizedValue) * (level.maxScale - level.minScale) + level.minScale;
+			float scale = (level.zoomCurve.Evaluate(normalizedValue) * (level.maxScale - level.minScale)) + level.minScale;
 			level.spriteRenderer.transform.localScale = Vector3.one * scale /*  * level.refUnitInMeter*/;
 			level.spriteRenderer.gameObject.SetActive(scale > 0.01f && value>=index && value<=index+1);
 		}
