@@ -16,21 +16,18 @@ public class ZoomManager : MonoBehaviour
 	}
 
 	[SerializeField] private UIDocument uiDocument;
-	[SerializeField] private ZoomLevel[] zoomLevels;
-	public float[] oneUnitInMeter; //to remove
+	public ZoomLevel[] zoomLevels;
 	[SerializeField] private InputAction zoomAction;
 	[SerializeField] private InputAction moveAction;
 	[SerializeField] private float zoomScroll = 0.1f;
 	[SerializeField] private float moveSpeed = 1f;
-	[SerializeField] private float zoomDuration = 0.1f;
-	[SerializeField] private float zoomVelocity = 0f;
+	[SerializeField] private float zoomDuration = 0.15f;
 	[SerializeField] private float spaceAround = 0f;
 
-	[HideInInspector] public int currentIndex = 1;
-	[HideInInspector] public float targetZoom = 0;
+	[HideInInspector] public float targetZoomValue = 1f;
 	
 	private float zoomValue = 0f;
-	private float targetZoomValue;
+	private float zoomVelocity = 0f;
 	private Slider zoomSlider;
 	private Transform movingObject;
 	private Camera cam;
@@ -44,16 +41,18 @@ public class ZoomManager : MonoBehaviour
 	private void Start()
 	{
 		cam = Camera.main;
-		zoomSlider = uiDocument.rootVisualElement.Q<Slider>("scaleSlider");
-		zoomSlider.lowValue = 0f;
-		zoomSlider.highValue = zoomLevels.Length-.1f;
-		zoomSlider.value = currentIndex;
-		zoomSlider.RegisterValueChangedCallback(OnZoomSliderChanged);
 
 		zoomAction.performed += OnZoom;
 		zoomAction.Enable();
 		moveAction.performed += OnMove;
 		moveAction.Enable();
+
+		zoomSlider = uiDocument.rootVisualElement.Q<Slider>("scaleSlider");
+		zoomSlider.lowValue = 0f;
+		zoomSlider.highValue = zoomLevels.Length-.1f;
+		zoomSlider.value = targetZoomValue;
+		zoomSlider.RegisterValueChangedCallback(OnZoomSliderChanged);
+
 
 		for (int i = 0; i < transform.childCount; i++)
 		{
@@ -98,7 +97,7 @@ public class ZoomManager : MonoBehaviour
 
 	private Vector3 ClampPositionToBounds(Vector3 newPosition)
 	{
-		Vector3 objectSize = zoomLevels[currentIndex].spriteRenderer.bounds.size / 2;
+		Vector3 objectSize = zoomLevels[(int)targetZoomValue].spriteRenderer.bounds.size / 2;
 		Vector3 minScreenBounds = cam.ViewportToWorldPoint(new Vector3(0, 0, cam.nearClipPlane)) * spaceAround;
 		Vector3 maxScreenBounds = cam.ViewportToWorldPoint(new Vector3(1, 1, cam.nearClipPlane)) * spaceAround;
 		Vector3 clampedPosition = newPosition;
@@ -121,8 +120,9 @@ public class ZoomManager : MonoBehaviour
 	private void OnZoomSliderChanged(ChangeEvent<float> evt)
 	{
 		targetZoomValue = evt.newValue;
-		Debug.Log(targetZoomValue);
-		SoundManager.Instance.PlaySound("zoom", Random.Range(-.95f, 1.05f));
+		//movingObject.position = ClampPositionToBounds(movingObject.position);
+		//Debug.Log(targetZoomValue);
+		SoundManager.Instance.PlaySound("zoom", Random.Range(-.99f, 1.01f));
 	}
 
 	private void SetZoomLevel(float value)

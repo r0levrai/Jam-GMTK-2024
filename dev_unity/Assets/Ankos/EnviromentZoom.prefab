@@ -330,10 +330,6 @@ MonoBehaviour:
     minScale: 0.95
     maxScale: 2
     refUnitInMeter: 0.00004
-  oneUnitInMeter:
-  - 8910490
-  - 0.04
-  - 0.002
   zoomAction:
     m_Name: Zoom
     m_Type: 0
@@ -386,11 +382,9 @@ MonoBehaviour:
     m_Flags: 0
   zoomScroll: 0.2
   moveSpeed: 10
-  zoomDuration: 0.1
-  zoomVelocity: 0
+  zoomDuration: 0.15
   spaceAround: 0.9
-  currentIndex: 1
-  targetZoom: 1
+  targetZoomValue: 1
 --- !u!1 &962818032902649590
 GameObject:
   m_ObjectHideFlags: 0

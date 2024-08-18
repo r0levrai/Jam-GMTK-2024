@@ -52,7 +52,7 @@ public class GameplayManager : MonoBehaviour
             lineBounds.Encapsulate(renderers[i].bounds);
 		}
 
-        Vector3 sizeobject = lineBounds.size * ZoomManager.Instance.oneUnitInMeter[ZoomManager.Instance.currentIndex];
+        Vector3 sizeobject = lineBounds.size * ZoomManager.Instance.zoomLevels[(int)ZoomManager.Instance.targetZoomValue].refUnitInMeter * (ZoomManager.Instance.targetZoomValue-(int)ZoomManager.Instance.targetZoomValue+1);
 
         return (lineBounds, sizeobject);
 	}

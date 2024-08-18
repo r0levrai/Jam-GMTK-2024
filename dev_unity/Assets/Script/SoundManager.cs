@@ -50,7 +50,7 @@ public class SoundManager : MonoSingleton<SoundManager>
         //Debug.Log(soundEffectSource.isPlaying);
         if (soundEffectSource.isPlaying)
         {
-            if (currentClip.priority > soundEffectSource.priority)
+            if (currentClip.priority >= soundEffectSource.priority)
             {
                 soundEffectSource.Stop();
                 soundEffectSource.clip = currentClip.audio;
