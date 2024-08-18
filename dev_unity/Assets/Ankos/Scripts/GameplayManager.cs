@@ -20,12 +20,6 @@ public class GameplayManager : MonoBehaviour
 		Instance = this;
 	}
 
-	private void Update()
-	{
-        if (Input.GetKeyUp(KeyCode.E))
-            Submit();
-	}
-
 	private void Start()
 	{
         NewGame();
@@ -38,7 +32,7 @@ public class GameplayManager : MonoBehaviour
 	public void NewGame()
     {
         objectIndex = UnityEngine.Random.Range(0, listObjects.Count);
-        FillUI();
+		UIManager.Instance.FillTitle($"Draw {listObjects[objectIndex].name} to scale!");
     }
 
 	public (Bounds, Vector3) CheckSize()
@@ -56,12 +50,6 @@ public class GameplayManager : MonoBehaviour
 
         return (lineBounds, sizeobject);
 	}
-
-    public void FillUI()
-    {
-        string text = $"Draw {listObjects[objectIndex].name} to scale!";
-        Debug.Log(text);
-    }
 
     public void Submit()
     {

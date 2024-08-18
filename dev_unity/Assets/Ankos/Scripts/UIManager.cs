@@ -1,18 +1,69 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	public static UIManager Instance;
+	private void Awake()
+	{
+		Instance = this;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+		promptLabel = uiMainDocument.rootVisualElement.Q<Label>("Prompt");
+		submitButton = uiMainDocument.rootVisualElement.Q<Button>("Submit");
+		GroupBox toolGroup = uiMainDocument.rootVisualElement.Q<GroupBox>("ToolSelection");
+		pensilBlack = toolGroup.Q<RadioButton>("PencilBlack");
+		pensilRed = toolGroup.Q<RadioButton>("PencilRed");
+		pensilBlue = toolGroup.Q<RadioButton>("PencilBlue");
+		pensilWhite = toolGroup.Q<RadioButton>("PencilWhite");
+		eraser = toolGroup.Q<RadioButton>("Eraser");
+		undoButton = toolGroup.Q<Button>("RedoButton");
+		GroupBox brushGroup = toolGroup.Q<GroupBox>("BrushSelection");
+		smallBrush = brushGroup.Q<RadioButton>("SmallBrush");
+		mediumBrush = brushGroup.Q<RadioButton>("MediumBrush");
+		bigBrush = brushGroup.Q<RadioButton>("BigBrush");
+	}
+
+	[SerializeField] private UIDocument uiMainDocument;
+	private Label promptLabel;
+	private Button submitButton;
+	private RadioButton pensilBlack, pensilRed, pensilBlue, pensilWhite, eraser;
+	private Button undoButton;
+	private RadioButton smallBrush, mediumBrush, bigBrush;
+
+	private void Start()
+	{
+		submitButton.clicked += () => GameplayManager.Instance.Submit();
+		pensilBlack.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushBlackPress();});
+		pensilRed.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushRedPress();});
+		//pensilBlue.RegisterCallback<ClickEvent>(evt => { Draw.Instance.;});
+		pensilWhite.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushWhitePress();});
+		//eraser.RegisterCallback<ClickEvent>(evt => { Draw.Instance.;});
+		undoButton.clicked += () => Draw.Instance.OnButtonUndoPress();
+		smallBrush.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonWidthDownPress(); });
+		mediumBrush.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnMediumBrushPress(); });
+		bigBrush.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonWidthUpPress(); });
+
+		RegisterMouseEvent(submitButton);
+		RegisterMouseEvent(pensilBlack);
+		RegisterMouseEvent(pensilRed);
+		RegisterMouseEvent(pensilBlue);
+		RegisterMouseEvent(pensilWhite);
+		RegisterMouseEvent(eraser);
+		RegisterMouseEvent(undoButton);
+		RegisterMouseEvent(smallBrush);
+		RegisterMouseEvent(mediumBrush);
+		RegisterMouseEvent(bigBrush);
+	}
+
+	void RegisterMouseEvent(VisualElement elem)
+	{
+		elem.RegisterCallback<MouseEnterEvent>(_ => Draw.Instance.drawable = false);
+		elem.RegisterCallback<MouseLeaveEvent>(_ => Draw.Instance.drawable = true);
+	}
+
+	public void FillTitle(string title)
+	{
+		//animation ???
+		promptLabel.text = title;
+	}
 }

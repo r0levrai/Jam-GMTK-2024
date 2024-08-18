@@ -54,7 +54,7 @@ public class Draw : MonoBehaviour
     }
     private void Update()
     {
-        if (m_camera.ScreenToWorldPoint(Input.mousePosition)[1]<3 && drawable)
+        if (drawable)
         {
             Drawing();
         }
@@ -142,65 +142,58 @@ public class Draw : MonoBehaviour
 
     void BrushWidthScale(float scale)
     {
-        if (drawable)
-            currentWidth *= scale;
+        currentWidth *= scale;
     }
 
     public void OnButtonWidthUpPress()
     {
-        if (drawable)
-            BrushWidthScale(2);
-    }
+        BrushWidthScale(2);
+	}
 
-    public void OnButtonWidthDownPress()
+	public void OnMediumBrushPress()
+	{
+		BrushWidthScale(1);
+	}
+
+	public void OnButtonWidthDownPress()
     {
-        if (drawable)
-            BrushWidthScale(0.5f);
+        BrushWidthScale(0.5f);
     }
 
     public void OnButtonBrushBlackPress()
     {
-        if (drawable)
-            colorIndex = 0;
+        colorIndex = 0;
     }
 
     public void OnButtonBrushRedPress()
     {
-        if (drawable)
-            colorIndex = 1;
+        colorIndex = 1;
     }
 
     public void OnButtonBrushWhitePress()
     {
-        if (drawable)
-            colorIndex = 2;
+        colorIndex = 2;
     }
 
     public void OnButtonUndoPress()
     {
-        if (drawable)
+        if (linesListUndo.Count > 0)
         {
-            if (linesListUndo.Count > 0)
-            {
-                LineRenderer action = linesListUndo[linesListUndo.Count - 1];
-                linesListUndo.RemoveAt(linesListUndo.Count - 1);
-                linesListRedo.Add(action);
-                action.enabled = false;
-            }
+            LineRenderer action = linesListUndo[linesListUndo.Count - 1];
+            linesListUndo.RemoveAt(linesListUndo.Count - 1);
+            linesListRedo.Add(action);
+            action.enabled = false;
         }
     }
 
     public void OnButtonRedoPress()
     {
-        if (drawable)
+        if (linesListRedo.Count > 0)
         {
-            if (linesListRedo.Count > 0)
-            {
-                LineRenderer action = linesListRedo[linesListRedo.Count - 1];
-                linesListRedo.RemoveAt(linesListRedo.Count - 1);
-                linesListUndo.Add(action);
-                action.enabled = true;
-            }
+            LineRenderer action = linesListRedo[linesListRedo.Count - 1];
+            linesListRedo.RemoveAt(linesListRedo.Count - 1);
+            linesListUndo.Add(action);
+            action.enabled = true;
         }
     }
 
