@@ -82,6 +82,7 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     private IEnumerator FadeMusic(Clip newClip, float fadeTime)
     {
+        yield return new WaitForSeconds(3);
         float timeToFade = fadeTime;
         float timeElapsed = 0;
 
