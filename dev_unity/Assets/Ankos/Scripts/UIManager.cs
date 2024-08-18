@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
 		submitButton.clicked += () => GameplayManager.Instance.Submit();
 		pensilBlack.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushBlackPress();});
 		pensilRed.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushRedPress();});
-		//pensilBlue.RegisterCallback<ClickEvent>(evt => { Draw.Instance.;});
+		pensilBlue.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushBluePress(); });
 		pensilWhite.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushWhitePress();});
 		//eraser.RegisterCallback<ClickEvent>(evt => { Draw.Instance.;});
 		undoButton.clicked += () => Draw.Instance.OnButtonUndoPress();
