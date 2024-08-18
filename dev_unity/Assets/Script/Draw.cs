@@ -46,7 +46,7 @@ public class Draw : MonoBehaviour
     {
         if (Instance == null) Instance = this;
 
-        currentWidth = 0.2f;
+        currentWidth = 0.4f;
         colorIndex = 0;
         linesListUndo = new List<LineRenderer>();
         linesListRedo = new List<LineRenderer>();
