@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement style="flex-grow: 1; justify-content: center; align-items: stretch; align-self: flex-end;">
-        <ui:Slider label="Scale" high-value="6" name="scaleSlider" direction="Vertical" inverted="false" show-input-field="false" page-size="0.1" style="height: 80%; align-self: auto; align-items: flex-start; justify-content: flex-start;" />
+        <ui:Slider label="Scale" high-value="6" name="scaleSlider" direction="Vertical" inverted="false" show-input-field="false" page-size="0.05" style="height: 80%; align-self: auto; align-items: flex-start; justify-content: flex-start;" />
     </ui:VisualElement>
 </ui:UXML>

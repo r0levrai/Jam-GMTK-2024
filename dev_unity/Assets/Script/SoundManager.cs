@@ -42,13 +42,12 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         PlayMusic("main");
         PlayMusicWithFade("main2");
-        
     }
 
     public void PlaySound(string audioClip, float pitch = 1)
     {
         var currentClip = clips.Find(c => c.name == audioClip);
-        Debug.Log(soundEffectSource.isPlaying);
+        //Debug.Log(soundEffectSource.isPlaying);
         if (soundEffectSource.isPlaying)
         {
             if (currentClip.priority > soundEffectSource.priority)

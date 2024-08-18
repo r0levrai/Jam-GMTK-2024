@@ -57,11 +57,8 @@ MonoBehaviour:
   - name: coin
     audio: {fileID: 8300000, guid: 58a2549ca3754dc42a76494ea239c9e4, type: 3}
     priority: 101
-  - name: duringZoom
-    audio: {fileID: 8300000, guid: 58a2549ca3754dc42a76494ea239c9e4, type: 3}
-    priority: 102
   - name: zoom
-    audio: {fileID: 8300000, guid: e9a1f696913e68441a343d2b970981cf, type: 3}
+    audio: {fileID: 8300000, guid: 58a2549ca3754dc42a76494ea239c9e4, type: 3}
     priority: 103
   musics:
   - name: main

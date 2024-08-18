@@ -1,0 +1,131 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1591259932334373314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4665089511609015544}
+  - component: {fileID: 910243908512922236}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4665089511609015544
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591259932334373314}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6838247231079692250}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &910243908512922236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591259932334373314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b704cd76df5c2d44eb1803d91ed452ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listObjects:
+  - name: the Moon
+    sizeInMeter: 3474000
+  - name: a black ant
+    sizeInMeter: 0.005
+  - name: a paperback book
+    sizeInMeter: 0.18
+  - name: a football field
+    sizeInMeter: 105
+  stickers:
+  - sprites:
+    - {fileID: 21300000, guid: 3157a8feec6c4834591f29acb2ef1c18, type: 3}
+  - sprites:
+    - {fileID: 21300000, guid: 4d12dcc0a613af043beed6793eab35ed, type: 3}
+  - sprites:
+    - {fileID: 21300000, guid: e675b605994affa4993bc282d8ef5420, type: 3}
+  - sprites:
+    - {fileID: 21300000, guid: 1be415123da3b084d957a07ec2abb142, type: 3}
+  - sprites:
+    - {fileID: 21300000, guid: 8fa0842b301d6db4b99972baea78bc38, type: 3}
+  - sprites:
+    - {fileID: 21300000, guid: 36d8ca6e639914b4eab1c5ced0973fb6, type: 3}
+  - sprites:
+    - {fileID: 21300000, guid: 6159fac73e800234ca15e7ad71152fd1, type: 3}
+  - sprites:
+    - {fileID: 21300000, guid: 7c57ba3d3be6b144b82cfc22f87df23e, type: 3}
+    - {fileID: 21300000, guid: b133f4dfdce51094fbd6604e9279a3ed, type: 3}
+  - sprites:
+    - {fileID: 21300000, guid: 8ee2fbe1361866446beda3c29c2a5194, type: 3}
+    - {fileID: 21300000, guid: 3073bb542026bf5469c486a6be8242b2, type: 3}
+  - sprites:
+    - {fileID: 21300000, guid: f7381ffa323addb4cbd49769fb98e748, type: 3}
+    - {fileID: 21300000, guid: 5fdd30e82e514854ebc94ce7827287d0, type: 3}
+  - sprites:
+    - {fileID: 21300000, guid: cdb84adce63cb034d9f8d22952fd37d6, type: 3}
+  uiDocument: {fileID: 8748764817086723960}
+--- !u!1 &3756397105362866659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6838247231079692250}
+  - component: {fileID: 8748764817086723960}
+  m_Layer: 0
+  m_Name: StampNote
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6838247231079692250
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3756397105362866659}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4665089511609015544}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8748764817086723960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3756397105362866659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: fe594e44b951e5b46bf129b3f6f46b23, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 453d89c1021d2e244909926f3ec5d3ff, type: 3}
+  m_SortingOrder: 0
