@@ -1,6 +1,6 @@
 db:
   host: 'localhost'
-  username: 'root'
+  username: 'server'
   password: 'Tiptoeing1-Scouts6-Faculty6-Acetone4-Mobility9'
   synchronize: true
 
