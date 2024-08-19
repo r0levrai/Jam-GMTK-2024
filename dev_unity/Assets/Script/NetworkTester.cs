@@ -25,17 +25,17 @@ public class NetworkTester : MonoBehaviour
             {
                 print("saving drawing in variable");
                 currentDrawing = new NetworkedDrawing(drawings[0].GetDrawingData(),
-                    "guest", "A book", "Human", 8.3f
+                    null, null, "guest", "A book", "Human", 8.3f
                 );
-                print(currentDrawing.ToJson());
+                print(currentDrawing);
             }
             else // Shift + S pressed
             {
                 print("sending drawing to server");
                 var drawing = new NetworkedDrawing(drawings[0].GetDrawingData(),
-                    "guest", "A book", "Human", 8.3f
+                    null, null, "guest", "A book", "Human", 8.3f
                 );
-                print(drawing.ToJson());
+                print(drawing);
                 await drawing.Send();
             }
 
@@ -53,12 +53,13 @@ public class NetworkTester : MonoBehaviour
             {
                 print("receiving drawing from server");
                 int n = 3;
-                NetworkedDrawing[] received = await NetworkedDrawing.ReceiveRandom(n);
+                NetworkedDrawing[] received = await NetworkedDrawing.ReceiveLasts(n);
                 print($"received {received.Length} drawings, asked for {n}");
                 if (received.Length > 0)
                 {
                     print($"displaying first:");
-                    print(received[0].ToJson());
+                    print(received[0]);
+                    print(received[0].data.createdDate);
                     drawings[1].SetDrawingData(received[0].GetDrawingData());
                 }
             }
