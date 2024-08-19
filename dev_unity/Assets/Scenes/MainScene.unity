@@ -629,11 +629,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectFoundList.Array.data[0]
-      value: Maybe I was wrong to let you draw X.
+      value: Maybe I was wrong to let you draw XX.
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectFoundList.Array.data[1]
-      value: "That\u2019s not what X looks like."
+      value: "That\u2019s not what XX looks like."
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectFoundList.Array.data[2]
@@ -892,40 +892,40 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectNotFoundList.Array.data[0]
-      value: "My eyes tell me it\u2019s a Y, but worry not. My heart tells me it\u2019s
-        X."
+      value: "My eyes tell me it\u2019s a YY, but worry not. My heart tells me it\u2019s
+        XX."
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectNotFoundList.Array.data[1]
-      value: It looks like a Y. But you do you.
+      value: It looks like a YY. But you do you.
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectNotFoundList.Array.data[2]
-      value: "What a Y! Oh, you were meant to draw X. Oh\u2026"
+      value: "What a YY! Oh, you were meant to draw XX. Oh\u2026"
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectNotFoundList.Array.data[3]
-      value: That's just a Y.
+      value: That's just a YY.
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectNotFoundList.Array.data[4]
-      value: Your X is so bad it looks like a Y.
+      value: Your XX is so bad it looks like a YY.
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectNotFoundList.Array.data[5]
-      value: "If I were to draw X, I wouldn\u2019t draw a Y"
+      value: "If I were to draw XX, I wouldn\u2019t draw a YY"
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectNotFoundList.Array.data[6]
-      value: I thought you were drawing X, not a Y
+      value: I thought you were drawing XX, not a YY
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectNotFoundList.Array.data[7]
-      value: Your Y looks like X if I were standing from very far.
+      value: Your YY looks like XX if I were standing from very far.
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectNotFoundList.Array.data[8]
-      value: That's not what X looks like in my mind. That's just a Y.
+      value: That's not what XX looks like in my mind. That's just a YY.
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: IntroductionCommentList.Array.size
@@ -1563,22 +1563,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectCategeoryNoneCommentList.Array.data[0]
-      value: I have no clue what X looks like, but that thing you did screams Y to
-        me.
+      value: I have no clue what XX looks like, but that thing you did screams YY
+        to me.
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectCategeoryNoneCommentList.Array.data[1]
-      value: I've never seen X, but I'm sure it does not look like this.
+      value: I've never seen XX, but I'm sure it does not look like this.
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectCategeoryNoneCommentList.Array.data[2]
-      value: "Banana books didn't tell me what X is, but that won\u2019t stop me
+      value: "Banana books didn't tell me what XX is, but that won\u2019t stop me
         from telling you it was horrible!"
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectCategeoryNoneCommentList.Array.data[3]
       value: "You\u2019re really drawing everything that\u2019s asked of you, huh\u2026even
-        if X's existence has never been proven\u2026"
+        if XX's existence has never been proven\u2026"
       objectReference: {fileID: 0}
     - target: {fileID: 1591259932334373314, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: m_Name
