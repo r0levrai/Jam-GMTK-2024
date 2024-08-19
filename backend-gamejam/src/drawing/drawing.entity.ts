@@ -1,4 +1,5 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Reaction } from "src/reaction/reaction.entity";
+import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 
 
@@ -41,4 +42,7 @@ export class Drawing extends BaseEntity {
 
     @Column()
     score: number;
+
+    @OneToMany(() => Reaction, reaction => reaction.drawing)
+    reactions: Reaction[];
 }
