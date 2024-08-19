@@ -620,6 +620,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: SnarkyCommentList.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectFoundList.Array.data[0]
       value: Maybe I was wrong to let you draw X.
       objectReference: {fileID: 0}
@@ -638,7 +642,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectNotFoundList.Array.size
-      value: 4
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: SnarkyCommentList.Array.data[0]
+      value: "I wouldn\u2019t do this."
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: SnarkyCommentList.Array.data[1]
+      value: "You know there is an undo button right? nevermind just click on the
+        wastepaper basket\u2026"
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: SnarkyCommentList.Array.data[2]
+      value: Did you read the guideline?
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: SnarkyCommentList.Array.data[3]
+      value: "That\u2019s one bad way to do it!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: SnarkyCommentList.Array.data[4]
+      value: Welp, I guess .random_user_4587422 will be the one
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: SnarkyCommentList.Array.data[5]
+      value: "I know there is no time limit, but you won\u2019t win even if you my
+        exceed banana life expectancy."
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: SnarkyCommentList.Array.data[6]
+      value: That drawing was done 10 lines ago.
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectNotFoundList.Array.data[0]
@@ -658,6 +692,30 @@ PrefabInstance:
       value: That's just Y.
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectNotFoundList.Array.data[4]
+      value: Your X is so bad it looks like Y.
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectNotFoundList.Array.data[5]
+      value: "If I were to draw X, I wouldn\u2019t draw Y."
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectNotFoundList.Array.data[6]
+      value: I thought you were drawing X, not a Y.
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectNotFoundList.Array.data[7]
+      value: Your Y looks like X if I were standing from very far.
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectNotFoundList.Array.data[8]
+      value: That's not what X looks like in my mind. That's just Y.
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: IntroductionCommentList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: listObjects.Array.data[0].category
       value: none
       objectReference: {fileID: 0}
@@ -672,6 +730,24 @@ PrefabInstance:
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: listObjects.Array.data[3].category
       value: none
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: IntroductionCommentList.Array.data[0]
+      value: "Hello I\u2019m Cavendish Canvas, auto-proclaimed artistic Peel of third
+        dan."
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: IntroductionCommentList.Array.data[1]
+      value: "I\u2019ll be the impartial and just judge in this drawing challenge."
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: IntroductionCommentList.Array.data[2]
+      value: We can do it together, and I believe in you random_user_4587421, what
+        a cute name!
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: IntroductionCommentList.Array.data[3]
+      value: "And don\u2019t worry, as the top banana I\u2019ll cover for you!"
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectCategeoryNoneCommentList.Array.size
