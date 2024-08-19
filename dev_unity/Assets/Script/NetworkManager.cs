@@ -13,6 +13,14 @@ public class NetworkManager : MonoSingleton<NetworkManager>
     public string postDrawingsRoute;
     public string getLastNDrawingsRoute;
     //[TextArea(1, 1000)] public string sslCertificatePublicKey;
+    void Awake()
+    {
+        if (FindObjectsOfType<Constants>().Length > 1)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+    }
 }
 
 [Serializable]
