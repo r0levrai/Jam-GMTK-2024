@@ -10,6 +10,9 @@ public class GameplayManager : MonoBehaviour
 	[SerializeField] private List<ObjectToDrawn> listObjects = new();
 	[SerializeField] private List<ListSprites> stickers;
 	[SerializeField] private UIDocument uiDocument;
+	[SerializeField] private ScreenshotDrawing screenshotDrawing;
+	[SerializeField] private Classify classifier;
+	[SerializeField] private Classify.MyPair[] result;
 
 
 	[SerializeField] private SpriteRenderer referenceSprite;
@@ -23,6 +26,7 @@ public class GameplayManager : MonoBehaviour
 	private VisualElement imageContainer;
 	private AnimationCurve curve = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
 
+
 	public static GameplayManager Instance;
 	private void Awake()
 	{
@@ -32,7 +36,6 @@ public class GameplayManager : MonoBehaviour
 	private void Start()
 	{
         NewGame();
-
 		var root = uiDocument.rootVisualElement;
 		stampedLabel = root.Q<Label>("stampedLabel");
 		imageContainer = root.Q<VisualElement>("sticker");
@@ -69,8 +72,11 @@ public class GameplayManager : MonoBehaviour
 	public void Submit()
     {
 		UIManager.Instance.ActiveTools(false);
+		Texture2D texture = ScreenshotDrawing.Instance.GetDrawing();
+		//texture.Resize(224, 224);
+		result = classifier.Classification(texture);
 
-        (Bounds, Vector3) boundsSizeDrawing = CheckSize();
+		(Bounds, Vector3) boundsSizeDrawing = CheckSize();
 
         float sizeDrawn;
         bool isVertical;
@@ -90,7 +96,8 @@ public class GameplayManager : MonoBehaviour
         else note = (int)(sizeDrawn *10 / realSize) +1;
 
 		StartCoroutine(EndAnimation(boundsSizeDrawing, isVertical));
-    }
+
+	}
 	
 	private IEnumerator ShowStampedText()
 	{
@@ -230,6 +237,7 @@ public class GameplayManager : MonoBehaviour
         public string name;
         public float sizeInMeter;
 		public Sprite spriteObject;
+		public string category;
     }
 
 	[Serializable]

@@ -521,6 +521,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: classifier
+      value: 
+      objectReference: {fileID: 635097811919719037, guid: d51af5ef847a6e049ac0002d05e22f1a, type: 3}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: screenshotCamera
+      value: 
+      objectReference: {fileID: 1633109612}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: screenshotDrawing
+      value: 
+      objectReference: {fileID: 1633109613}
     - target: {fileID: 1591259932334373314, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: m_Name
       value: GameManager
