@@ -88,37 +88,40 @@ public class GameplayManager : MonoBehaviour
 		float ClassifierScore;
 		bool objectFound = false;
 		int objectFoundIndex = -1;
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 250; i++)
 		{
 			if (result[i].label == listObjects[objectIndex].category)
 			{
-				objectFound = true;
 				objectFoundIndex = i;
-			}
+				if (i<10)
+					objectFound = true;
+			}	
 		}
 
 		if (listObjects[objectIndex].category == "none")
 		{
 			ClassifierPhrase = ObjectCategeoryNoneCommentList[UnityEngine.Random.Range(0, ObjectCategeoryNoneCommentList.Count)];
-			ClassifierScore = result[0].score;
 
 		}
 		else if (objectFound)
 		{
 			ClassifierPhrase = ObjectFoundList[UnityEngine.Random.Range(0, ObjectFoundList.Count)];
-			ClassifierScore = result[objectFoundIndex].score;
 		}
 		else
 		{
 			ClassifierPhrase = ObjectNotFoundList[UnityEngine.Random.Range(0, ObjectNotFoundList.Count)];
-			ClassifierScore = result[0].score;
 		}
+		if (listObjects[objectIndex].category == "none")
+			ClassifierScore = UnityEngine.Random.Range(0f, 100f);
+		else
+			ClassifierScore = 100f -objectFoundIndex / 2.5f;
 		string x = listObjects[objectIndex].name;
-		string y = result[0].label;
+		string y = "";
+		y = result[UnityEngine.Random.Range(0, 10)].label;
 		ClassifierPhrase = ClassifierPhrase.Replace("XX", x);
 		ClassifierPhrase = ClassifierPhrase.Replace("YY", y);
 		bananaFace.style.backgroundImage = new(bananaMoods[UnityEngine.Random.Range(0, bananaMoods.Count)]);
-		bananaScale.text = $"{ClassifierScore}";
+		bananaScale.text = $"{ClassifierScore}%";
 		bananaCommentary.text = ClassifierPhrase;
 
 		(Bounds, Vector3) boundsSizeDrawing = CheckSize();
