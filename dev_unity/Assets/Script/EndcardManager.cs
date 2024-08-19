@@ -78,7 +78,7 @@ public class EndcardManager : MonoBehaviour
         {
             cards[i].timeAgoText.text = drawings[i].GetTimeDifference();
             int iBg = int.TryParse(drawings[i].data.background, out iBg) ? iBg : 0;
-            cards[i].background.sprite = ZoomManager.Instance.GetCurrentImage(iBg);
+            cards[i].background.sprite = Constants.Instance.GetCurrentImage(iBg);
             cards[i].draw.SetDrawingData(drawings[i].GetDrawingData());
         }
     }
