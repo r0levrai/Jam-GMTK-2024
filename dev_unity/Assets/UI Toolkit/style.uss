@@ -114,3 +114,45 @@
 .size-selector-button.medium-brush:checked {
     background-image: url("project://database/Assets/Texture/medium_brush_checked.png?fileID=2800000&guid=ecfa100bf65f92c409bac88369f2c251&type=3#medium_brush_checked");
 }
+
+.unity-toggle__checkmark {
+    display: none;
+}
+
+.volume-toggle {
+    width: 63px;
+    height: 55px;
+    background-image: url("project://database/Assets/Texture/volumeoff.png?fileID=2800000&guid=c5a7ec2233ee9df41a7f9018e4414ba1&type=3#volumeoff");
+}
+
+.volume-toggle:checked {
+    background-image: url("project://database/Assets/Texture/volumeon.png?fileID=2800000&guid=b154823559c9d224ea03859c8eba9988&type=3#volumeon");
+}
+
+.unity-base-slider__tracker {
+    background-image: url("project://database/Assets/Texture/slider2.png?fileID=2800000&guid=04e1f5e760c68bf4d92d8186fa95610d&type=3#slider2");
+    width: 375px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0);
+    margin-top: -20px;
+    align-items: stretch;
+}
+
+.unity-base-slider__dragger {
+    background-image: url("project://database/Assets/Texture/button2.png?fileID=2800000&guid=75c9a5ad6c9e45b47a7e7499fffe985b&type=3#button2");
+    width: 38px;
+    height: 49px;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0);
+    margin-top: -25px;
+}
+
+.sound-toggle {
+    background-image: url("project://database/Assets/Texture/sfxoff.png?fileID=2800000&guid=b5adfb9f7c8734a418e9a43f832d9b7f&type=3#sfxoff");
+    width: 56px;
+    height: 57px;
+}
+
+.sound-toggle:checked {
+    background-image: url("project://database/Assets/Texture/sfxon.png?fileID=2800000&guid=3f929f9e80ad6f34caa2325f73c1a8b3&type=3#sfxon");
+}
