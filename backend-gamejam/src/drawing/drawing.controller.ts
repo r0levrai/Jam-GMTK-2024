@@ -29,10 +29,7 @@ export class DrawingController {
         return await this.drawingService.getRandomDrawings(limit);
     }
     
-    @Get(':id')
-    async getDrawingById(@Param('id') id: number): Promise<Drawing | undefined> {
-        return await this.drawingService.getDrawingById(id);
-    }
+ 
 
     @Get('user/:userName')
     async getDrawingsByUserName(@Param('userName') userName: string): Promise<Drawing[]> {
