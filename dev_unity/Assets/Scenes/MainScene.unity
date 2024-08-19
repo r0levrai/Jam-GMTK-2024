@@ -562,6 +562,7 @@ MonoBehaviour:
   - {fileID: 6690431269068935025, guid: 32dde5d4786438e468228d755b2ccdcc, type: 3}
   - {fileID: 6690431269068935025, guid: 8374c93017e0f9741b92ae1e1dd81b03, type: 3}
   - {fileID: 6690431269068935025, guid: 8465faaead587cd4c962ee3cb4ca88e1, type: 3}
+  - {fileID: 6690431269068935025, guid: 95b96ca7767c57747911eec0c23af99d, type: 3}
   drawable: 1
   linesListUndo: []
 --- !u!4 &1166920321

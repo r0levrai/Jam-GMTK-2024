@@ -16,8 +16,9 @@ public class UIManager : MonoBehaviour
 		pensilRed = toolGroup.Q<RadioButton>("PencilRed");
 		pensilBlue = toolGroup.Q<RadioButton>("PencilBlue");
 		pensilWhite = toolGroup.Q<RadioButton>("PencilWhite");
-		eraser = toolGroup.Q<RadioButton>("Eraser");
-		undoButton = toolGroup.Q<Button>("RedoButton");
+		eraser = toolGroup.Q<Button>("ClearButton");
+		undoButton = toolGroup.Q<Button>("BackButton");
+		redoButton = toolGroup.Q<Button>("RedoButton");
 		GroupBox brushGroup = toolGroup.Q<GroupBox>("BrushSelection");
 		smallBrush = brushGroup.Q<RadioButton>("SmallBrush");
 		mediumBrush = brushGroup.Q<RadioButton>("MediumBrush");
@@ -28,8 +29,8 @@ public class UIManager : MonoBehaviour
 	private Label promptLabel;
 	private Button submitButton, nextButton;
 	private GroupBox toolGroup;
-	private RadioButton pensilBlack, pensilRed, pensilBlue, pensilWhite, eraser;
-	private Button undoButton;
+	private RadioButton pensilBlack, pensilRed, pensilBlue, pensilWhite;
+	private Button undoButton, eraser, redoButton;
 	private RadioButton smallBrush, mediumBrush, bigBrush;
 
 	private void Start()
@@ -40,8 +41,9 @@ public class UIManager : MonoBehaviour
 		pensilRed.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushRedPress();});
 		pensilBlue.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushBluePress(); });
 		pensilWhite.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushWhitePress();});
-		//eraser.RegisterCallback<ClickEvent>(evt => { Draw.Instance.;});
-		undoButton.clicked += () => Draw.Instance.OnButtonUndoPress();
+		eraser.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnClearButtonPress(); });
+		undoButton.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonUndoPress(); });
+		redoButton.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonRedoPress(); });
 		smallBrush.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnSmallBrushPress(); });
 		mediumBrush.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnMediumBrushPress(); });
 		bigBrush.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnLargeBrushPress(); });
@@ -53,6 +55,7 @@ public class UIManager : MonoBehaviour
 		RegisterMouseEvent(pensilWhite);
 		RegisterMouseEvent(eraser);
 		RegisterMouseEvent(undoButton);
+		RegisterMouseEvent(redoButton);
 		RegisterMouseEvent(smallBrush);
 		RegisterMouseEvent(mediumBrush);
 		RegisterMouseEvent(bigBrush);
@@ -75,6 +78,7 @@ public class UIManager : MonoBehaviour
 	{
 		submitButton.style.display = active ? DisplayStyle.Flex : DisplayStyle.None;
 		toolGroup.style.display = active ? DisplayStyle.Flex : DisplayStyle.None;
+		promptLabel.style.display = active ? DisplayStyle.Flex : DisplayStyle.None;
 		Draw.Instance.drawable = active;
 	}
 	public void ActiveNextButton(bool active = true)

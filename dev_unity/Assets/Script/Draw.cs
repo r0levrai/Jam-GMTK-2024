@@ -195,6 +195,19 @@ public class Draw : MonoBehaviour
         colorIndex = 3;
     }
 
+    public void OnClearButtonPress()
+    {
+        if (linesListUndo.Count > 0)
+        {
+            for (int i = 0; i < linesListUndo.Count; i++)
+            {
+                Destroy(linesListUndo[i].gameObject);
+            }
+        }
+        linesListUndo.Clear();
+        linesListRedo.Clear();
+    }
+
     public void OnButtonUndoPress()
     {
         if (linesListUndo.Count > 0)
@@ -259,6 +272,7 @@ public class Draw : MonoBehaviour
             }
         }
         linesListUndo.Clear();
+        linesListRedo.Clear();
         UnitySuxxWith2DVector[] linesPoints = data.linesPoints;
         float[] linesWidth = data.linesWidth;
         int[] linesColorIndex = data.linesColorIndex;

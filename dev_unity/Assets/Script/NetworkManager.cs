@@ -105,7 +105,7 @@ public class NetworkedDrawing
     }
     public override string ToString()
     {
-        return JsonUtility.ToJson(this.data) + "\n" + Utils.GetTimeDifference(this.data.createdDate);
+        return JsonUtility.ToJson(this.data) + "\n" + this. GetTimeDifference();
     }
     public static async Task<NetworkedDrawing[]> ReceiveLasts(int n)
     {
@@ -147,10 +147,47 @@ public class NetworkedDrawing
         return new Draw.LineRendererData(data.linesPoints, data.linesWidth, data.linesColorIndex);
     }
 
-    public void Populate(GameObject o)
+    /// Input a string utc datetime in the format "2024-08-19T16:32:57.171Z"
+    /// and compare it to current time.
+    /// Output will be like "2 days ago", "34 minutes ago", etc.
+    public string GetTimeDifference()
     {
-        string result = Utils.GetTimeDifference(data.createdDate);
-        Console.WriteLine(result); // Output will be like "2 days ago", "34 minutes ago", etc.
+        // Parse the input date string (ISO 8601 format)
+        DateTime givenTime;
+        try
+        {
+            givenTime = DateTime.Parse(data.createdDate).ToUniversalTime();
+        }
+        catch
+        {
+            return "? ago";
+        }
+
+        // Calculate the time difference with the current time in UTC
+        DateTime currentTime = DateTime.UtcNow;
+        TimeSpan difference = currentTime - givenTime;
+
+        // Convert to a human-readable format
+        if (difference.TotalDays >= 1)
+        {
+            return $"{(int)difference.TotalDays} days ago";
+        }
+        else if (difference.TotalHours >= 1)
+        {
+            return $"{(int)difference.TotalHours} hours ago";
+        }
+        else if (difference.TotalMinutes >= 1)
+        {
+            return $"{(int)difference.TotalMinutes} minutes ago";
+        }
+        else if (difference.TotalSeconds >= 1)
+        {
+            return $"{(int)difference.TotalSeconds} seconds ago";
+        }
+        else
+        {
+            return "just now";
+        }
     }
 }
 
@@ -189,51 +226,5 @@ public static class UnityWebRequestAsyncExtensions
         }
 
         return request;
-    }
-}
-
-public static class Utils
-{
-    /// Input a string utc datetime in the format "2024-08-19T16:32:57.171Z"
-    /// and compare it to current time.
-    /// Output will be like "2 days ago", "34 minutes ago", etc.
-    public static string GetTimeDifference(string dateTimeString)
-    {
-        // Parse the input date string (ISO 8601 format)
-        DateTime givenTime;
-        try
-        {
-            givenTime = DateTime.Parse(dateTimeString).ToUniversalTime();
-        }
-        catch
-        {
-            return "? ago";
-        }
-
-        // Calculate the time difference with the current time in UTC
-        DateTime currentTime = DateTime.UtcNow;
-        TimeSpan difference = currentTime - givenTime;
-
-        // Convert to a human-readable format
-        if (difference.TotalDays >= 1)
-        {
-            return $"{(int)difference.TotalDays} days ago";
-        }
-        else if (difference.TotalHours >= 1)
-        {
-            return $"{(int)difference.TotalHours} hours ago";
-        }
-        else if (difference.TotalMinutes >= 1)
-        {
-            return $"{(int)difference.TotalMinutes} minutes ago";
-        }
-        else if (difference.TotalSeconds >= 1)
-        {
-            return $"{(int)difference.TotalSeconds} seconds ago";
-        }
-        else
-        {
-            return "just now";
-        }
     }
 }
