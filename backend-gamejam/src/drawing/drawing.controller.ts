@@ -51,10 +51,10 @@ export class DrawingController {
     }
 
     
-    @Post(':id/reactions')
+    @Post(':id/:reaction')
     async addReaction(
         @Param('id') id: number,
-        @Body('reaction') reaction: string,
+        @Param('reaction') reaction: string,
         @Req() request: Request
     ): Promise<Drawing> {
         const ipAdress = request.ip;
