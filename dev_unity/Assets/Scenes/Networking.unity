@@ -779,6 +779,10 @@ PrefabInstance:
         qwIDAQAB'
       objectReference: {fileID: 0}
     - target: {fileID: 5716019098136375467, guid: e0b8080d6f12fca47bd547a806beea2d, type: 3}
+      propertyPath: servers.Array.data[0]
+      value: https://draw-to-scale.r0levrai.net:3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5716019098136375467, guid: e0b8080d6f12fca47bd547a806beea2d, type: 3}
       propertyPath: sslCertificatePublicKey
       value: 
       objectReference: {fileID: 0}

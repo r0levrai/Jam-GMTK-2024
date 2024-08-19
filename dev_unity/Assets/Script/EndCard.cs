@@ -10,6 +10,10 @@ public class EndCard : MonoBehaviour
     private Vector2 positionStart_ = new Vector2(0,0), positionEnd_ = new Vector2(0, 0);
     private float alphaStart_ = 1, alphaEnd_ = 1;
 
+    public TMPro.TextMeshProUGUI timeAgoText;
+    public SpriteRenderer background;
+    public Draw draw;
+
     public float animDuration_ = 1;
 
     public float time_ = 0;
