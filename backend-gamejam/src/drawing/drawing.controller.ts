@@ -44,6 +44,7 @@ export class DrawingController {
     async deleteDrawing(@Param('id') id: number): Promise<void> {
         await this.drawingService.deleteDrawing(id);
     }
+    
 
 
 }
