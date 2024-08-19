@@ -1,10 +1,8 @@
 import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { DrawingRepository } from "./drawing.repository";
-import { Drawing } from "./drawing.entity";
+import { Drawing, ReactionType } from "./drawing.entity";
 import { DrawingDto } from "./drawing.dto";
-import { Reaction } from "src/reaction/reaction.entity";
-import { ReactionRepository } from "src/reaction/reaction.repository";
 
 @Injectable()
 export class DrawingService {
@@ -12,10 +10,9 @@ export class DrawingService {
 
     constructor(
         @InjectRepository(DrawingRepository)
-        private readonly drawingRepository: DrawingRepository,
-        @InjectRepository(ReactionRepository)
-        private readonly reactionRepository: ReactionRepository
+        private readonly drawingRepository: DrawingRepository
     ) {}
+
     
 
     async createDrawing(drawingDto: DrawingDto): Promise<Drawing> {
@@ -49,26 +46,29 @@ export class DrawingService {
         const effectiveLimit = Math.min(limit, this.MAX_RANDOM_DRAWINGS);
         return await this.drawingRepository.findRandomDrawings(effectiveLimit);
     }
+  
 
-    async addReaction(drawingId: number, ipAddress: string, reaction: string): Promise<Reaction> {
-        const drawing = await this.drawingRepository.findOne({ where: { id: drawingId }, relations: ['reactions'] });
+    async addReaction(drawingId: number, reaction: string, ipAddress: string): Promise<Drawing> {
+        const drawing = await this.drawingRepository.findDrawingById(drawingId)
         if (!drawing) {
-            throw new NotFoundException("Not Found");
+            throw new NotFoundException("Not found");
         }
 
-        console.log(this.reactionRepository)
-        console.log(this.drawingRepository)
-        const existingReaction = await this.reactionRepository.findByDrawingAndIpAddress(drawing, ipAddress)
-        if (existingReaction) {
-            //if (existingReaction.reaction === reaction)
-                throw new BadRequestException('User has already reacted to this drawing');
+        if (reaction === ReactionType.LIKE) {
+            if (drawing.like.includes(ipAddress))
+                throw new BadRequestException("already like")
+            drawing.like.push(ipAddress)
         }
-
-        const newReaction = new Reaction();
-        newReaction.drawing = drawing;
-        newReaction.ipAddress = ipAddress;
-        newReaction.reaction = reaction;
-
-        return await this.reactionRepository.save(newReaction);
+        if (reaction === ReactionType.FUNNY) {
+            if (drawing.funny.includes(ipAddress))
+                throw new BadRequestException("already funny")
+            drawing.funny.push(ipAddress)
+        }
+        if (reaction === ReactionType.BAD) {
+            if (drawing.bad.includes(ipAddress))
+                throw new BadRequestException("already bad")
+            drawing.bad.push(ipAddress)
+        }
+        return await this.drawingRepository.save(drawing);
     }
 }

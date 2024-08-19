@@ -1,5 +1,4 @@
-import { Reaction } from "src/reaction/reaction.entity";
-import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, ValueTransformer } from "typeorm";
 
 
 
@@ -13,6 +12,16 @@ export class Points {
     points: Vector3[];
 }
 
+export enum ReactionType {
+    LIKE = "like",
+    FUNNY = "funny",
+    BAD = "bad",
+}
+
+const mapTransformer: ValueTransformer = {
+    to: (value: Map<string, number>) => JSON.stringify(Array.from(value.entries())),
+    from: (value: string) => new Map<string, number>(JSON.parse(value))
+};
 
 @Entity()
 export class Drawing extends BaseEntity {
@@ -43,6 +52,12 @@ export class Drawing extends BaseEntity {
     @Column()
     score: number;
 
-    @OneToMany(() => Reaction, reaction => reaction.drawing)
-    reactions: Reaction[];
+    @Column("simple-array")
+    like: string[];
+
+    @Column("simple-array")
+    funny: string[];
+
+    @Column("simple-array")
+    bad: string[];
 }
