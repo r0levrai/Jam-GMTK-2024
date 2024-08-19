@@ -34,10 +34,11 @@
     rotate: -12.5deg;
     translate: 0 0;
     display: flex;
-    height: 164px;
-    width: 569px;
+    height: 160px;
+    width: 1000px;
     color: rgba(27, 27, 27, 0);
     margin-top: -50px;
+    left: -400px;
 }
 
 .tool-selector-button:hover {

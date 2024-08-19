@@ -60,7 +60,8 @@ public class Classify : MonoBehaviour
         }
         System.Array.Sort<MyPair>(result, new System.Comparison<MyPair>(
                   (i1, i2) => compareTuple(i1, i2)));
-        return result;
+		input.Dispose();
+		return result;
     }
 }
 
