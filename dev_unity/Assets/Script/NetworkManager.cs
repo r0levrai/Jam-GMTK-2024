@@ -10,7 +10,7 @@ public class NetworkManager : MonoSingleton<NetworkManager>
     public string[] servers;
     public string postDrawingsRoute;
     public string getLastNDrawingsRoute;
-    [TextArea(1, 1000)] public string sslCertificatePublicKey;
+    //[TextArea(1, 1000)] public string sslCertificatePublicKey;
 }
 
 [System.Serializable]
@@ -71,7 +71,7 @@ public struct NetworkedDrawing
     {
         string route = NetworkManager.Instance.postDrawingsRoute;
         UnityWebRequest webRequest = UnityWebRequest.Post(NetworkManager.Instance.servers[0] + route, this.ToJson(), "application/json");
-        webRequest.certificateHandler = new CustomSSLCertificate();
+        //webRequest.certificateHandler = new CustomSSLCertificate();
         var response = await webRequest.SendWebRequestAsync();
         if (response.result == UnityWebRequest.Result.ConnectionError || response.result == UnityWebRequest.Result.ProtocolError)
         {
@@ -85,7 +85,7 @@ public struct NetworkedDrawing
     {
         string route = NetworkManager.Instance.getLastNDrawingsRoute;
         UnityWebRequest webRequest = UnityWebRequest.Get(NetworkManager.Instance.servers[0] + $"{route}?n={n}");
-        webRequest.certificateHandler = new CustomSSLCertificate();
+        //webRequest.certificateHandler = new CustomSSLCertificate();
         var response = await webRequest.SendWebRequestAsync();
         if (response.result == UnityWebRequest.Result.ConnectionError || response.result == UnityWebRequest.Result.ProtocolError)
         {
@@ -107,6 +107,7 @@ public struct NetworkedDrawing
     }
 }
 
+/* DONT WORK WITH WEB BUILDS as of 19/08/2024
 public class CustomSSLCertificate : CertificateHandler
 {
     protected override bool ValidateCertificate(byte[] certificateData)
@@ -127,7 +128,7 @@ public class CustomSSLCertificate : CertificateHandler
             return pk.Equals(pubKey);
         }
     }
-}
+}*/
 
 public static class UnityWebRequestAsyncExtensions
 {
