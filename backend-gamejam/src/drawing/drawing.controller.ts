@@ -28,7 +28,7 @@ export class DrawingController {
     async getRandomDrawings(@Query('limit') limit: number): Promise<Drawing[]> {
         return await this.drawingService.getRandomDrawings(limit);
     }
- 
+    
 
     @Get('user/:userName')
     async getDrawingsByUserName(@Param('userName') userName: string): Promise<Drawing[]> {
@@ -44,7 +44,6 @@ export class DrawingController {
     async deleteDrawing(@Param('id') id: number): Promise<void> {
         await this.drawingService.deleteDrawing(id);
     }
-    
 
 
 }
