@@ -25,6 +25,8 @@ public class GameplayManager : MonoBehaviour
 	[SerializeField] private RectTransform trueSize;
 	[SerializeField] private TMP_Text trueSizeText;
 
+	[SerializeField] private List<Sprite> bananaMoods = new();
+
 	private int objectIndex;
 	private Label stampedLabel, bananaCommentary, bananaScale;
 	private VisualElement stickerContainer, bananaFace, bananaRating;
@@ -77,7 +79,7 @@ public class GameplayManager : MonoBehaviour
 
 	private int note = 0;
 	public void Submit()
-    {
+	{
 		UIManager.Instance.ActiveTools(false);
 
 		Texture2D texture = ScreenshotDrawing.Instance.GetDrawing();
@@ -86,8 +88,8 @@ public class GameplayManager : MonoBehaviour
 		float ClassifierScore;
 		bool objectFound = false;
 		int objectFoundIndex = -1;
-		for (int i = 0; i <10; i++)
-        {
+		for (int i = 0; i < 10; i++)
+		{
 			if (result[i].label == listObjects[objectIndex].category)
 			{
 				objectFound = true;
@@ -107,16 +109,17 @@ public class GameplayManager : MonoBehaviour
 			ClassifierScore = result[objectFoundIndex].score;
 		}
 		else
-        {
+		{
 			ClassifierPhrase = ObjectNotFoundList[UnityEngine.Random.Range(0, ObjectNotFoundList.Count)];
 			ClassifierScore = result[0].score;
-
 		}
 		string x = listObjects[objectIndex].name;
 		string y = result[0].label;
 		ClassifierPhrase = ClassifierPhrase.Replace("X", x);
 		ClassifierPhrase = ClassifierPhrase.Replace("Y", y);
-		print(ClassifierPhrase + "    " + ClassifierScore);
+		bananaFace.style.backgroundImage = new(bananaMoods[UnityEngine.Random.Range(0, bananaMoods.Count)]);
+		bananaScale.text = $"{ClassifierScore}";
+		bananaCommentary.text = ClassifierPhrase;
 
 		(Bounds, Vector3) boundsSizeDrawing = CheckSize();
 
@@ -137,9 +140,6 @@ public class GameplayManager : MonoBehaviour
         if (sizeDrawn > realSize) note = (int)((sizeDrawn - ((sizeDrawn - realSize) * 2)) * 10 / realSize) + 1;
         else note = (int)(sizeDrawn *10 / realSize) +1;
 
-		//image bananaFace
-		bananaScale.text = "scale";
-		bananaCommentary.text = "commentary blah blah blah";
 
 		StartCoroutine(EndAnimation(boundsSizeDrawing, isVertical));
 
