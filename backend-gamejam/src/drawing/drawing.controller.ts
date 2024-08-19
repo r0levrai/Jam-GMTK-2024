@@ -28,7 +28,6 @@ export class DrawingController {
     async getRandomDrawings(@Query('limit') limit: number): Promise<Drawing[]> {
         return await this.drawingService.getRandomDrawings(limit);
     }
-    
  
 
     @Get('user/:userName')
