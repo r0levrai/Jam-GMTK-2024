@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -28,16 +27,15 @@ public class ZoomManager : MonoBehaviour
 	{
 		get => zoomLevels[(int)targetZoomValue].refUnitInMeter / zoomLevels[(int)targetZoomValue].spriteRenderer.transform.localScale.x;
 	}
-	public int GetIndexImage() => (int)targetZoomValue;
-	public Sprite GetCurrentImage(int index) => zoomLevels[index].spriteRenderer.sprite;
-	
-	private float targetZoomValue = 1f;
+	private float targetZoomValue { 
+		get => Constants.Instance.targetZoomValue;
+		set => Constants.Instance.targetZoomValue = value; 
+	}
 	private float zoomValue = 0f;
 	private float zoomVelocity = 0f;
 	private Slider zoomSlider;
 	private Transform movingObject;
 	private Camera cam;
-
 
 	public static ZoomManager Instance;
 	private void Awake()
@@ -59,7 +57,6 @@ public class ZoomManager : MonoBehaviour
 		zoomSlider.highValue = zoomLevels.Length-.1f;
 		zoomSlider.value = targetZoomValue;
 		zoomSlider.RegisterValueChangedCallback(OnZoomSliderChanged);
-
 
 		for (int i = 0; i < transform.childCount; i++)
 		{
