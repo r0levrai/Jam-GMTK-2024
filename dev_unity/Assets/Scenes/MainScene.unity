@@ -344,6 +344,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &119996842 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4665089511609015544, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+  m_PrefabInstance: {fileID: 1564704454}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &254383773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -401,6 +406,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0541090ee1ca5f949a1410d5e0144fe2, type: 3}
+--- !u!1001 &280619639
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 119996842}
+    m_Modifications:
+    - target: {fileID: 635097811919719037, guid: d51af5ef847a6e049ac0002d05e22f1a, type: 3}
+      propertyPath: modelAsset
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: c8162db2f4c899947a420e2733b16a22, type: 3}
+    - target: {fileID: 6016876468604153573, guid: d51af5ef847a6e049ac0002d05e22f1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.072831
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016876468604153573, guid: d51af5ef847a6e049ac0002d05e22f1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.7483197
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016876468604153573, guid: d51af5ef847a6e049ac0002d05e22f1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.953186
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016876468604153573, guid: d51af5ef847a6e049ac0002d05e22f1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016876468604153573, guid: d51af5ef847a6e049ac0002d05e22f1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016876468604153573, guid: d51af5ef847a6e049ac0002d05e22f1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016876468604153573, guid: d51af5ef847a6e049ac0002d05e22f1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016876468604153573, guid: d51af5ef847a6e049ac0002d05e22f1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016876468604153573, guid: d51af5ef847a6e049ac0002d05e22f1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016876468604153573, guid: d51af5ef847a6e049ac0002d05e22f1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7675054749332276977, guid: d51af5ef847a6e049ac0002d05e22f1a, type: 3}
+      propertyPath: m_Name
+      value: Classifier
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d51af5ef847a6e049ac0002d05e22f1a, type: 3}
 --- !u!1001 &320298467
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -513,6 +579,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1289443691 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 635097811919719037, guid: d51af5ef847a6e049ac0002d05e22f1a, type: 3}
+  m_PrefabInstance: {fileID: 280619639}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9959192fef942a942a84eab5a0d55400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1289443692 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6016876468604153573, guid: d51af5ef847a6e049ac0002d05e22f1a, type: 3}
+  m_PrefabInstance: {fileID: 280619639}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1564704454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -524,7 +606,7 @@ PrefabInstance:
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: classifier
       value: 
-      objectReference: {fileID: 635097811919719037, guid: d51af5ef847a6e049ac0002d05e22f1a, type: 3}
+      objectReference: {fileID: 1289443691}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: screenshotCamera
       value: 
@@ -533,6 +615,87 @@ PrefabInstance:
       propertyPath: screenshotDrawing
       value: 
       objectReference: {fileID: 1633109613}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectFoundList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectFoundList.Array.data[0]
+      value: Maybe I was wrong to let you draw X.
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectFoundList.Array.data[1]
+      value: "That\u2019s not what X looks like."
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectFoundList.Array.data[2]
+      value: Great attempt. No really.
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectFoundList.Array.data[3]
+      value: "I\u2019m pretty sure I can do better, even if I physically don\u2019t
+        have hands."
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectNotFoundList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectNotFoundList.Array.data[0]
+      value: "My eyes tell me it\u2019s Y, but worry not. My heart tells me it\u2019s
+        X."
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectNotFoundList.Array.data[1]
+      value: It looks like Y. But you do you.
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectNotFoundList.Array.data[2]
+      value: What a Y! Oh, you were meant to draw X. Oh
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectNotFoundList.Array.data[3]
+      value: That's just Y.
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: listObjects.Array.data[0].category
+      value: none
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: listObjects.Array.data[1].category
+      value: ant
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: listObjects.Array.data[2].category
+      value: book
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: listObjects.Array.data[3].category
+      value: none
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectCategeoryNoneCommentList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectCategeoryNoneCommentList.Array.data[0]
+      value: "I\u2019ve no clue what X looks like, but that thing you did screams
+        Y to me."
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectCategeoryNoneCommentList.Array.data[1]
+      value: I have never seen X, but I'm sure it does not look like this.
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectCategeoryNoneCommentList.Array.data[2]
+      value: "Banana books don\u2019t tell me what X is, but that won\u2019t stop
+        me from telling you it was horrible!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectCategeoryNoneCommentList.Array.data[3]
+      value: "You\u2019re drawing everything that\u2019s asked huh\u2026even if X
+        existence has never been proven\u2026"
+      objectReference: {fileID: 0}
     - target: {fileID: 1591259932334373314, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -579,7 +742,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4665089511609015544, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1289443692}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
 --- !u!1 &1633109608

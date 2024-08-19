@@ -8,6 +8,11 @@ using UnityEngine.UIElements;
 public class GameplayManager : MonoBehaviour
 {
 	[SerializeField] private List<ObjectToDrawn> listObjects = new();
+	[SerializeField] private List<String> SnarkyCommentList = new();
+	[SerializeField] private List<String> IntroductionCommentList = new();
+	[SerializeField] private List<String> ObjectCategeoryNoneCommentList = new();
+	[SerializeField] private List<String> ObjectNotFoundList = new();
+	[SerializeField] private List<String> ObjectFoundList = new();
 	[SerializeField] private List<ListSprites> stickers;
 	[SerializeField] private UIDocument uiDocument;
 	[SerializeField] private ScreenshotDrawing screenshotDrawing;
@@ -72,9 +77,44 @@ public class GameplayManager : MonoBehaviour
 	public void Submit()
     {
 		UIManager.Instance.ActiveTools(false);
+
 		Texture2D texture = ScreenshotDrawing.Instance.GetDrawing();
-		//texture.Resize(224, 224);
 		result = classifier.Classification(texture);
+		string ClassifierPhrase;
+		float ClassifierScore;
+		bool objectFound = false;
+		int objectFoundIndex = -1;
+		for (int i = 0; i <10; i++)
+        {
+			if (result[i].label == listObjects[objectIndex].category)
+			{
+				objectFound = true;
+				objectFoundIndex = i;
+			}
+		}
+
+		if (listObjects[objectIndex].category == "none")
+		{
+			ClassifierPhrase = ObjectCategeoryNoneCommentList[UnityEngine.Random.Range(0, ObjectCategeoryNoneCommentList.Count)];
+			ClassifierScore = result[0].score;
+
+		}
+		else if (objectFound)
+		{
+			ClassifierPhrase = ObjectFoundList[UnityEngine.Random.Range(0, ObjectFoundList.Count)];
+			ClassifierScore = result[objectFoundIndex].score;
+		}
+		else
+        {
+			ClassifierPhrase = ObjectNotFoundList[UnityEngine.Random.Range(0, ObjectNotFoundList.Count)];
+			ClassifierScore = result[0].score;
+
+		}
+		string x = listObjects[objectIndex].name;
+		string y = result[0].label;
+		ClassifierPhrase = ClassifierPhrase.Replace("X", x);
+		ClassifierPhrase = ClassifierPhrase.Replace("Y", y);
+		print(ClassifierPhrase + "    " + ClassifierScore);
 
 		(Bounds, Vector3) boundsSizeDrawing = CheckSize();
 
