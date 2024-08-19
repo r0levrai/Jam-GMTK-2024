@@ -17,12 +17,12 @@ public class EndCard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        setupScale(0.5f, 1);
-        setupRotation(2, -2);
-        setupAlpha(0.4f, 1);
-        setupPosition(new Vector3(-1, -1, 0), new Vector3(0, 0, 0));
+        //setupScale(0.5f, 1);
+        //setupRotation(2, -2);
+        //setupAlpha(0.4f, 1);
+        //setupPosition(new Vector3(-1, -1, 0), new Vector3(0, 0, 0));
 
-        time_ = -2;
+        //time_ = -2;
     }
 
     // Update is called once per frame
@@ -79,25 +79,25 @@ public class EndCard : MonoBehaviour
         return t >= 1 ? 1 : t < 0 ? 0 : 1 - (float)System.Math.Pow(2, -10 * t);
     }
 
-    void setupScale(float start, float end)
+    public void setupScale(float start, float end)
     {
         scaleStart_ = start;
         scaleEnd_ = end;
     }
 
-    void setupRotation(float start, float end)
+    public void setupRotation(float start, float end)
     {
         rotationStart_ = start;
         rotationEnd_ = end;
     }
 
-    void setupAlpha(float start, float end)
+    public void setupAlpha(float start, float end)
     {
         alphaStart_ = start;
         alphaEnd_ = end;
     }
 
-    void setupPosition(Vector3 start, Vector3 end)
+    public void setupPosition(Vector3 start, Vector3 end)
     {
         positionStart_ = start;
         positionEnd_ = end;

@@ -7,6 +7,10 @@ app = Flask(__name__)
 
 drawings = []
 
+@app.route('/', methods=['GET'])
+def test():
+    return "hello there :)", 200
+
 @app.route('/drawings', methods=['POST'])
 def receive_json():
     global drawings
@@ -16,7 +20,7 @@ def receive_json():
     drawings.append(json)
     return jsonify({"message": "JSON received"}), 200
 
-@app.route('/draw-at-scale/lasts', methods=['GET'])
+@app.route('/drawings/lasts', methods=['GET'])
 def send_json():
     global drawings
     n = request.args.get('n', default=1, type=int)
@@ -26,4 +30,4 @@ def send_json():
     return jsonify({"drawings": drawings[-n:]}), 200
 
 if __name__ == '__main__':
-    app.run(ssl_context=('ssl-certs/certificate.crt', 'ssl-certs/private.key'), host="0.0.0.0", port=55555, debug=True)
+    app.run(ssl_context=('ssl-certs/fullchain.pem', 'ssl-certs/privkey.pem'), host="0.0.0.0", port=55555, debug=True)
