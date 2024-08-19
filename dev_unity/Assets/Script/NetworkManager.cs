@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Threading.Tasks;
+using System.Security.Cryptography.X509Certificates;
 
 public class NetworkManager : MonoSingleton<NetworkManager>
 {
     public string[] servers;
+    public string postDrawingsRoute;
+    public string getLastNDrawingsRoute;
+    [TextArea(1, 1000)] public string sslCertificatePublicKey;
 }
 
 [System.Serializable]
@@ -65,13 +69,23 @@ public struct NetworkedDrawing
 
     public async Task<bool> Send()
     {
-        UnityWebRequest webRequest = UnityWebRequest.Post(NetworkManager.Instance.servers[0], this.ToJson(), "application/json");
+        string route = NetworkManager.Instance.postDrawingsRoute;
+        UnityWebRequest webRequest = UnityWebRequest.Post(NetworkManager.Instance.servers[0] + route, this.ToJson(), "application/json");
+        webRequest.certificateHandler = new CustomSSLCertificate();
         var response = await webRequest.SendWebRequestAsync();
-        return false;
+        if (response.result == UnityWebRequest.Result.ConnectionError || response.result == UnityWebRequest.Result.ProtocolError)
+        {
+            Debug.LogError("Error: " + response.error);
+            return false;
+        }
+        Debug.Log("Success: " + response.downloadHandler.text);
+        return true;
     }
     public static async Task<NetworkedDrawing[]> ReceiveRandom(int n)
     {
-        UnityWebRequest webRequest = UnityWebRequest.Get(NetworkManager.Instance.servers[0] + $"/random?n={n}");
+        string route = NetworkManager.Instance.getLastNDrawingsRoute;
+        UnityWebRequest webRequest = UnityWebRequest.Get(NetworkManager.Instance.servers[0] + $"{route}?n={n}");
+        webRequest.certificateHandler = new CustomSSLCertificate();
         var response = await webRequest.SendWebRequestAsync();
         if (response.result == UnityWebRequest.Result.ConnectionError || response.result == UnityWebRequest.Result.ProtocolError)
         {
@@ -81,6 +95,7 @@ public struct NetworkedDrawing
         else
         {
             string json = response.downloadHandler.text;
+            Debug.Log("Success: " + json);
             NetworkedDrawing[] data = JsonUtility.FromJson<NetworkedDrawingList>(json).drawings;
             return data;
         }
@@ -89,6 +104,28 @@ public struct NetworkedDrawing
     public Draw.LineRendererData GetDrawingData()
     {
         return new Draw.LineRendererData(this.linesPoints, this.linesWidth, this.linesColorIndex);
+    }
+}
+
+public class CustomSSLCertificate : CertificateHandler
+{
+    protected override bool ValidateCertificate(byte[] certificateData)
+    {
+        string pubKey = NetworkManager.Instance.sslCertificatePublicKey;
+        if (pubKey == null || pubKey == "")  // bypass
+        {
+            return true;
+        }
+        else
+        {
+            X509Certificate2 certificate = new X509Certificate2(certificateData);
+            string pk = certificate.GetPublicKeyString();
+            if (!pk.Equals(pubKey))
+            {
+                Debug.LogError("SSL certificate mismatch: expected public key " + pk);
+            }
+            return pk.Equals(pubKey);
+        }
     }
 }
 

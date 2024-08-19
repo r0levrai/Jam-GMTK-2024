@@ -27,16 +27,18 @@ public class NetworkTester : MonoBehaviour
                 currentDrawing = new NetworkedDrawing(drawings[0].GetDrawingData(),
                     "guest", "A book", "Human", 8.3f
                 );
+                print(currentDrawing.ToJson());
             }
             else // Shift + S pressed
             {
                 print("sending drawing to server");
-                await new NetworkedDrawing(drawings[0].GetDrawingData(),
+                var drawing = new NetworkedDrawing(drawings[0].GetDrawingData(),
                     "guest", "A book", "Human", 8.3f
-                ).Send();
+                );
+                print(drawing.ToJson());
+                await drawing.Send();
             }
 
-            print(currentDrawing.ToJson());
             print("clearing drawing");
             drawings[0].SetDrawingData(emptyDrawingData);
         }
