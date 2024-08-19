@@ -28,6 +28,8 @@ public class ZoomManager : MonoBehaviour
 	{
 		get => zoomLevels[(int)targetZoomValue].refUnitInMeter / zoomLevels[(int)targetZoomValue].spriteRenderer.transform.localScale.x;
 	}
+	public int GetIndexImage() => (int)targetZoomValue;
+	public Sprite GetCurrentImage(int index) => zoomLevels[index].spriteRenderer.sprite;
 	
 	private float targetZoomValue = 1f;
 	private float zoomValue = 0f;
@@ -35,6 +37,7 @@ public class ZoomManager : MonoBehaviour
 	private Slider zoomSlider;
 	private Transform movingObject;
 	private Camera cam;
+
 
 	public static ZoomManager Instance;
 	private void Awake()

@@ -75,6 +75,7 @@ public class UIManager : MonoBehaviour
 	{
 		submitButton.style.display = active ? DisplayStyle.Flex : DisplayStyle.None;
 		toolGroup.style.display = active ? DisplayStyle.Flex : DisplayStyle.None;
+		promptLabel.style.display = active ? DisplayStyle.Flex : DisplayStyle.None;
 		Draw.Instance.drawable = active;
 	}
 	public void ActiveNextButton(bool active = true)

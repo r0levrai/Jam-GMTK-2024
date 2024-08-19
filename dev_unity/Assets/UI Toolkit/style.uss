@@ -114,3 +114,29 @@
 .size-selector-button.medium-brush:checked {
     background-image: url("project://database/Assets/Texture/medium_brush_checked.png?fileID=2800000&guid=ecfa100bf65f92c409bac88369f2c251&type=3#medium_brush_checked");
 }
+
+.unity-base-slider__dragger {
+    background-image: url("project://database/Assets/Sprites/ui%20stuff%20layers.png?fileID=1691425476&guid=19a7656f5aba5e84680f1d932be6c644&type=3#ui stuff layers_14");
+    width: 80%;
+    right: -5px;
+    left: auto;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0);
+    height: 15px;
+}
+
+.unity-base-slider__tracker {
+    background-image: url("project://database/Assets/Sprites/ui%20stuff%20layers.png?fileID=1044022483&guid=19a7656f5aba5e84680f1d932be6c644&type=3#ui stuff layers_9");
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    left: 0;
+    flex-grow: 1;
+}
