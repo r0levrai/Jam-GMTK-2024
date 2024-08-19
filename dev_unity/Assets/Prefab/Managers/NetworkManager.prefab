@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4620426142444665285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3779152658588026147}
+  - component: {fileID: 5716019098136375467}
+  m_Layer: 0
+  m_Name: NetworkManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3779152658588026147
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4620426142444665285}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5716019098136375467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4620426142444665285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6014a34b3d4943a4fb3695405773d96f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  servers:
+  - https://82.66.247.41:3000
+  postDrawingsRoute: /drawings
+  getLastNDrawingsRoute: /drawings/lasts
+  sslCertificatePublicKey: 3082010A0282010100E8FAB9A99BACDB19A37F26D72A889B08A0ECC65CADE2DBF17F060B18E5E4FD275A6AAF8DC05087600819B687FD01DAADBA56805F276157552FB8E705BA30E36CECDC4A30E071431A7EFC0FF1D18C7FC611E4B5BB3B2A8BE2F7174C8BA80033BD3A801899628A0768E64D1C23294B7BCD30432E905F34CA22078D3DE4975D17FF16E4D50304786EFAD11BE28A6340FD04601AEE6908F380B896B9FC340106176E08889C387A7FC8162A570312BC3EA0FC0E2FB1133C67BBDDE39C32AD7449826FB377B9FA0FD2AEACB733D4C60C9925877B2F5223C79F1DB7FA2A002CB190273743307AABD8B1A0BF5F9F85F6DA88A49116E5F4C4470B2B8438D9405548F255AB0203010001

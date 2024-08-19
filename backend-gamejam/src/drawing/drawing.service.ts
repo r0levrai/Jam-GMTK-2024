@@ -35,12 +35,12 @@ export class DrawingService {
         await this.drawingRepository.deleteDrawing(id);
     }
 
-    async getLast10Drawings(): Promise<Drawing[]> {
-        return await this.drawingRepository.findLast10Drawings();
+    async getLastDrawings(limit: number): Promise<Drawing[]> {
+        return await this.drawingRepository.findLastDrawings(limit);
     }
 
-    async getFirst10Drawings(): Promise<Drawing[]> {
-        return await this.drawingRepository.findFirst10Drawings();
+    async getFirstDrawings(limit: number): Promise<Drawing[]> {
+        return await this.drawingRepository.findFirstDrawings(limit);
     }
     async getRandomDrawings(limit: number): Promise<Drawing[]> {
         const effectiveLimit = Math.min(limit, this.MAX_RANDOM_DRAWINGS);

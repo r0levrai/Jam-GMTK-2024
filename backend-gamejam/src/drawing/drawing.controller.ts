@@ -12,9 +12,19 @@ export class DrawingController {
         return await this.drawingService.createDrawing(drawingDto);
     }
 
-    @Get(':id')
-    async getDrawingById(@Param('id') id: number): Promise<Drawing | undefined> {
-        return await this.drawingService.getDrawingById(id);
+    @Get('lasts')
+    async getLastDrawings(@Query('n') n: number): Promise<Drawing[]> {
+        return await this.drawingService.getLastDrawings(n);
+    }
+
+    @Get('firsts')
+    async getFirstDrawings(@Query('n') n: number): Promise<Drawing[]> {
+        return await this.drawingService.getFirstDrawings(n);
+    }
+
+    @Get('random')
+    async getRandomDrawings(@Query('n') n: number): Promise<Drawing[]> {
+        return await this.drawingService.getRandomDrawings(n);
     }
 
     @Get('user/:userName')
@@ -30,20 +40,5 @@ export class DrawingController {
     @Delete(':id')
     async deleteDrawing(@Param('id') id: number): Promise<void> {
         await this.drawingService.deleteDrawing(id);
-    }
-
-    @Get('last10')
-    async getLast10Drawings(): Promise<Drawing[]> {
-        return await this.drawingService.getLast10Drawings();
-    }
-
-    @Get('first10')
-    async getFirst10Drawings(): Promise<Drawing[]> {
-        return await this.drawingService.getFirst10Drawings();
-    }
-
-    @Get('random')
-    async getRandomDrawings(@Query('limit') limit: number): Promise<Drawing[]> {
-        return await this.drawingService.getRandomDrawings(limit);
     }
 }
