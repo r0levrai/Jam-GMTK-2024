@@ -6,7 +6,12 @@
 
 .stamped-text-active {
     display: flex;
-    transform-origin: center;
     scale: 2 2;
     rotate: 10deg;
+}
+
+.banana-active {
+    display: flex;
+    scale: 1 1;
+    rotate: -2deg;
 }

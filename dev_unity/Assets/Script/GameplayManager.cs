@@ -14,7 +14,6 @@ public class GameplayManager : MonoBehaviour
 	[SerializeField] private Classify classifier;
 	[SerializeField] private Classify.MyPair[] result;
 
-
 	[SerializeField] private SpriteRenderer referenceSprite;
 	[SerializeField] private RectTransform playerSize;
 	[SerializeField] private TMP_Text playerSizeText;
@@ -22,10 +21,9 @@ public class GameplayManager : MonoBehaviour
 	[SerializeField] private TMP_Text trueSizeText;
 
 	private int objectIndex;
-	private Label stampedLabel;
-	private VisualElement imageContainer;
+	private Label stampedLabel, bananaCommentary, bananaScale;
+	private VisualElement stickerContainer, bananaFace, bananaRating;
 	private AnimationCurve curve = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
-
 
 	public static GameplayManager Instance;
 	private void Awake()
@@ -38,7 +36,11 @@ public class GameplayManager : MonoBehaviour
         NewGame();
 		var root = uiDocument.rootVisualElement;
 		stampedLabel = root.Q<Label>("stampedLabel");
-		imageContainer = root.Q<VisualElement>("sticker");
+		stickerContainer = root.Q<VisualElement>("sticker");
+		bananaRating = root.Q<VisualElement>("bananaRating");
+		bananaFace = bananaRating.Q<VisualElement>("banana");
+		bananaScale = bananaRating.Q<Label>("bananaScale");
+		bananaCommentary = bananaRating.Q<Label>("bananaCommentary");
 
 		playerSize.localScale = Vector3.zero;
 		trueSize.localScale = Vector3.zero;
@@ -95,6 +97,10 @@ public class GameplayManager : MonoBehaviour
         if (sizeDrawn > realSize) note = (int)((sizeDrawn - ((sizeDrawn - realSize) * 2)) * 10 / realSize) + 1;
         else note = (int)(sizeDrawn *10 / realSize) +1;
 
+		//image bananaFace
+		bananaScale.text = "scale";
+		bananaCommentary.text = "commentary blah blah blah";
+
 		StartCoroutine(EndAnimation(boundsSizeDrawing, isVertical));
 
 	}
@@ -140,32 +146,36 @@ public class GameplayManager : MonoBehaviour
 		}
 
 		if (stickers[note].sprites.Count == 1)
-			imageContainer.style.backgroundImage = new StyleBackground(stickers[note].sprites[0]);
+			stickerContainer.style.backgroundImage = new StyleBackground(stickers[note].sprites[0]);
 		else if(stickers[note].sprites.Count > 1)
-			imageContainer.style.backgroundImage = new StyleBackground(stickers[note].sprites[UnityEngine.Random.Range(0, stickers[note].sprites.Count)]);
+			stickerContainer.style.backgroundImage = new StyleBackground(stickers[note].sprites[UnityEngine.Random.Range(0, stickers[note].sprites.Count)]);
 
 		yield return new WaitForSeconds(.6f);
 		stampedLabel.AddToClassList("stamped-text-active");
 		stampedLabel.RemoveFromClassList("stamped-text-inactive");
 
-		imageContainer.style.opacity = 0;
+		stickerContainer.style.opacity = 0;
 
 		Rect bounds = uiDocument.rootVisualElement.worldBound;
-		float randomX = UnityEngine.Random.Range(bounds.width * 0.25f, bounds.width * 0.75f);
-		float randomY = UnityEngine.Random.Range(bounds.height * 0.25f, bounds.height * 0.75f);
+		float randomX = UnityEngine.Random.Range(bounds.width * 0.2f, bounds.width * 0.8f);
+		float randomY = UnityEngine.Random.Range(bounds.height * 0.2f, bounds.height * 0.8f);
 		float randomRotation = UnityEngine.Random.Range(-45f, 45f);
 
-		imageContainer.style.left = randomX - imageContainer.resolvedStyle.width / 2;
-		imageContainer.style.top = randomY - imageContainer.resolvedStyle.height / 2;
-		imageContainer.style.transformOrigin = new TransformOrigin(50, 50, 0);
-		imageContainer.style.rotate = new Rotate(randomRotation);
-		imageContainer.style.height = 500;
-		imageContainer.style.width = 500;
+		stickerContainer.style.left = randomX - stickerContainer.resolvedStyle.width / 2;
+		stickerContainer.style.top = randomY - stickerContainer.resolvedStyle.height / 2;
+		stickerContainer.style.transformOrigin = new TransformOrigin(50, 50, 0);
+		stickerContainer.style.rotate = new Rotate(randomRotation);
+		stickerContainer.style.height = 500;
+		stickerContainer.style.width = 500;
 
 		yield return new WaitForSeconds(.6f);
-		imageContainer.style.width = 300;
-		imageContainer.style.height = 300;
-		imageContainer.style.opacity = 1;
+		stickerContainer.style.width = 300;
+		stickerContainer.style.height = 300;
+		stickerContainer.style.opacity = 1;
+
+		yield return new WaitForSeconds(.8f);
+		bananaRating.AddToClassList("banana-active");
+		bananaRating.RemoveFromClassList("stamped-text-inactive");
 	}
 
 	private IEnumerator EndAnimation((Bounds, Vector3) boundsSizeDrawing, bool isVertical = true)
