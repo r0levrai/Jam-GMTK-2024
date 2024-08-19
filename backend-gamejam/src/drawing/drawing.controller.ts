@@ -12,23 +12,20 @@ export class DrawingController {
         return await this.drawingService.createDrawing(drawingDto);
     }
 
-
-    @Get('last10')
-    async getLast10Drawings(): Promise<Drawing[]> {
-        console.log("Getting last 10 drawings");
-        return await this.drawingService.getLast10Drawings();
+    @Get('lasts')
+    async getLastDrawings(@Query('n') n: number): Promise<Drawing[]> {
+        return await this.drawingService.getLastDrawings(n);
     }
 
-    @Get('first10')
-    async getFirst10Drawings(): Promise<Drawing[]> {
-        return await this.drawingService.getFirst10Drawings();
+    @Get('firsts')
+    async getFirstDrawings(@Query('n') n: number): Promise<Drawing[]> {
+        return await this.drawingService.getFirstDrawings(n);
     }
 
     @Get('random')
-    async getRandomDrawings(@Query('limit') limit: number): Promise<Drawing[]> {
-        return await this.drawingService.getRandomDrawings(limit);
+    async getRandomDrawings(@Query('n') n: number): Promise<Drawing[]> {
+        return await this.drawingService.getRandomDrawings(n);
     }
-    
 
     @Get('user/:userName')
     async getDrawingsByUserName(@Param('userName') userName: string): Promise<Drawing[]> {
@@ -44,6 +41,4 @@ export class DrawingController {
     async deleteDrawing(@Param('id') id: number): Promise<void> {
         await this.drawingService.deleteDrawing(id);
     }
-
-
 }

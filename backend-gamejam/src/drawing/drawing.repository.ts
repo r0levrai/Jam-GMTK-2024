@@ -29,27 +29,32 @@ export class DrawingRepository extends Repository<Drawing> {
         await this.delete(id);
     }
 
-    async findLast10Drawings(): Promise<Drawing[]> {
+    async findLastDrawings(limit: number): Promise<Drawing[]> {
         try {
             return await this.find({
                 order: {
                     createdDate: "DESC"
                 },
-                take: 10
+                take: limit
             });
         } catch (error) {
-            console.error("Error fetching the last 10 drawings:", error);
-            throw new Error("Could not fetch the last 10 drawings");
+            console.error("Error fetching the last drawings:", error);
+            throw new Error("Could not fetch the last drawings");
         }
     }
-
-    async findFirst10Drawings(): Promise<Drawing[]> {
-        return await this.find({
-            order: {
-                createdDate: "ASC"
-            },
-            take: 10
-        });
+    
+    async findFirstDrawings(limit: number): Promise<Drawing[]> {
+        try {
+            return await this.find({
+                order: {
+                    createdDate: "ASC"
+                },
+                take: limit
+            });
+        } catch (error) {
+            console.error("Error fetching the first drawings:", error);
+            throw new Error("Could not fetch the first drawings");
+        }
     }
 
     async findRandomDrawings(limit: number): Promise<Drawing[]> {
