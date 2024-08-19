@@ -1,7 +1,10 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, Query } from "@nestjs/common";
+import { Controller, Get, Post, Put, Delete, Param, Body, Query, Req } from "@nestjs/common";
 import { DrawingService } from "./drawing.service";
 import { Drawing } from "./drawing.entity";
 import { DrawingDto } from "./drawing.dto";
+import { Request } from 'express';
+import { Reaction } from "src/reaction/reaction.entity";
+
 
 @Controller('drawings')
 export class DrawingController {
@@ -13,23 +16,28 @@ export class DrawingController {
     }
 
     @Get('lasts')
-    async getLastDrawings(@Query('n') n: number): Promise<Drawing[]> {
-        return await this.drawingService.getLastDrawings(n);
+    async getLastDrawings(@Query('n') n: number){
+        const drawings = await this.drawingService.getLastDrawings(n);
+        return {drawings: drawings};
     }
 
     @Get('firsts')
-    async getFirstDrawings(@Query('n') n: number): Promise<Drawing[]> {
-        return await this.drawingService.getFirstDrawings(n);
+    async getFirstDrawings(@Query('n') n: number) {
+        const drawings = await this.drawingService.getFirstDrawings(n);
+        return {drawings: drawings};
     }
 
     @Get('random')
-    async getRandomDrawings(@Query('n') n: number): Promise<Drawing[]> {
-        return await this.drawingService.getRandomDrawings(n);
+    async getRandomDrawings(@Query('n') n: number) {
+        const drawings = await this.drawingService.getRandomDrawings(n);
+        return {drawings: drawings};
     }
 
     @Get('user/:userName')
-    async getDrawingsByUserName(@Param('userName') userName: string): Promise<Drawing[]> {
-        return await this.drawingService.getDrawingsByUserName(userName);
+    async getDrawingsByUserName(@Param('userName') userName: string) {
+        const drawings = await this.drawingService.getDrawingsByUserName(userName);
+        return {drawings: drawings};
+
     }
 
     @Put(':id')
@@ -40,5 +48,16 @@ export class DrawingController {
     @Delete(':id')
     async deleteDrawing(@Param('id') id: number): Promise<void> {
         await this.drawingService.deleteDrawing(id);
+    }
+
+    
+    @Post(':id/reactions')
+    async addReaction(
+        @Param('id') id: number,
+        @Body('reaction') reaction: string,
+        @Req() request: Request
+    ): Promise<Reaction> {
+        const ipAdress = request.ip;
+        return await this.drawingService.addReaction(id, ipAdress, reaction);
     }
 }
