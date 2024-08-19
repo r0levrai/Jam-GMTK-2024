@@ -8,8 +8,16 @@ using UnityEngine.UIElements;
 public class GameplayManager : MonoBehaviour
 {
 	[SerializeField] private List<ObjectToDrawn> listObjects = new();
+	[SerializeField] private List<String> SnarkyCommentList = new();
+	[SerializeField] private List<String> IntroductionCommentList = new();
+	[SerializeField] private List<String> ObjectCategeoryNoneCommentList = new();
+	[SerializeField] private List<String> ObjectNotFoundList = new();
+	[SerializeField] private List<String> ObjectFoundList = new();
 	[SerializeField] private List<ListSprites> stickers;
 	[SerializeField] private UIDocument uiDocument;
+	[SerializeField] private ScreenshotDrawing screenshotDrawing;
+	[SerializeField] private Classify classifier;
+	[SerializeField] private Classify.MyPair[] result;
 
 
 	[SerializeField] private SpriteRenderer referenceSprite;
@@ -23,6 +31,7 @@ public class GameplayManager : MonoBehaviour
 	private VisualElement imageContainer;
 	private AnimationCurve curve = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
 
+
 	public static GameplayManager Instance;
 	private void Awake()
 	{
@@ -32,7 +41,6 @@ public class GameplayManager : MonoBehaviour
 	private void Start()
 	{
         NewGame();
-
 		var root = uiDocument.rootVisualElement;
 		stampedLabel = root.Q<Label>("stampedLabel");
 		imageContainer = root.Q<VisualElement>("sticker");
@@ -70,7 +78,45 @@ public class GameplayManager : MonoBehaviour
     {
 		UIManager.Instance.ActiveTools(false);
 
-        (Bounds, Vector3) boundsSizeDrawing = CheckSize();
+		Texture2D texture = ScreenshotDrawing.Instance.GetDrawing();
+		result = classifier.Classification(texture);
+		string ClassifierPhrase;
+		float ClassifierScore;
+		bool objectFound = false;
+		int objectFoundIndex = -1;
+		for (int i = 0; i <10; i++)
+        {
+			if (result[i].label == listObjects[objectIndex].category)
+			{
+				objectFound = true;
+				objectFoundIndex = i;
+			}
+		}
+
+		if (listObjects[objectIndex].category == "none")
+		{
+			ClassifierPhrase = ObjectCategeoryNoneCommentList[UnityEngine.Random.Range(0, ObjectCategeoryNoneCommentList.Count)];
+			ClassifierScore = result[0].score;
+
+		}
+		else if (objectFound)
+		{
+			ClassifierPhrase = ObjectFoundList[UnityEngine.Random.Range(0, ObjectFoundList.Count)];
+			ClassifierScore = result[objectFoundIndex].score;
+		}
+		else
+        {
+			ClassifierPhrase = ObjectNotFoundList[UnityEngine.Random.Range(0, ObjectNotFoundList.Count)];
+			ClassifierScore = result[0].score;
+
+		}
+		string x = listObjects[objectIndex].name;
+		string y = result[0].label;
+		ClassifierPhrase = ClassifierPhrase.Replace("X", x);
+		ClassifierPhrase = ClassifierPhrase.Replace("Y", y);
+		print(ClassifierPhrase + "    " + ClassifierScore);
+
+		(Bounds, Vector3) boundsSizeDrawing = CheckSize();
 
         float sizeDrawn;
         bool isVertical;
@@ -90,7 +136,8 @@ public class GameplayManager : MonoBehaviour
         else note = (int)(sizeDrawn *10 / realSize) +1;
 
 		StartCoroutine(EndAnimation(boundsSizeDrawing, isVertical));
-    }
+
+	}
 	
 	private IEnumerator ShowStampedText()
 	{
@@ -230,6 +277,7 @@ public class GameplayManager : MonoBehaviour
         public string name;
         public float sizeInMeter;
 		public Sprite spriteObject;
+		public string category;
     }
 
 	[Serializable]
