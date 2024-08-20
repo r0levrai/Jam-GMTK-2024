@@ -134,12 +134,29 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: 74ce3ed28539045499eb90b5d4109617, type: 3}
     priority: 98
   musics:
-  - name: main
-    audio: {fileID: 8300000, guid: 2985db53a34e7e745bf2e6237b6872ac, type: 3}
+  - name: space
+    audio: {fileID: 8300000, guid: 2ab9a9d2af9ec4b4da09584c1fe25e77, type: 3}
     priority: 0
-  - name: main2
-    audio: {fileID: 8300000, guid: d1916c83aea7ad9428e46d6dcceb767c, type: 3}
+  - name: earth
+    audio: {fileID: 8300000, guid: 1a76f5e1b33c2464b9849c68b734bf02, type: 3}
     priority: 0
+  - name: building
+    audio: {fileID: 8300000, guid: 0cdf5472a7c96124db78fd6fa23b1109, type: 3}
+    priority: 0
+  - name: house
+    audio: {fileID: 8300000, guid: 25e6c5763c2be24459d5610ea6b27d95, type: 3}
+    priority: 0
+  - name: human
+    audio: {fileID: 8300000, guid: ae1722dbfeeaa424e9ccdbe443965e4f, type: 3}
+    priority: 0
+  - name: hairs
+    audio: {fileID: 8300000, guid: 9ba6018a78a8c00449bab6db7ed3f470, type: 3}
+    priority: 0
+  - name: cells
+    audio: {fileID: 8300000, guid: f6d8383c06279be44b08cf5811e171c2, type: 3}
+    priority: 0
+  volumeSound: 1
+  volumeMusic: 1
 --- !u!1 &5181781325813799837
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,7 +329,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -440,7 +457,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0

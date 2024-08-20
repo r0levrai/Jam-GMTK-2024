@@ -134,6 +134,7 @@ public class ZoomManager : MonoBehaviour
 
 	private void SetZoomLevel(float value)
 	{
+		SoundManager.Instance.PlayMusicByZoomIndex(Constants.Instance.GetIndexImage());
 		foreach (var level in zoomLevels)
 		{
 			int index = System.Array.IndexOf(zoomLevels, level);
