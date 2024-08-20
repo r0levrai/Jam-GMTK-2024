@@ -43,8 +43,8 @@ public class EndCard : MonoBehaviour
         Vector3 currenPos = getCurrentVal(positionStart_, positionEnd_, currentT);
 
         gameObject.transform.localScale = new Vector3(currentScale, currentScale, 1);
-        draw.transform.localScale = new Vector3(currentScale, currentScale, 1);
-        background.transform.localScale = new Vector3(currentScale, currentScale, 1);
+        //draw.transform.localScale = new Vector3(currentScale, currentScale, 1);
+        //background.transform.localScale = new Vector3(currentScale, currentScale, 1);
         gameObject.transform.localEulerAngles =  new Vector3(0, 0, currentRotation);
         gameObject.transform.localPosition = currenPos;
         setAlpha(currentAlpha);
