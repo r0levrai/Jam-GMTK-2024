@@ -3,6 +3,7 @@ import { DrawingService } from "./drawing.service";
 import { Drawing } from "./drawing.entity";
 import { DrawingDto } from "./drawing.dto";
 import { Request } from 'express';
+import { DrawingResponseDto } from "./drawing.response.dto";
 
 
 
@@ -11,7 +12,7 @@ export class DrawingController {
     constructor(private readonly drawingService: DrawingService) {}
 
     @Post()
-    async createDrawing(@Body() drawingDto: DrawingDto): Promise<Drawing> {
+    async createDrawing(@Body() drawingDto: DrawingDto): Promise<DrawingResponseDto> {
         return await this.drawingService.createDrawing(drawingDto);
     }
 
@@ -41,7 +42,7 @@ export class DrawingController {
     }
 
     @Put(':id')
-    async updateDrawing(@Param('id') id: number, @Body() updateData: Partial<DrawingDto>): Promise<Drawing> {
+    async updateDrawing(@Param('id') id: number, @Body() updateData: Partial<Drawing>): Promise<DrawingResponseDto> {
         return await this.drawingService.updateDrawing(id, updateData);
     }
 
@@ -56,7 +57,7 @@ export class DrawingController {
         @Param('id') id: number,
         @Param('reaction') reaction: string,
         @Req() request: Request
-    ): Promise<Drawing> {
+    ): Promise<DrawingResponseDto> {
         const ipAdress = request.ip;
         return await this.drawingService.addReaction(id, reaction, ipAdress);
     }

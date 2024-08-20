@@ -1,4 +1,5 @@
 import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, ValueTransformer } from "typeorm";
+import { DrawingResponseDto } from "./drawing.response.dto";
 
 
 
@@ -52,12 +53,31 @@ export class Drawing extends BaseEntity {
     @Column()
     score: number;
 
-    @Column("simple-array")
+    @Column("simple-array", {default: 0})
     like: string[];
 
-    @Column("simple-array")
+    @Column("simple-array", {default: 0})
     funny: string[];
 
-    @Column("simple-array")
+    @Column("simple-array", {default: 0})
     bad: string[];
 }
+
+export function convertDrawingToDto(drawing: Drawing): DrawingResponseDto {
+    const drawingResponseDto = new DrawingResponseDto();
+    
+    drawingResponseDto.id = drawing.id;
+    drawingResponseDto.createdDate = drawing.createdDate;
+    drawingResponseDto.linesPoints = drawing.linesPoints;
+    drawingResponseDto.linesWidth = drawing.linesWidth;
+    drawingResponseDto.linesColorIndex = drawing.linesColorIndex;
+    drawingResponseDto.userName = drawing.userName;
+    drawingResponseDto.drawingName = drawing.drawingName;
+    drawingResponseDto.background = drawing.background;
+    drawingResponseDto.score = drawing.score;
+    drawingResponseDto.like = drawing.like.length;
+    drawingResponseDto.funny = drawing.funny.length;
+    drawingResponseDto.bad = drawing.bad.length;
+  
+    return drawingResponseDto;
+  }
