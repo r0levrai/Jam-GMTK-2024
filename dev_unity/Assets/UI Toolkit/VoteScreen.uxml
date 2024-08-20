@@ -4,19 +4,19 @@
     <ui:GroupBox style="align-self: center; flex-direction: row; rotate: -2deg; align-items: auto; position: absolute; top: 20px;">
         <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="LoveReaction" class="reaction-button" style="-unity-background-image-tint-color: rgb(253, 159, 137);">
             <ui:GroupBox class="reaction-groupbox" style="margin-right: 30px; margin-left: 40px;">
-                <ui:Label tabindex="-1" text="31" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Count" style="align-self: flex-start;" />
+                <ui:Label tabindex="-1" text="31" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LoveReactionCount" style="align-self: flex-start;" />
                 <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Image" class="emoji" style="background-image: url(&quot;project://database/Assets/Sprites/mini%20mascotte/ce08.png?fileID=2800000&amp;guid=f2073e078b4bb294980e25293bf416a4&amp;type=3#ce08&quot;);" />
             </ui:GroupBox>
         </ui:Button>
         <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="LaughReaction" class="reaction-button" style="-unity-background-image-tint-color: rgb(137, 205, 253);">
             <ui:GroupBox class="reaction-groupbox" style="margin-right: 30px; margin-left: 40px;">
-                <ui:Label tabindex="-1" text="12" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Count" style="align-self: flex-start;" />
+                <ui:Label tabindex="-1" text="12" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LaughReactionCount" style="align-self: flex-start;" />
                 <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Image" class="emoji" style="background-image: url(&quot;project://database/Assets/Sprites/mini%20mascotte/ce09.png?fileID=2800000&amp;guid=ca6a7359563d35148b4ed97c7d88331b&amp;type=3#ce09&quot;);" />
             </ui:GroupBox>
         </ui:Button>
         <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="PerplexedReaction" class="reaction-button" style="-unity-background-image-tint-color: rgb(137, 253, 162);">
             <ui:GroupBox class="reaction-groupbox" style="margin-right: 30px; margin-left: 40px;">
-                <ui:Label tabindex="-1" text="12" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Count" style="align-self: flex-start;" />
+                <ui:Label tabindex="-1" text="12" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PerplexedReactionCount" style="align-self: flex-start;" />
                 <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Image" class="emoji" style="background-image: url(&quot;project://database/Assets/Sprites/mini%20mascotte/ce10.png?fileID=2800000&amp;guid=0abafcc8780175a429e2f0d77c9c3389&amp;type=3#ce10&quot;);" />
             </ui:GroupBox>
         </ui:Button>

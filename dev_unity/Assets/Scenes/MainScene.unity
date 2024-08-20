@@ -1618,6 +1618,26 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[0].sprites.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[1].sprites.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[2].sprites.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[3].sprites.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[6].sprites.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectCategeoryNoneCommentList.Array.data[0]
       value: I have no clue what XX looks like, but that thing you did screams YY
         to me.
@@ -1636,6 +1656,82 @@ PrefabInstance:
       value: "You\u2019re really drawing everything that\u2019s asked of you, huh\u2026even
         if XX's existence has never been proven\u2026"
       objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[0].sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 68fd81be18a00084ca7f19a66a727af3, type: 3}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[0].sprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 2a82695bec6106541b8cbb32b052c29c, type: 3}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[1].sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 68fd81be18a00084ca7f19a66a727af3, type: 3}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[1].sprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 2a82695bec6106541b8cbb32b052c29c, type: 3}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[2].sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 696e9fa997bd9ce48bc1fe5e61343a64, type: 3}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[2].sprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0c0cc2911549e5e47a3ca45a236a7452, type: 3}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[3].sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0c0cc2911549e5e47a3ca45a236a7452, type: 3}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[3].sprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: b13a76dfb11add745a4e22a0fb9b0ea9, type: 3}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[4].sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 6e44f46c037ff0e4aa938c67b6fbccbf, type: 3}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[5].sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 12383a7d6afcd0641b31c81c08ad3285, type: 3}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[6].sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: e9283e75517d24c4da3779e533f00cbf, type: 3}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[6].sprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 4b0b51386e8e23f46bd7843036f85749, type: 3}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[7].sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: d368a1a601078a44e810254611b49d52, type: 3}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[7].sprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 340a98c855e01b240afe7de3f79c0b0e, type: 3}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[8].sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 6360d340780a9a044a93b4cbeb31f563, type: 3}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[8].sprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: f158ea7f4fde1364ba12c340cefd089f, type: 3}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[9].sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 340a98c855e01b240afe7de3f79c0b0e, type: 3}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[9].sprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 83e2c757daa9baf41bf08565f44d806e, type: 3}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: stickers.Array.data[10].sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 83e2c757daa9baf41bf08565f44d806e, type: 3}
     - target: {fileID: 1591259932334373314, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: m_Name
       value: GameManager
