@@ -110,7 +110,10 @@ public class TitleScreen : MonoBehaviour
             for (int i = 0; i < 3; i++)
             {
                 count++;
-                EndcardManager.PopulateCard(endCards[count % endCards.Count], drawings[count % drawings.Length]);
+                if (drawings != null && drawings.Length > 0)
+                {
+                    EndcardManager.PopulateCard(endCards[count % 3], drawings[count % drawings.Length]);
+                }
             }
         }
 
