@@ -646,7 +646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectNotFoundList.Array.size
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: listObjects.Array.data[0].name
@@ -901,19 +901,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectNotFoundList.Array.data[4]
-      value: Your XX is so bad it looks like a YY.
-      objectReference: {fileID: 0}
-    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
-      propertyPath: ObjectNotFoundList.Array.data[5]
       value: "If I were to draw XX, I wouldn\u2019t draw a YY"
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
-      propertyPath: ObjectNotFoundList.Array.data[6]
+      propertyPath: ObjectNotFoundList.Array.data[5]
       value: I thought you were drawing XX, not a YY
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
-      propertyPath: ObjectNotFoundList.Array.data[7]
+      propertyPath: ObjectNotFoundList.Array.data[6]
       value: Your XX looks like YY if I were standing from very far.
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectNotFoundList.Array.data[7]
+      value: That's not what XX looks like in my mind. That's just a YY.
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectNotFoundList.Array.data[8]
