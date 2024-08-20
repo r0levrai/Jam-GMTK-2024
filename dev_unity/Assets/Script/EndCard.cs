@@ -12,7 +12,7 @@ public class EndCard : MonoBehaviour
     private float alphaStart_ = 1, alphaEnd_ = 1;
 
     public TMPro.TextMeshProUGUI timeAgoText;
-    public SpriteRenderer background;
+    public UnityEngine.UI.Image background;
     public Draw draw;
     private UIDocument mainDoc;
     public VisualTreeAsset overlayUI;

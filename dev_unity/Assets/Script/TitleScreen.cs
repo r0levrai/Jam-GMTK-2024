@@ -104,13 +104,13 @@ public class TitleScreen : MonoBehaviour
         }
 
         // pre ease in
-        if (time_ > 1.5 && state == 0)
+        if (time_ > 0 && state == 0)
         {
             state++;
             for (int i = 0; i < 3; i++)
             {
                 count++;
-                EndcardManager.PopulateCard(endCards[count], drawings[count % drawings.Length]);
+                EndcardManager.PopulateCard(endCards[count % endCards.Count], drawings[count % drawings.Length]);
             }
         }
 
