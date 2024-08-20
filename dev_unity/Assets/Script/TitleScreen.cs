@@ -42,7 +42,7 @@ public class TitleScreen : MonoBehaviour
     {
         drawings = await NetworkedDrawing.ReceiveLasts(nReceivedCards);
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < Mathf.Min(drawings.Length, 3); i++)
         {
             EndCard ec2 = Instantiate(endcard, new Vector3(0, 0, 0), Quaternion.identity);
             float rot2 = Random.Range(2.0f, 10.0f);
