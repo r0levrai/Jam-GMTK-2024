@@ -116,6 +116,8 @@ public class ZoomManager : MonoBehaviour
 
 	/*====== zoom ======*/
 
+	private readonly string[] soundZoomNames = new string[5] { "scroll1", "scroll2", "scroll3", "scroll4", "scroll5" };
+
 	private void OnZoom(InputAction.CallbackContext context)
 	{
 		Vector2 scrollInput = context.ReadValue<Vector2>();
@@ -127,7 +129,7 @@ public class ZoomManager : MonoBehaviour
 		targetZoomValue = evt.newValue;
 		//movingObject.position = ClampPositionToBounds(movingObject.position);
 		//Debug.Log(targetZoomValue);
-		SoundManager.Instance.PlaySound("zoom", Random.Range(-.99f, 1.01f));
+		SoundManager.Instance.PlaySound(soundZoomNames[Random.Range(0, soundZoomNames.Length)]);
 	}
 
 	private void SetZoomLevel(float value)

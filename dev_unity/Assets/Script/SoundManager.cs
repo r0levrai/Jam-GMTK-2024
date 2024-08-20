@@ -35,22 +35,41 @@ public class SoundManager : MonoSingleton<SoundManager>
         }
     }
 
-    public List<Clip> clips = new List<Clip>();
+
+	void Awake()
+	{
+		if (FindObjectsOfType<SoundManager>().Length > 1)
+		{
+			Destroy(gameObject);
+		}
+		DontDestroyOnLoad(gameObject);
+	}
+
+	public List<Clip> clips = new List<Clip>();
     public List<Clip> musics = new List<Clip>();
     public List<Source> sources = new List<Source>();
+
+    public float volumeSound = 1;
+    public float volumeMusic = 0.2f;
+
     void Start()
     {
         PlayMusic("main");
-        PlayMusicWithFade("main2");
+        //PlayMusicWithFade("main2");
+    }
+
+    public void PlayOneShot(string audioClip)
+    {
+		var currentClip = clips.Find(c => c.name == audioClip);
+        soundEffectSource.PlayOneShot(currentClip.audio);
     }
 
     public void PlaySound(string audioClip, float pitch = 1)
     {
         var currentClip = clips.Find(c => c.name == audioClip);
-        //Debug.Log(soundEffectSource.isPlaying);
         if (soundEffectSource.isPlaying)
         {
-            if (currentClip.priority >= soundEffectSource.priority)
+            if (currentClip.priority > soundEffectSource.priority)
             {
                 soundEffectSource.Stop();
                 soundEffectSource.clip = currentClip.audio;
@@ -67,6 +86,11 @@ public class SoundManager : MonoSingleton<SoundManager>
             soundEffectSource.Play();
         }
     }
+    public void StopSound()
+    {
+		if (soundEffectSource.isPlaying)
+			soundEffectSource.Stop();
+	}
 
     public void PlayMusic(string audioClip, int pitch = 1)
     {
@@ -79,6 +103,14 @@ public class SoundManager : MonoSingleton<SoundManager>
         musicSource.pitch = pitch;
         musicSource.Play();
     }
+    public void StopMusic()
+    {
+        if (musicSource.isPlaying)
+        {
+			StopAllCoroutines();
+			musicSource.Stop();
+        }
+	}
 
     private IEnumerator FadeMusic(Clip newClip, float fadeTime)
     {
@@ -86,14 +118,14 @@ public class SoundManager : MonoSingleton<SoundManager>
         float timeToFade = fadeTime;
         float timeElapsed = 0;
 
-        if (musicSource.isPlaying)
+		if (musicSource.isPlaying)
         {
             newMusicSource.clip = newClip.audio;
             newMusicSource.Play();
             while (timeElapsed < timeToFade)
             {
-                newMusicSource.volume = Mathf.Lerp(0, 1, timeElapsed / timeToFade);
-                musicSource.volume = Mathf.Lerp(1, 0, timeElapsed / timeToFade);
+                newMusicSource.volume = Mathf.Lerp(0, volumeMusic, timeElapsed / timeToFade);
+                musicSource.volume = Mathf.Lerp(volumeMusic, 0, timeElapsed / timeToFade);
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }
@@ -105,8 +137,8 @@ public class SoundManager : MonoSingleton<SoundManager>
             musicSource.Play();
             while (timeElapsed < timeToFade)
             {
-                musicSource.volume = Mathf.Lerp(0, 1, timeElapsed / timeToFade);
-                newMusicSource.volume = Mathf.Lerp(1, 0, timeElapsed / timeToFade);
+                musicSource.volume = Mathf.Lerp(0, volumeMusic, timeElapsed / timeToFade);
+                newMusicSource.volume = Mathf.Lerp(volumeMusic, 0, timeElapsed / timeToFade);
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }
@@ -131,5 +163,12 @@ public class SoundManager : MonoSingleton<SoundManager>
 		}
     }
 
+    public void ChangeVolumeMusic(float volume)
+    {
+        musicSource.volume = volume;
+        newMusicSource.volume = volume;
+    }
+    public void ChangeVolumeSound(float volume)
+        => soundEffectSource.volume = volume;
 }
 

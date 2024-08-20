@@ -122,11 +122,11 @@
 .volume-toggle {
     width: 63px;
     height: 55px;
-    background-image: url("project://database/Assets/Texture/volumeoff.png?fileID=2800000&guid=c5a7ec2233ee9df41a7f9018e4414ba1&type=3#volumeoff");
+    background-image: url("project://database/Assets/Texture/sfxoff.png?fileID=2800000&guid=b5adfb9f7c8734a418e9a43f832d9b7f&type=3#sfxoff");
 }
 
 .volume-toggle:checked {
-    background-image: url("project://database/Assets/Texture/volumeon.png?fileID=2800000&guid=b154823559c9d224ea03859c8eba9988&type=3#volumeon");
+    background-image: url("project://database/Assets/Texture/sfxon.png?fileID=2800000&guid=3f929f9e80ad6f34caa2325f73c1a8b3&type=3#sfxon");
 }
 
 .unity-base-slider__tracker {
@@ -148,11 +148,11 @@
 }
 
 .sound-toggle {
-    background-image: url("project://database/Assets/Texture/sfxoff.png?fileID=2800000&guid=b5adfb9f7c8734a418e9a43f832d9b7f&type=3#sfxoff");
+    background-image: url("project://database/Assets/Texture/volumeoff.png?fileID=2800000&guid=c5a7ec2233ee9df41a7f9018e4414ba1&type=3#volumeoff");
     width: 56px;
     height: 57px;
 }
 
 .sound-toggle:checked {
-    background-image: url("project://database/Assets/Texture/sfxon.png?fileID=2800000&guid=3f929f9e80ad6f34caa2325f73c1a8b3&type=3#sfxon");
+    background-image: url("project://database/Assets/Texture/volumeon.png?fileID=2800000&guid=b154823559c9d224ea03859c8eba9988&type=3#volumeon");
 }

@@ -72,12 +72,14 @@ public class Draw : MonoBehaviour
             currentLineRenderer.startWidth = currentWidth;
             currentLineRenderer.endWidth = currentWidth;
             PointToMousePos();
+            SoundManager.Instance.PlaySound("drawing");
         }
         else
         {
             if (currentLineRenderer != null)
             {
-                linesListUndo.Add(currentLineRenderer);
+				SoundManager.Instance.StopSound();
+				linesListUndo.Add(currentLineRenderer);
                 currentLineRenderer = null;
             }
 
