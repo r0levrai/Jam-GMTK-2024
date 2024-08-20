@@ -43,10 +43,11 @@ public class EndCard : MonoBehaviour
         Vector3 currenPos = getCurrentVal(positionStart_, positionEnd_, currentT);
 
         gameObject.transform.localScale = new Vector3(currentScale, currentScale, 1);
+        draw.transform.localScale = new Vector3(currentScale, currentScale, 1);
+        background.transform.localScale = new Vector3(currentScale, currentScale, 1);
         gameObject.transform.localEulerAngles =  new Vector3(0, 0, currentRotation);
         gameObject.transform.localPosition = currenPos;
         setAlpha(currentAlpha);
-
     }
 
     public void setAlpha(float alpha)
@@ -68,6 +69,16 @@ public class EndCard : MonoBehaviour
             text.color = newColor;
         }
 
+    }
+
+    void OnMouseDown()
+    {
+        Debug.Log("Sprite Clicked");
+    }
+
+    void OnMouseOver()
+    {
+        Debug.Log("Sprite Hovered");
     }
 
     float getCurrentVal(float start, float end, float t)

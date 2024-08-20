@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 7517407388206552535}
   - component: {fileID: 6141081884794279037}
   m_Layer: 0
-  m_Name: drwaing
+  m_Name: drawaing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
