@@ -38,6 +38,9 @@ public struct ReceivedDrawing
     public string drawingName; // object the game asked to draw
     public string background;
     public float score;
+    public int like;
+    public int funny;
+    public int bad;
     public Draw.UnitySuxxWith2DVector[] linesPoints;
     public float[] linesWidth;
     public int[] linesColorIndex;
@@ -149,6 +152,28 @@ public class NetworkedDrawing
             string route = NetworkManager.Instance.postDrawingsRoute;
             string json = JsonUtility.ToJson(new SentDrawing(this.data));
             UnityWebRequest webRequest = UnityWebRequest.Post(NetworkManager.Instance.servers[0] + route, json, "application/json");
+            //webRequest.certificateHandler = new CustomSSLCertificate();
+            var response = await webRequest.SendWebRequestAsync();
+            if (response.result == UnityWebRequest.Result.ConnectionError || response.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.LogError("Error: " + response.error);
+                return false;
+            }
+            Debug.Log("Success: " + response.downloadHandler.text);
+            return true;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Exception: " + e);
+            return false;
+        }
+    }
+    public async Task<bool> SendReaction(string reaction)
+    {
+        try
+        {
+            string route = NetworkManager.Instance.postDrawingsRoute + $"/{this.data.id}/{reaction}";
+            UnityWebRequest webRequest = UnityWebRequest.Post(NetworkManager.Instance.servers[0] + route, "", "application/json");
             //webRequest.certificateHandler = new CustomSSLCertificate();
             var response = await webRequest.SendWebRequestAsync();
             if (response.result == UnityWebRequest.Result.ConnectionError || response.result == UnityWebRequest.Result.ProtocolError)

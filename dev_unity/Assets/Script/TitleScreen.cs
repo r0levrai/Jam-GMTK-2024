@@ -42,7 +42,7 @@ public class TitleScreen : MonoBehaviour
     {
         drawings = await NetworkedDrawing.ReceiveLasts(nReceivedCards);
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < Mathf.Min(drawings.Length, 3); i++)
         {
             EndCard ec2 = Instantiate(endcard, new Vector3(0, 0, 0), Quaternion.identity);
             float rot2 = Random.Range(2.0f, 10.0f);
@@ -57,6 +57,7 @@ public class TitleScreen : MonoBehaviour
         }
 
         playButton.clicked += () => SceneManager.LoadSceneAsync(1);
+        howToButton.clicked += () => SceneManager.LoadSceneAsync(3);
         volumeSlider.RegisterValueChangedCallback((evt) =>
 		{
 			SoundManager.Instance.ChangeVolumeMusic(evt.newValue / volumeSlider.highValue);
@@ -85,7 +86,8 @@ public class TitleScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time_ += Time.deltaTime;
+        if(!Constants.Instance.pauseTitleAnimation)
+            time_ += Time.deltaTime;
         timeBanane_ += Time.deltaTime;
 
         if(timeBanane_ > 2)
@@ -110,7 +112,10 @@ public class TitleScreen : MonoBehaviour
             for (int i = 0; i < 3; i++)
             {
                 count++;
-                EndcardManager.PopulateCard(endCards[count % endCards.Count], drawings[count % drawings.Length]);
+                if (drawings != null && drawings.Length > 0)
+                {
+                    EndcardManager.PopulateCard(endCards[count % 3], drawings[count % drawings.Length]);
+                }
             }
         }
 
@@ -120,6 +125,7 @@ public class TitleScreen : MonoBehaviour
             state++;
             for (int i = 0; i < 3; i++)
             {
+                if (i >= endCards.Count) { break; }
                 endCards[i].move(new Vector3(12, 2.5f));
                 endCards[i].rotate(Random.Range(2.0f, 10.0f));
                 endCards[i].time_ = Random.Range(0.0f, 0.2f);
@@ -134,6 +140,7 @@ public class TitleScreen : MonoBehaviour
             time_ = 0;
             for (int i = 0; i < 3; i++)
             {
+                if (i >= endCards.Count) { break; }
                 float rot2 = Random.Range(2.0f, 10.0f);
                 if (Random.Range(0.0f, 1.0f) < 0.5f) rot2 *= -1;
                 endCards[i].setupRotation(rot2 * 3, -rot2);

@@ -30,9 +30,15 @@ public class ZoomManager : MonoBehaviour
 	{
 		get => zoomLevels[(int)targetZoomValue].refUnitInMeter / zoomLevels[(int)targetZoomValue].spriteRenderer.transform.localScale.x;
 	}
-	private float targetZoomValue { 
+	private float targetZoomValue {
 		get => Constants.Instance.targetZoomValue;
-		set => Constants.Instance.targetZoomValue = value; 
+		set => Constants.Instance.targetZoomValue = value;
+	}
+
+	private bool zoomEnable
+	{
+		get => Constants.Instance.zoomEnable;
+		set => Constants.Instance.zoomEnable = value;
 	}
 	private float zoomValue = 0f;
 	private float zoomVelocity = 0f;
@@ -85,7 +91,7 @@ public class ZoomManager : MonoBehaviour
 	private void Update()
 	{
 		//Debug.Log(currentUnitScaleInMeter);
-		if (Mathf.Abs(zoomValue - targetZoomValue) > 0.01f)
+		if (Mathf.Abs(zoomValue - targetZoomValue) > 0.01f && zoomEnable)
 		{
 			zoomValue = Mathf.SmoothDamp(zoomValue, targetZoomValue, ref zoomVelocity, zoomDuration);
 			SetZoomLevel(zoomValue);

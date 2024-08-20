@@ -1,8 +1,9 @@
 import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { DrawingRepository } from "./drawing.repository";
-import { Drawing, ReactionType } from "./drawing.entity";
+import { convertDrawingToDto, Drawing, ReactionType } from "./drawing.entity";
 import { DrawingDto } from "./drawing.dto";
+import { DrawingResponseDto } from "./drawing.response.dto";
 
 @Injectable()
 export class DrawingService {
@@ -15,40 +16,40 @@ export class DrawingService {
 
     
 
-    async createDrawing(drawingDto: DrawingDto): Promise<Drawing> {
-        return await this.drawingRepository.createDrawing(drawingDto);
+    async createDrawing(drawingDto: DrawingDto): Promise<DrawingResponseDto> {
+        return convertDrawingToDto(await this.drawingRepository.createDrawing(drawingDto));
     }
 
-    async getDrawingById(id: number): Promise<Drawing | undefined> {
-        return await this.drawingRepository.findDrawingById(id);
+    async getDrawingById(id: number): Promise<DrawingResponseDto | undefined> {
+        return convertDrawingToDto(await this.drawingRepository.findDrawingById(id));
     }
 
-    async getDrawingsByUserName(userName: string): Promise<Drawing[]> {
-        return await this.drawingRepository.findByUserName(userName);
+    async getDrawingsByUserName(userName: string): Promise<DrawingResponseDto[]> {
+        return (await this.drawingRepository.findByUserName(userName)).map(convertDrawingToDto);
     }
 
-    async updateDrawing(id: number, updateData: Partial<DrawingDto>): Promise<Drawing> {
-        return await this.drawingRepository.updateDrawing(id, updateData);
+    async updateDrawing(id: number, updateData: Partial<DrawingDto>): Promise<DrawingResponseDto> {
+        return convertDrawingToDto(await this.drawingRepository.updateDrawing(id, updateData));
     }
 
     async deleteDrawing(id: number): Promise<void> {
         await this.drawingRepository.deleteDrawing(id);
     }
 
-    async getLastDrawings(limit: number): Promise<Drawing[]> {
-        return await this.drawingRepository.findLastDrawings(limit);
+    async getLastDrawings(limit: number): Promise<DrawingResponseDto[]> {
+        return (await this.drawingRepository.findLastDrawings(limit)).map(convertDrawingToDto);
     }
 
-    async getFirstDrawings(limit: number): Promise<Drawing[]> {
-        return await this.drawingRepository.findFirstDrawings(limit);
+    async getFirstDrawings(limit: number): Promise<DrawingResponseDto[]> {
+        return (await this.drawingRepository.findFirstDrawings(limit)).map(convertDrawingToDto);
     }
-    async getRandomDrawings(limit: number): Promise<Drawing[]> {
+    async getRandomDrawings(limit: number): Promise<DrawingResponseDto[]> {
         const effectiveLimit = Math.min(limit, this.MAX_RANDOM_DRAWINGS);
-        return await this.drawingRepository.findRandomDrawings(effectiveLimit);
+        return (await this.drawingRepository.findRandomDrawings(effectiveLimit)).map(convertDrawingToDto);
     }
   
 
-    async addReaction(drawingId: number, reaction: string, ipAddress: string): Promise<Drawing> {
+    async addReaction(drawingId: number, reaction: string, ipAddress: string): Promise<DrawingResponseDto> {
         const drawing = await this.drawingRepository.findDrawingById(drawingId)
         if (!drawing) {
             throw new NotFoundException("Not found");
@@ -69,6 +70,6 @@ export class DrawingService {
                 throw new BadRequestException("already bad")
             drawing.bad.push(ipAddress)
         }
-        return await this.drawingRepository.save(drawing);
+        return convertDrawingToDto(await this.drawingRepository.save(drawing));
     }
 }

@@ -102,5 +102,9 @@ public class EndcardManager : MonoBehaviour
         int iBg = int.TryParse(drawing.data.background, out iBg) ? iBg : 0;
         card.background.sprite = Constants.Instance.GetCurrentImage(iBg);
         card.draw.SetDrawingData(drawing.GetDrawingData());
-    }
+        card.like_score = drawing.data.like;
+        card.funny_score = drawing.data.funny;
+        card.bad_score = drawing.data.bad;
+        card.networkedDrawing = drawing;
+}
 }

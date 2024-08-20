@@ -41,6 +41,9 @@ public class Draw : MonoBehaviour
 
     Vector2 lastPos;
 
+    public bool isEraserActive = false;
+
+
     public static Draw Instance;
 
     private void Awake()
@@ -55,12 +58,106 @@ public class Draw : MonoBehaviour
         linesListRedo = new List<LineRenderer>();
 
     }
+    
+    public void ToggleEraser()
+    {
+        isEraserActive = !isEraserActive;
+    }
+
     private void Update()
     {
         if (drawable)
         {
-            Drawing();
+            if (isEraserActive)
+            {
+                EraserTool();
+            }
+            else
+            {
+                Drawing();
+            }
         }
+    }
+
+    void EraserTool()
+    {
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
+            EraseAtPosition(mousePos, 0.5f);
+        }
+    }
+
+
+    void EraseAtPosition(Vector2 position, float eraserRadius)
+    {
+        for (int i = linesListUndo.Count - 1; i >= 0; i--)
+        {
+            LineRenderer line = linesListUndo[i];
+            int positionCount = line.positionCount;
+            List<Vector3> newPositions = new List<Vector3>();
+            List<List<Vector3>> splitSegments = new List<List<Vector3>>();
+
+            bool isErasing = false;
+
+            for (int j = 0; j < positionCount; j++)
+            {
+                Vector3 pointPosition = line.GetPosition(j);
+                float distance = Vector2.Distance(new Vector2(pointPosition.x, pointPosition.y), position);
+
+                if (distance > eraserRadius)
+                {
+                    if (isErasing && newPositions.Count > 0)
+                    {
+                        splitSegments.Add(new List<Vector3>(newPositions));
+                        newPositions.Clear();
+                    }
+                    isErasing = false;
+                    newPositions.Add(pointPosition);
+                }
+                else
+                {
+                    isErasing = true;
+                }
+            }
+            if (newPositions.Count > 0)
+            {
+                splitSegments.Add(new List<Vector3>(newPositions));
+            }
+
+            if (splitSegments.Count == 0)
+            {
+                Destroy(line.gameObject);
+                linesListUndo.RemoveAt(i);
+            }
+            else
+            {
+                line.positionCount = splitSegments[0].Count;
+                line.SetPositions(splitSegments[0].ToArray());
+
+                for (int k = 1; k < splitSegments.Count; k++)
+                {
+                    CreateNewLineSegment(splitSegments[k], line);
+                }
+            }
+        }
+    }
+
+    void CreateNewLineSegment(List<Vector3> segmentPoints, LineRenderer originalLine)
+    {
+        if (segmentPoints.Count < 2) return;
+
+        GameObject newLineObject = new GameObject("LineSegment");
+        newLineObject.transform.parent = originalLine.transform.parent;
+
+        LineRenderer newLine = newLineObject.AddComponent<LineRenderer>();
+        newLine.material = originalLine.material;
+        newLine.startWidth = originalLine.startWidth;
+        newLine.endWidth = originalLine.endWidth;
+        newLine.positionCount = segmentPoints.Count;
+        newLine.SetPositions(segmentPoints.ToArray());
+
+        linesListUndo.Add(newLine);
     }
 
     void Drawing()

@@ -33,6 +33,12 @@ public class GameplayManager : MonoBehaviour
 	private AnimationCurve curve = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
 
 	public static GameplayManager Instance;
+
+	private bool zoomEnable
+	{
+		get => Constants.Instance.zoomEnable;
+		set => Constants.Instance.zoomEnable = value;
+	}
 	private void Awake()
 	{
 		Instance = this;
@@ -55,7 +61,8 @@ public class GameplayManager : MonoBehaviour
 
 	public void NewGame()
     {
-        objectIndex = UnityEngine.Random.Range(0, listObjects.Count);
+		zoomEnable = true;
+		objectIndex = UnityEngine.Random.Range(0, listObjects.Count);
 		UIManager.Instance.FillTitle($"Draw {listObjects[objectIndex].name}<br>to scale!");
 		referenceSprite.sprite = listObjects[objectIndex].spriteObject;
 		UIManager.Instance.ActiveTools(true);
@@ -81,6 +88,8 @@ public class GameplayManager : MonoBehaviour
 	public void Submit()
 	{
 		UIManager.Instance.ActiveTools(false);
+
+		zoomEnable = false;
 
 		Texture2D texture = ScreenshotDrawing.Instance.GetDrawing();
 		result = classifier.Classification(texture);
