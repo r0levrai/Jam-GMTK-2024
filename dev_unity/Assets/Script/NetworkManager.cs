@@ -117,37 +117,53 @@ public class NetworkedDrawing
     }
     public static async Task<NetworkedDrawing[]> ReceiveLasts(int n)
     {
-        string route = NetworkManager.Instance.getLastNDrawingsRoute;
-        UnityWebRequest webRequest = UnityWebRequest.Get(NetworkManager.Instance.servers[0] + $"{route}?n={n}");
-        //webRequest.certificateHandler = new CustomSSLCertificate();
-        var response = await webRequest.SendWebRequestAsync();
-        if (response.result == UnityWebRequest.Result.ConnectionError || response.result == UnityWebRequest.Result.ProtocolError)
+        try
         {
-            Debug.LogError("Error: " + response.error);
-            return new NetworkedDrawing[0];
+            string route = NetworkManager.Instance.getLastNDrawingsRoute;
+            UnityWebRequest webRequest = UnityWebRequest.Get(NetworkManager.Instance.servers[0] + $"{route}?n={n}");
+            //webRequest.certificateHandler = new CustomSSLCertificate();
+            var response = await webRequest.SendWebRequestAsync();
+            if (response.result == UnityWebRequest.Result.ConnectionError || response.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.LogError("Error: " + response.error);
+                return new NetworkedDrawing[0];
+            }
+            else
+            {
+                string json = response.downloadHandler.text;
+                Debug.Log("Success: " + json);
+                ReceivedDrawing[] data = JsonUtility.FromJson<ReceivedDrawingList>(json).drawings;
+                return data.Select(rd => new NetworkedDrawing(rd)).ToArray();
+            }
         }
-        else
+        catch (Exception e)
         {
-            string json = response.downloadHandler.text;
-            Debug.Log("Success: " + json);
-            ReceivedDrawing[] data = JsonUtility.FromJson<ReceivedDrawingList>(json).drawings;
-            return data.Select(rd => new NetworkedDrawing(rd)).ToArray();
+            Debug.LogError("Exception: " + e);
+            return new NetworkedDrawing[0];
         }
     }
     public async Task<bool> Send()
     {
-        string route = NetworkManager.Instance.postDrawingsRoute;
-        string json = JsonUtility.ToJson(new SentDrawing(this.data));
-        UnityWebRequest webRequest = UnityWebRequest.Post(NetworkManager.Instance.servers[0] + route, json, "application/json");
-        //webRequest.certificateHandler = new CustomSSLCertificate();
-        var response = await webRequest.SendWebRequestAsync();
-        if (response.result == UnityWebRequest.Result.ConnectionError || response.result == UnityWebRequest.Result.ProtocolError)
+        try
         {
-            Debug.LogError("Error: " + response.error);
+            string route = NetworkManager.Instance.postDrawingsRoute;
+            string json = JsonUtility.ToJson(new SentDrawing(this.data));
+            UnityWebRequest webRequest = UnityWebRequest.Post(NetworkManager.Instance.servers[0] + route, json, "application/json");
+            //webRequest.certificateHandler = new CustomSSLCertificate();
+            var response = await webRequest.SendWebRequestAsync();
+            if (response.result == UnityWebRequest.Result.ConnectionError || response.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.LogError("Error: " + response.error);
+                return false;
+            }
+            Debug.Log("Success: " + response.downloadHandler.text);
+            return true;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Exception: " + e);
             return false;
         }
-        Debug.Log("Success: " + response.downloadHandler.text);
-        return true;
     }
 
     public Draw.LineRendererData GetDrawingData()
@@ -194,7 +210,7 @@ public class NetworkedDrawing
         }
         else
         {
-            return "Now :)";
+            return "just now";
         }
     }
 }

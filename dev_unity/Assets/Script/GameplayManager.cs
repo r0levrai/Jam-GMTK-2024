@@ -143,6 +143,11 @@ public class GameplayManager : MonoBehaviour
         if (sizeDrawn > realSize) note = (int)((sizeDrawn - ((sizeDrawn - realSize) * 2)) * 10 / realSize) + 1;
         else note = (int)(sizeDrawn *10 / realSize) +1;
 
+		// save the drawing, drawn object, background and score for the next scene
+		Constants.Instance.SavePlayerDrawing(objectIndex, note);
+
+		// send them to the server
+        _ = Constants.Instance.GetPlayerDrawing().Send(); // since we don't await it, it runs in parallel
 
 		SoundManager.Instance.StopMusic();
 		StartCoroutine(EndAnimation(boundsSizeDrawing, isVertical));

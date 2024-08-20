@@ -83,7 +83,7 @@ public class ZoomManager : MonoBehaviour
 
 	private void Update()
 	{
-		Debug.Log(currentUnitScaleInMeter);
+		//Debug.Log(currentUnitScaleInMeter);
 		if (Mathf.Abs(zoomValue - targetZoomValue) > 0.01f)
 		{
 			zoomValue = Mathf.SmoothDamp(zoomValue, targetZoomValue, ref zoomVelocity, zoomDuration);
