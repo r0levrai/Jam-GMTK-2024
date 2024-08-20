@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Draw : MonoBehaviour
 {
-    public Camera m_camera;
+    [System.NonSerialized] public Camera m_camera;
     public GameObject[] brush;
     public bool drawable;
 
@@ -45,6 +45,7 @@ public class Draw : MonoBehaviour
     private void Awake()
     {
         if (Instance == null) Instance = this;
+        m_camera = Camera.main;
 
         currentWidth = 0.4f;
         colorIndex = 0;
@@ -97,6 +98,7 @@ public class Draw : MonoBehaviour
             currentLineRenderer.transform.position = pos;
             currentLineRenderer.transform.rotation = rotation;
             currentLineRenderer.transform.localScale = scale;
+            currentLineRenderer.widthMultiplier *= scale.y;
         }
 
         if (drawable)
@@ -262,6 +264,7 @@ public class Draw : MonoBehaviour
 
     public void SetDrawingData(LineRendererData data)
     {
+        if (drawable) { Debug.LogWarning("[Draw] Untick drawable before calling SetDrawingData"); }
         Vector3 pos = transform.position;
         Quaternion rotation = transform.rotation;
         Vector3 scale = transform.localScale;
