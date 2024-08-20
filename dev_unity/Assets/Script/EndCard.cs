@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class EndCard : MonoBehaviour
 {
@@ -105,11 +106,18 @@ public class EndCard : MonoBehaviour
     {
         mainDoc.visualTreeAsset = prevUI;
 
+        VisualElement root = mainDoc.rootVisualElement;
+        Button playAgainButton = root.Q<Button>("AgainButton");
+        Button mainMenuButton = root.Q<Button>("MenuButton");
+
         move(positionOld_);
         rotate(0);
         scale(scaleOld_);
         time_ = 0;
         GetComponent<SortingGroup>().sortingOrder = 1;
+
+        playAgainButton.clicked += () => SceneManager.LoadSceneAsync(1);
+        mainMenuButton.clicked += () => SceneManager.LoadSceneAsync(0);
     }
 
     private void OnMouseOver()
