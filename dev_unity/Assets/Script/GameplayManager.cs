@@ -338,7 +338,6 @@ public class GameplayManager : MonoBehaviour
 		yield return StartCoroutine(ShowStampedText());
 
 		UIManager.Instance.ActiveNextButton(true);
-		SoundManager.Instance.PlayMusicByZoomIndex(Constants.Instance.GetIndexImage(), 0f);
 	}
 
 	[Serializable]

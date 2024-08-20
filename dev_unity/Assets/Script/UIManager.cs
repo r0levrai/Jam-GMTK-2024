@@ -39,7 +39,11 @@ public class UIManager : MonoBehaviour
 	private void Start()
 	{
 		submitButton.clicked += () => GameplayManager.Instance.Submit();
-		nextButton.clicked += () => SceneManager.LoadSceneAsync(2);
+		nextButton.clicked += (() =>
+		{
+			SoundManager.Instance.PlayMusicByZoomIndex(Constants.Instance.GetIndexImage(), 0.2f);
+			SceneManager.LoadSceneAsync(2);
+		});
 		pensilBlack.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushBlackPress();	SoundManager.Instance.PlayOneShot("penSelect1"); });
 		pensilRed.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushRedPress();		SoundManager.Instance.PlayOneShot("penSelect2"); });
 		pensilBlue.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushBluePress();	SoundManager.Instance.PlayOneShot("penSelect3"); });
