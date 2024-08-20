@@ -325,7 +325,7 @@ MonoBehaviour:
   - name: a mouse
     sizeInMeter: 0.15
     spriteObject: {fileID: 21300000, guid: 2f8b64441a571324ba87e38370dba938, type: 3}
-    category: mouse (animal)
+    category: mouse
   - name: sun glasses
     sizeInMeter: 0.15
     spriteObject: {fileID: 21300000, guid: 8dfa2380f32b9954a9e1b4adf1c35180, type: 3}
@@ -371,13 +371,13 @@ MonoBehaviour:
     spriteObject: {fileID: 21300000, guid: c65b91d46c09aa94a8c8ed3de815d60a, type: 3}
     category: parrot
   - name: a kangaroo
-    sizeInMeter: 0.95
+    sizeInMeter: 2
     spriteObject: {fileID: 21300000, guid: a3de6943c1823db44a922a695ab5d8f4, type: 3}
     category: kangaroo
-  - name: wheelbarrow
+  - name: a wheelbarrow
     sizeInMeter: 1.31
     spriteObject: {fileID: 21300000, guid: d447cd2e750dd33469480ff00d6251ed, type: 3}
-    category: wheelbarrow
+    category: none
   - name: a cow
     sizeInMeter: 1.8
     spriteObject: {fileID: 21300000, guid: e3eb91d9f5c9fe44a8f84d299b7c1980, type: 3}
@@ -401,7 +401,7 @@ MonoBehaviour:
   - name: a blue whale skull
     sizeInMeter: 5.5
     spriteObject: {fileID: 21300000, guid: 60d1a8c87508fa84e9ed916a668a66d9, type: 3}
-    category: none
+    category: whale
   - name: a Londinian bus
     sizeInMeter: 12
     spriteObject: {fileID: 21300000, guid: 7584d8cbca039ff479a74544ead42bd9, type: 3}
@@ -429,7 +429,7 @@ MonoBehaviour:
   - name: the Eiffel tower
     sizeInMeter: 324
     spriteObject: {fileID: 21300000, guid: 35286e5498dca6443945a682f2672870, type: 3}
-    category: none
+    category: The Eiffel Tower
   - name: the Burj Khalifa skyscraper
     sizeInMeter: 829.8
     spriteObject: {fileID: 21300000, guid: e75886c869fd8374aa459d833ca748e3, type: 3}
@@ -437,11 +437,11 @@ MonoBehaviour:
   - name: the Mont Blanc
     sizeInMeter: 4805.59
     spriteObject: {fileID: 21300000, guid: 20089e737ddcd1143b095bc102fa8611, type: 3}
-    category: none
+    category: mountain
   - name: the Mount Everest
     sizeInMeter: 8848.86
     spriteObject: {fileID: 21300000, guid: 4fa20cf181c7ed643a4dea071e04b0df, type: 3}
-    category: none
+    category: mountain
   - name: the Brazil
     sizeInMeter: 4320000
     spriteObject: {fileID: 21300000, guid: 4dfa17d64bad46d4b9c5ede9fb098511, type: 3}
@@ -449,11 +449,11 @@ MonoBehaviour:
   - name: Mercury
     sizeInMeter: 4879400
     spriteObject: {fileID: 21300000, guid: d3ec9a013c6026f4682ab605c7700740, type: 3}
-    category: none
+    category: moon
   - name: Mars
     sizeInMeter: 6779000
     spriteObject: {fileID: 21300000, guid: 04415ccf89fc6e643ade0e5a665a8ac6, type: 3}
-    category: none
+    category: moon
   SnarkyCommentList:
   - "I wouldn\u2019t do this."
   - "You do know there's an undo button right? Nevermind, just click on the trash
@@ -471,25 +471,25 @@ MonoBehaviour:
     name!
   - "And don\u2019t worry, as the top banana I\u2019ll cover for you!"
   ObjectCategeoryNoneCommentList:
-  - I have no clue what X looks like, but that thing you did screams Y to me.
-  - I've never seen X, but I'm sure it does not look like this.
-  - "Banana books didn't tell me what X is, but that won\u2019t stop me from telling
+  - I have no clue what XX looks like, but that thing you did screams YY to me.
+  - I've never seen XX, but I'm sure it does not look like this.
+  - "Banana books didn't tell me what XX is, but that won\u2019t stop me from telling
     you it was horrible!"
   - "You\u2019re really drawing everything that\u2019s asked of you, huh\u2026even
-    if X's existence has never been proven\u2026"
+    if XX's existence has never been proven\u2026"
   ObjectNotFoundList:
-  - "My eyes tell me it\u2019s a Y, but worry not. My heart tells me it\u2019s X."
-  - It looks like a Y. But you do you.
-  - "What a Y! Oh, you were meant to draw X. Oh\u2026"
-  - That's just a Y.
-  - Your X is so bad it looks like a Y.
-  - "If I were to draw X, I wouldn\u2019t draw a Y"
-  - I thought you were drawing X, not a Y
-  - Your Y looks like X if I were standing from very far.
-  - That's not what X looks like in my mind. That's just a Y.
+  - "My eyes tell me it\u2019s a YY, but worry not. My heart tells me it\u2019s XX."
+  - It looks like a YY. But you do you.
+  - "What a YY! Oh, you were meant to draw XX. Oh\u2026"
+  - That's just a YY.
+  - Your XX is so bad it looks like a YY.
+  - "If I were to draw XX, I wouldn\u2019t draw a YY"
+  - I thought you were drawing XX, not a YY
+  - Your XX looks like YY if I were standing from very far.
+  - That's not what XX looks like in my mind. That's just a YY.
   ObjectFoundList:
-  - Maybe I was wrong to let you draw X.
-  - "That\u2019s not what X looks like."
+  - Maybe I was wrong to let you draw XX.
+  - "That\u2019s not what XX looks like."
   - Great attempt. No, really.
   - "I\u2019m pretty sure I can do better, even if I physically don\u2019t have hands."
   - If I were blind, I would say it was a decent attempt.
@@ -1172,6 +1172,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4665089511609015544}
     m_Modifications:
+    - target: {fileID: 635097811919719037, guid: d51af5ef847a6e049ac0002d05e22f1a, type: 3}
+      propertyPath: modelAsset
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: b884f0bc5b9dced4fb0752ad0cb0d5b9, type: 3}
     - target: {fileID: 6016876468604153573, guid: d51af5ef847a6e049ac0002d05e22f1a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.072831
