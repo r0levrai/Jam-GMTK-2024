@@ -182,23 +182,23 @@ public class GameplayManager : MonoBehaviour
 		string newSize;
 		if (currentSize / 1000f > 1)
         {
-			newSize = $"{(currentSize / 1000f)} km";
+			newSize = $"{String.Format("{0:0.#}", (currentSize / 1000f))} km";
 		}
 		else if (currentSize / 1f > 1)
 		{
-			newSize = $"{(currentSize)} m";
+			newSize = $"{String.Format("{0:0.#}", (currentSize))} m";
 		}
 		else if (currentSize / 0.01f > 1)
 		{
-			newSize = $"{(currentSize / 0.01f)} cm";
+			newSize = $"{String.Format("{0:0.#}", (currentSize / 0.01f))} cm";
 		}
 		else if (currentSize / 0.001f > 1)
 		{
-			newSize = $"{(currentSize / 0.001f)} mm";
+			newSize = $"{String.Format("{0:0.#}", (currentSize / 0.001f))} mm";
 		}
 		else
         {
-			newSize = $"{(currentSize / 0.000001f)} nm";
+			newSize = $"{String.Format("{0:0.#}", (currentSize / 0.000001f))} nm";
 		}
 		return newSize;
 	}

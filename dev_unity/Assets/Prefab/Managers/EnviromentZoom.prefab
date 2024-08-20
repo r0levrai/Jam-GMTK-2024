@@ -391,7 +391,7 @@ MonoBehaviour:
       m_Flags: 4
     - m_Name: modifier
       m_Id: 5bf9c818-1ef1-4cd6-bd8a-6dcf96d938f6
-      m_Path: <Mouse>/middleButton
+      m_Path: <Mouse>/rightButton
       m_Interactions: 
       m_Processors: 
       m_Groups: 

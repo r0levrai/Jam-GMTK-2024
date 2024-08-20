@@ -319,11 +319,11 @@ MonoBehaviour:
   m_text: "Welcome to Cavendish's Perfect Proportions, your abode in proving to that
     banana who\u2019s boss.\r\n\r\nYour goal is to try and draw the prompted object
     at the correct size. The longer side will be the one taken into account.\r\n\r\nYou
-    can zoom in and out to change the scale of the drawing board.\r\n\r\nAt the end,
-    just submit your masterpiece; you\u2019ll get a score based on the accuracy of
-    your drawing's size, as well as its artistic value, along with some encouraging
-    words from Cavendish Canvas (the banana).\r\n\r\nDon\u2019t forget to check and
-    rate other players' drawings!\r\n"
+    can zoom in and out to change the scale of the drawing board.\r\nUse your right
+    click to move the drawing board arround.\n\r\nAt the end, just submit your masterpiece;
+    you\u2019ll get a score based on the accuracy of your drawing's size, as well
+    as its artistic value, along with some encouraging words from Cavendish Canvas
+    (the banana).\r\n\r\nDon\u2019t forget to check and rate other players' drawings!\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5b398af8d2b9a6644a772f047ac25272, type: 2}
   m_sharedMaterial: {fileID: 3010047765613290278, guid: 5b398af8d2b9a6644a772f047ac25272, type: 2}
