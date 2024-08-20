@@ -148,6 +148,9 @@ public class TitleScreen : MonoBehaviour
                 endCards[i].setupPosition(new Vector3(-15, 4.5f), new Vector3(18 / 4.0f * (i + 1) - 9, 3.15f + Random.Range(0, 0.1f)));
                 endCards[i].time_ = Random.Range(0.0f, 0.2f);
                 endCards[i].easingout = true;
+                endCards[i].blocked_bad = false;
+                endCards[i].blocked_like = false;
+                endCards[i].blocked_funny = false;
             }
         }
     }

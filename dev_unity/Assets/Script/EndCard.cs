@@ -32,10 +32,17 @@ public class EndCard : MonoBehaviour
     public int bad_score = 0;
     public NetworkedDrawing networkedDrawing;
 
+    public bool blocked_like = false;
+    public bool blocked_funny = false;
+    public bool blocked_bad = false;
+
+    private Label likeCount, laughCount, perplexedCount; 
+
 
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.transform.localPosition = new Vector3(-100, -100);
         mainDoc = GameObject.Find("UIDocument").GetComponent<UIDocument>();
     }
 
@@ -92,8 +99,22 @@ public class EndCard : MonoBehaviour
             VisualElement root = mainDoc.rootVisualElement;
             Button button = root.Q<Button>("BackButton");
 
+            Button likeButton = root.Q<Button>("LoveReaction");
+            Button laughButton = root.Q<Button>("LaughReaction");
+            Button perplexedButton = root.Q<Button>("PerplexedReaction");
+
+            likeCount = root.Q<Label>("LoveReactionCount");
+            laughCount = root.Q<Label>("LaughReactionCount");
+            perplexedCount = root.Q<Label>("PerplexedReactionCount");
+
+            likeCount.text = like_score.ToString();
+            laughCount.text = funny_score.ToString();
+            perplexedCount.text = bad_score.ToString();
 
             button.clicked += () => SetPreviousCard();
+            likeButton.clicked += () => ClickLike();
+            laughButton.clicked += () => ClickLaugh();
+            perplexedButton.clicked += () => ClickPerplexed();
 
             move(new Vector3(0, 0));
             rotate(0);
@@ -104,15 +125,66 @@ public class EndCard : MonoBehaviour
         }
         
     }
+    private void ClickLike()
+    {
+        if(!blocked_like)
+        {
+            like_score++;
+            likeCount.text = like_score.ToString();
+            blocked_like = true;
 
+            networkedDrawing.SendReaction("like");
+        }
+    }
+
+    private void ClickLaugh()
+    {
+        if (!blocked_funny)
+        {
+            funny_score++;
+            laughCount.text = funny_score.ToString();
+
+            blocked_funny = true;
+            networkedDrawing.SendReaction("funny");
+        }
+    }
+
+    private void ClickPerplexed()
+    {
+        if (!blocked_bad)
+        {
+            bad_score++;
+            perplexedCount.text = bad_score.ToString();
+
+            blocked_bad = true;
+            networkedDrawing.SendReaction("bad");
+        }
+    }
     private void SetPreviousCard()
     {
         Constants.Instance.pauseTitleAnimation = false;
         mainDoc.visualTreeAsset = prevUI;
 
         VisualElement root = mainDoc.rootVisualElement;
-        Button playAgainButton = root.Q<Button>("AgainButton");
-        Button mainMenuButton = root.Q<Button>("MenuButton");
+
+        try
+        {
+            Button playAgainButton = root.Q<Button>("AgainButton");
+            Button mainMenuButton = root.Q<Button>("MenuButton");
+            
+
+            playAgainButton.clicked += () => SceneManager.LoadSceneAsync(1);
+            mainMenuButton.clicked += () => SceneManager.LoadSceneAsync(0);
+            
+        }
+        catch
+        {
+            Button playButton = root.Q<Button>("PlayButton");
+            Button howButton = root.Q<Button>("HowButton");
+
+            playButton.clicked += () => SceneManager.LoadSceneAsync(1);
+            howButton.clicked += () => SceneManager.LoadSceneAsync(3);
+        }
 
         positionEnd_ = positionOld_;
         scaleEnd_ = scaleOld_;
@@ -122,8 +194,7 @@ public class EndCard : MonoBehaviour
         time_ = 0;
         textCanvas.sortingOrder = 1;
 
-        playAgainButton.clicked += () => SceneManager.LoadSceneAsync(1);
-        mainMenuButton.clicked += () => SceneManager.LoadSceneAsync(0);
+        
     }
 
     private void OnMouseOver()
