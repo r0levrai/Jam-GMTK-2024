@@ -56,6 +56,10 @@ public class TitleScreen : MonoBehaviour
             endCards.Add(ec2);
         }
 
+        playButton.RegisterCallback<MouseEnterEvent>(_ => SoundManager.Instance.PlayOneShot("hover1"));
+        playButton.RegisterCallback<ClickEvent>(_ => SoundManager.Instance.PlayOneShot("clickPaper"));
+        howToButton.RegisterCallback<MouseEnterEvent>(_ => SoundManager.Instance.PlayOneShot("hover2"));
+        howToButton.RegisterCallback<ClickEvent>(_ => SoundManager.Instance.PlayOneShot("clickPaper"));
         playButton.clicked += () => SceneManager.LoadSceneAsync(1);
         howToButton.clicked += () => SceneManager.LoadSceneAsync(3);
         volumeSlider.RegisterValueChangedCallback((evt) =>

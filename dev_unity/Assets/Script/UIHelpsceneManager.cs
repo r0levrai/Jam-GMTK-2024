@@ -15,6 +15,8 @@ public class UIHelpsceneManager : MonoBehaviour
 
 	private void Start()
 	{
+		mainMenuButton.RegisterCallback<MouseEnterEvent>(_ => SoundManager.Instance.PlayOneShot("hover2"));
+		mainMenuButton.RegisterCallback<ClickEvent>(_ => SoundManager.Instance.PlayOneShot("clickPaper"));
 		mainMenuButton.clicked += () => SceneManager.LoadSceneAsync(0);
 	}
 
