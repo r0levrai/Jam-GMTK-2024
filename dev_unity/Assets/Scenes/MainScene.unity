@@ -1648,13 +1648,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectCategeoryNoneCommentList.Array.data[2]
-      value: "Banana books didn't tell me what XX is, but that won\u2019t stop me
-        from telling you it was horrible!"
+      value: "I wonder what XX is, but that won\u2019t stop me from telling you it
+        was horrible!"
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectCategeoryNoneCommentList.Array.data[3]
-      value: "You\u2019re really drawing everything that\u2019s asked of you, huh\u2026even
-        if XX's existence has never been proven\u2026"
+      value: Great effort, but I'm sorry to tell you that nobody has ever seen XX
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: stickers.Array.data[0].sprites.Array.data[0]
