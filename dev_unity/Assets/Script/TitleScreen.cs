@@ -5,11 +5,16 @@ using UnityEngine;
 public class TitleScreen : MonoBehaviour
 {
     public EndCard endcard;
+    public List<Sprite> spriteList_;
 
     public List<EndCard> endCards;
 
-    private float time_ = 0;
+    private float time_ = 0, timeBanane_ = 0;
     private bool once = false;
+    private float rotAngle_ = -10;
+    private int currentSprite = 0;
+
+    public GameObject banane;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +37,22 @@ public class TitleScreen : MonoBehaviour
     void Update()
     {
         time_ += Time.deltaTime;
+        timeBanane_ += Time.deltaTime;
+
+        if(timeBanane_ > 2)
+        {
+            timeBanane_ = 0;
+            banane.transform.Rotate(new Vector3(0, 0, rotAngle_));
+            rotAngle_ *= -1;
+
+            int newCurrent = currentSprite;
+            while (newCurrent == currentSprite) {
+                newCurrent = Random.Range(0, spriteList_.Count);
+            }
+
+            banane.GetComponent<SpriteRenderer>().sprite = spriteList_[newCurrent];
+            currentSprite = newCurrent;
+        }
 
         if(time_ > 3 && !once)
         {
