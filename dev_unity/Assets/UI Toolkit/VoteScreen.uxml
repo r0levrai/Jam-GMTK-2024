@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/style.uss?fileID=7433441132597879392&amp;guid=978176127b0706241a127fd3f6e71606&amp;type=3#style" />
-    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.46);" />
-    <ui:GroupBox style="align-self: center; flex-direction: row; rotate: -2deg; align-items: auto; position: absolute; bottom: 70px;">
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
+    <ui:GroupBox style="align-self: center; flex-direction: row; rotate: -2deg; align-items: auto; position: absolute; top: 20px;">
         <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="LoveReaction" class="reaction-button" style="-unity-background-image-tint-color: rgb(253, 159, 137);">
             <ui:GroupBox class="reaction-groupbox" style="margin-right: 30px; margin-left: 40px;">
                 <ui:Label tabindex="-1" text="31" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Count" style="align-self: flex-start;" />

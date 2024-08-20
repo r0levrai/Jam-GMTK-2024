@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 8451318293771078691}
   - component: {fileID: 1070170460321866197}
   - component: {fileID: 8090804625740779081}
+  - component: {fileID: 2680342971899812452}
   m_Layer: 0
   m_Name: EndCard
   m_TagString: Untagged
@@ -135,6 +136,7 @@ MonoBehaviour:
   timeAgoText: {fileID: 9003817502124009381}
   background: {fileID: 8177043100077104091}
   draw: {fileID: 251929675569567723}
+  overlayUI: {fileID: 9197481963319205126, guid: a249b8219af5f454aafc445577ccdb98, type: 3}
   animDuration_: 1
   time_: 0
   easingout: 1
@@ -183,6 +185,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.3, y: 6.3}
   m_EdgeRadius: 0
+--- !u!210 &2680342971899812452
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2284720110279398482}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_SortAtRoot: 0
 --- !u!1 &3288335121060855131
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,7 +210,7 @@ GameObject:
   - component: {fileID: 7517407388206552535}
   - component: {fileID: 6141081884794279037}
   m_Layer: 0
-  m_Name: drawaing
+  m_Name: drawing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
