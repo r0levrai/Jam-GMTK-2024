@@ -2,33 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.Rendering;
 
 public class EndCard : MonoBehaviour
 {
-    private float scaleStart_ = 1, scaleEnd_ = 1;
+    private float scaleStart_ = 1, scaleEnd_ = 1, scaleOld_ = 1;
     private float rotationStart_ = 0, rotationEnd_ = 0;
-    private Vector2 positionStart_ = new Vector2(0,0), positionEnd_ = new Vector2(0, 0);
+    private Vector2 positionStart_ = new Vector2(0,0), positionEnd_ = new Vector2(0, 0), positionOld_ = new Vector2(0,0);
     private float alphaStart_ = 1, alphaEnd_ = 1;
 
     public TMPro.TextMeshProUGUI timeAgoText;
     public SpriteRenderer background;
     public Draw draw;
+    private UIDocument mainDoc;
+    public VisualTreeAsset overlayUI;
+    private VisualTreeAsset prevUI;
 
     public float animDuration_ = 1;
 
     public float time_ = 0;
 
     public bool easingout = true;
+    private bool isHover = false;
+
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        //setupScale(0.5f, 1);
-        //setupRotation(2, -2);
-        //setupAlpha(0.4f, 1);
-        //setupPosition(new Vector3(-1, -1, 0), new Vector3(0, 0, 0));
-
-        //time_ = -2;
+        mainDoc = GameObject.Find("UIDocument").GetComponent<UIDocument>();
     }
 
     // Update is called once per frame
@@ -71,14 +73,39 @@ public class EndCard : MonoBehaviour
 
     }
 
-    void OnMouseDown()
+    private void OnMouseDown()
     {
-        Debug.Log("Sprite Clicked");
+        if(mainDoc.visualTreeAsset != overlayUI)
+        {
+            isHover = false;
+            positionOld_ = positionEnd_;
+            scaleOld_ = scaleEnd_;
+            prevUI = mainDoc.visualTreeAsset;
+            mainDoc.visualTreeAsset = overlayUI;
+            move(new Vector3(0, 0));
+            rotate(0);
+            scale(1.5f);
+            time_ = 0;
+
+            GetComponent<SortingGroup>().sortingOrder = 2;
+        }
+        
     }
 
-    void OnMouseOver()
+    private void OnMouseOver()
     {
-        Debug.Log("Sprite Hovered");
+        if (mainDoc.visualTreeAsset != overlayUI)
+        {
+            isHover = true;
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        if (mainDoc.visualTreeAsset != overlayUI)
+        {
+            isHover = false;
+        }
     }
 
     float getCurrentVal(float start, float end, float t)
@@ -131,6 +158,12 @@ public class EndCard : MonoBehaviour
     {
         rotationStart_ = rotationEnd_;
         rotationEnd_ = rotationStart_ + target;
+    }
+
+    public void scale(float target)
+    {
+        scaleStart_ = scaleEnd_;
+        scaleEnd_ = target;
     }
 }
 
