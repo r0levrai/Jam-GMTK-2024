@@ -168,6 +168,28 @@ public class NetworkedDrawing
             return false;
         }
     }
+    public async Task<bool> SendReaction(string reaction)
+    {
+        try
+        {
+            string route = NetworkManager.Instance.postDrawingsRoute + $"/{this.data.id}/{reaction}";
+            UnityWebRequest webRequest = UnityWebRequest.Post(NetworkManager.Instance.servers[0] + route, "", "application/json");
+            //webRequest.certificateHandler = new CustomSSLCertificate();
+            var response = await webRequest.SendWebRequestAsync();
+            if (response.result == UnityWebRequest.Result.ConnectionError || response.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.LogError("Error: " + response.error);
+                return false;
+            }
+            Debug.Log("Success: " + response.downloadHandler.text);
+            return true;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Exception: " + e);
+            return false;
+        }
+    }
 
     public Draw.LineRendererData GetDrawingData()
     {

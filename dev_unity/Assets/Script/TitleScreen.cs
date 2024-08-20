@@ -125,6 +125,7 @@ public class TitleScreen : MonoBehaviour
             state++;
             for (int i = 0; i < 3; i++)
             {
+                if (i >= endCards.Count) { break; }
                 endCards[i].move(new Vector3(12, 2.5f));
                 endCards[i].rotate(Random.Range(2.0f, 10.0f));
                 endCards[i].time_ = Random.Range(0.0f, 0.2f);
@@ -139,6 +140,7 @@ public class TitleScreen : MonoBehaviour
             time_ = 0;
             for (int i = 0; i < 3; i++)
             {
+                if (i >= endCards.Count) { break; }
                 float rot2 = Random.Range(2.0f, 10.0f);
                 if (Random.Range(0.0f, 1.0f) < 0.5f) rot2 *= -1;
                 endCards[i].setupRotation(rot2 * 3, -rot2);

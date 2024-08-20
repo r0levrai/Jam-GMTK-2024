@@ -27,6 +27,7 @@ public class Constants : MonoSingleton<Constants>
             Draw.Instance.GetDrawingData(), null, null, "guest",
             objectIndex.ToString(), GetIndexImage().ToString(), (float)note
         );
+        print($"Saved w/ background {GetIndexImage()}: {imagesBackground[GetIndexImage()].name}");
     }
     public NetworkedDrawing GetPlayerDrawing() => playerDrawing;
 }
