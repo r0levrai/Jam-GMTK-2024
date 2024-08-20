@@ -7,7 +7,7 @@
         </ui:GroupBox>
         <ui:GroupBox style="flex-direction: row; justify-content: flex-start; align-items: center; rotate: -2deg;">
             <ui:Toggle name="SoundToggle" focusable="false" value="true" class="sound-toggle" style="padding-bottom: 0; padding-right: 0; margin-right: 17px;" />
-            <ui:Slider high-value="100" name="SoundSlider" style="width: 375px; height: 39px; justify-content: center;" />
+            <ui:Slider high-value="100" name="SoundSlider" focusable="false" style="width: 375px; height: 39px; justify-content: center;" />
         </ui:GroupBox>
         <ui:GroupBox style="flex-direction: row; align-self: auto; align-items: flex-end;">
             <ui:Button text="Play" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PlayButton" class="basic-button" style="margin-top: 70px; margin-right: 17px;" />
