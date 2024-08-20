@@ -44,10 +44,10 @@ public class EndCard : MonoBehaviour
         float currentAlpha = getCurrentVal(alphaStart_, alphaEnd_, currentT);
         Vector3 currenPos = getCurrentVal(positionStart_, positionEnd_, currentT);
 
-        gameObject.transform.localScale = new Vector3(currentScale, currentScale, 1);
+        gameObject.transform.localScale = new Vector3(currentScale + (isHover ? 0.1f : 0), currentScale + (isHover ? 0.1f : 0), 1);
         //draw.transform.localScale = new Vector3(currentScale, currentScale, 1);
         //background.transform.localScale = new Vector3(currentScale, currentScale, 1);
-        gameObject.transform.localEulerAngles =  new Vector3(0, 0, currentRotation);
+        gameObject.transform.localEulerAngles =  new Vector3(0, 0, currentRotation + (isHover ? 5:0));
         gameObject.transform.localPosition = currenPos;
         setAlpha(currentAlpha);
     }
@@ -82,14 +82,31 @@ public class EndCard : MonoBehaviour
             scaleOld_ = scaleEnd_;
             prevUI = mainDoc.visualTreeAsset;
             mainDoc.visualTreeAsset = overlayUI;
+            VisualElement root = mainDoc.rootVisualElement;
+            Button button = root.Q<Button>("BackButton");
+
+
+            button.clicked += () => SetPreviousCard();
+
             move(new Vector3(0, 0));
             rotate(0);
             scale(1.5f);
             time_ = 0;
 
-            GetComponent<SortingGroup>().sortingOrder = 2;
+            GetComponent<SortingGroup>().sortingOrder = 5;
         }
         
+    }
+
+    private void SetPreviousCard()
+    {
+        mainDoc.visualTreeAsset = prevUI;
+
+        move(positionOld_);
+        rotate(0);
+        scale(scaleOld_);
+        time_ = 0;
+        GetComponent<SortingGroup>().sortingOrder = 1;
     }
 
     private void OnMouseOver()
