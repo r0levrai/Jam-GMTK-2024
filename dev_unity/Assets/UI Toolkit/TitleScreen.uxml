@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/style.uss?fileID=7433441132597879392&amp;guid=978176127b0706241a127fd3f6e71606&amp;type=3#style" />
+    <ui:GroupBox style="align-self: flex-end; position: absolute; bottom: 30px; right: 230px; align-items: flex-end;">
+        <ui:GroupBox style="flex-direction: row; justify-content: flex-start; align-self: auto; align-items: center; rotate: -2deg;">
+            <ui:Toggle name="VolumeToggle" focusable="false" value="true" class="volume-toggle" />
+            <ui:Slider high-value="100" name="VolumeSlider" page-size="50" focusable="false" style="width: 375px; height: 40px;" />
+        </ui:GroupBox>
+        <ui:GroupBox style="flex-direction: row; justify-content: flex-start; align-items: center; rotate: -2deg;">
+            <ui:Toggle name="SoundToggle" focusable="false" value="true" class="sound-toggle" style="padding-bottom: 0; padding-right: 0; margin-right: 17px;" />
+            <ui:Slider high-value="100" name="SoundSlider" focusable="false" inverted="false" page-size="50" style="width: 375px; height: 39px; justify-content: center;" />
+        </ui:GroupBox>
+        <ui:GroupBox style="flex-direction: row; align-self: auto; align-items: flex-end;">
+            <ui:Button text="Play" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PlayButton" class="basic-button" style="margin-top: 70px; margin-right: 17px;" />
+            <ui:Button text="?" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HowButton" class="basic-button" style="width: 115px;" />
+        </ui:GroupBox>
+    </ui:GroupBox>
+</ui:UXML>
