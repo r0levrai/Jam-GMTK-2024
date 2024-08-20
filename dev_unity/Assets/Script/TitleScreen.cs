@@ -57,6 +57,7 @@ public class TitleScreen : MonoBehaviour
         }
 
         playButton.clicked += () => SceneManager.LoadSceneAsync(1);
+        howToButton.clicked += () => SceneManager.LoadSceneAsync(3);
         volumeSlider.RegisterValueChangedCallback((evt) =>
 		{
 			SoundManager.Instance.ChangeVolumeMusic(evt.newValue / volumeSlider.highValue);
