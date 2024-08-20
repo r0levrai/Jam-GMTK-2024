@@ -717,6 +717,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3add8eb16fc8f8245a42a9110f406486, type: 3}
   - {fileID: 21300000, guid: b3a2aeb1fd7ef75489521696134d33c0, type: 3}
   - {fileID: 21300000, guid: c6a9f65a41f1b874fa77d94abff4522d, type: 3}
+  - {fileID: 21300000, guid: e07d8cb34d355874a904a662f0a3bd1b, type: 3}
+  - {fileID: 21300000, guid: 45b8d3afd5d9752408cba97b85c7b63a, type: 3}
+  - {fileID: 21300000, guid: 061ea033ccd55684ab3cc8c51e824c42, type: 3}
+  - {fileID: 21300000, guid: 5d0250fc6ff95d14685c3826c2a93b43, type: 3}
+  - {fileID: 21300000, guid: 40036094025a23d418d841d42afd2b53, type: 3}
+  - {fileID: 21300000, guid: c47c99d3bfa4ee94f81b04ce0836310d, type: 3}
   endCards: []
   nReceivedCards: 24
   banane: {fileID: 1780443791}

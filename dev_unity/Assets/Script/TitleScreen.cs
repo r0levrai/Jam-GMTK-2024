@@ -86,7 +86,8 @@ public class TitleScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time_ += Time.deltaTime;
+        if(!Constants.Instance.pauseTitleAnimation)
+            time_ += Time.deltaTime;
         timeBanane_ += Time.deltaTime;
 
         if(timeBanane_ > 2)

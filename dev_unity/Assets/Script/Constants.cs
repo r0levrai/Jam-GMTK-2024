@@ -15,6 +15,7 @@ public class Constants : MonoSingleton<Constants>
     public List<Sprite> imagesBackground = new List<Sprite>();
     public float targetZoomValue = 1f;
     public bool zoomEnable = true;
+    public bool pauseTitleAnimation = false;
 
     public int GetIndexImage() => (int)targetZoomValue;
 	public Sprite GetCurrentImage(int index) => imagesBackground[index];

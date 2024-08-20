@@ -189,9 +189,13 @@ MonoBehaviour:
   background: {fileID: 7943096129864045544}
   draw: {fileID: 251929675569567723}
   overlayUI: {fileID: 9197481963319205126, guid: a249b8219af5f454aafc445577ccdb98, type: 3}
+  textCanvas: {fileID: 1173012027457187398}
   animDuration_: 1
   time_: 0
   easingout: 1
+  like_score: 0
+  funny_score: 0
+  bad_score: 0
 --- !u!61 &8090804625740779081
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -337,7 +341,7 @@ GameObject:
   - component: {fileID: 4982355853197867639}
   - component: {fileID: 2098556654108648787}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: EndCardCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

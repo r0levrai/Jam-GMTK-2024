@@ -18,6 +18,7 @@ public class EndCard : MonoBehaviour
     private UIDocument mainDoc;
     public VisualTreeAsset overlayUI;
     private VisualTreeAsset prevUI;
+    public Canvas textCanvas;
 
     public float animDuration_ = 1;
 
@@ -81,6 +82,7 @@ public class EndCard : MonoBehaviour
     {
         if(mainDoc.visualTreeAsset != overlayUI)
         {
+            Constants.Instance.pauseTitleAnimation = true;
             isHover = false;
             positionOld_ = positionEnd_;
             scaleOld_ = scaleEnd_;
@@ -97,24 +99,27 @@ public class EndCard : MonoBehaviour
             scale(1.5f);
             time_ = 0;
 
-            GetComponent<SortingGroup>().sortingOrder = 5;
+            textCanvas.sortingOrder = 100;
         }
         
     }
 
     private void SetPreviousCard()
     {
+        Constants.Instance.pauseTitleAnimation = false;
         mainDoc.visualTreeAsset = prevUI;
 
         VisualElement root = mainDoc.rootVisualElement;
         Button playAgainButton = root.Q<Button>("AgainButton");
         Button mainMenuButton = root.Q<Button>("MenuButton");
 
+        positionEnd_ = positionOld_;
+        scaleEnd_ = scaleOld_;
         move(positionOld_);
         rotate(0);
         scale(scaleOld_);
         time_ = 0;
-        GetComponent<SortingGroup>().sortingOrder = 1;
+        textCanvas.sortingOrder = 1;
 
         playAgainButton.clicked += () => SceneManager.LoadSceneAsync(1);
         mainMenuButton.clicked += () => SceneManager.LoadSceneAsync(0);
