@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Xml.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -14,7 +18,6 @@ public class ZoomManager : MonoBehaviour
 		public float refUnitInMeter = 1.0f; 
 	}
 
-	[SerializeField] private UIDocument uiDocument;
 	[SerializeField] private ZoomLevel[] zoomLevels;
 	[SerializeField] private InputAction zoomAction;
 	[SerializeField] private InputAction moveAction;
@@ -33,9 +36,9 @@ public class ZoomManager : MonoBehaviour
 	}
 	private float zoomValue = 0f;
 	private float zoomVelocity = 0f;
-	private Slider zoomSlider;
 	private Transform movingObject;
 	private Camera cam;
+	private List<Vector3> posImages = new List<Vector3>();
 
 	public static ZoomManager Instance;
 	private void Awake()
@@ -47,16 +50,15 @@ public class ZoomManager : MonoBehaviour
 	{
 		cam = Camera.main;
 
+		foreach (var img in zoomLevels)
+		{
+			posImages.Add(img.spriteRenderer.transform.localPosition);
+		}
+
 		zoomAction.performed += OnZoom;
 		zoomAction.Enable();
 		moveAction.performed += OnMove;
 		moveAction.Enable();
-
-		zoomSlider = uiDocument.rootVisualElement.Q<Slider>("scaleSlider");
-		zoomSlider.lowValue = 0f;
-		zoomSlider.highValue = zoomLevels.Length-.1f;
-		zoomSlider.value = targetZoomValue;
-		zoomSlider.RegisterValueChangedCallback(OnZoomSliderChanged);
 
 		for (int i = 0; i < transform.childCount; i++)
 		{
@@ -74,7 +76,6 @@ public class ZoomManager : MonoBehaviour
 	private void OnDestroy()
 	{
 		Instance = null;
-		zoomSlider.UnregisterValueChangedCallback(OnZoomSliderChanged);
 		zoomAction.performed -= OnZoom;
 		zoomAction.Disable();
 		moveAction.performed -= OnMove;
@@ -88,6 +89,14 @@ public class ZoomManager : MonoBehaviour
 		{
 			zoomValue = Mathf.SmoothDamp(zoomValue, targetZoomValue, ref zoomVelocity, zoomDuration);
 			SetZoomLevel(zoomValue);
+			SoundManager.Instance.PlayMusicByZoomIndex(Constants.Instance.GetIndexImage());
+
+			/*
+			float normalizedValue = Mathf.InverseLerp((int)targetZoomValue, (int)targetZoomValue + 1, zoomValue);
+			float scale = (zoomLevels[(int)targetZoomValue].zoomCurve.Evaluate(normalizedValue));
+			movingObject.position = Vector3.Lerp(Vector3.zero, posImages[(int)targetZoomValue], scale);
+			*/
+			zoomLevels[(int)targetZoomValue].spriteRenderer.transform.position = Vector3.zero;
 		}
 	}
 
@@ -122,20 +131,16 @@ public class ZoomManager : MonoBehaviour
 	private void OnZoom(InputAction.CallbackContext context)
 	{
 		Vector2 scrollInput = context.ReadValue<Vector2>();
-		zoomSlider.value += scrollInput.y * zoomScroll * Time.deltaTime;
-	}
-
-	private void OnZoomSliderChanged(ChangeEvent<float> evt)
-	{
-		targetZoomValue = evt.newValue;
-		//movingObject.position = ClampPositionToBounds(movingObject.position);
-		//Debug.Log(targetZoomValue);
-		SoundManager.Instance.PlaySound(soundZoomNames[Random.Range(0, soundZoomNames.Length)]);
+		float zoomValueNow = targetZoomValue + (scrollInput.y * zoomScroll * Time.deltaTime);
+		if (zoomValueNow < zoomLevels.Length - .1f && zoomValueNow >= 0)
+		{
+			targetZoomValue = zoomValueNow;
+			SoundManager.Instance.PlaySound(soundZoomNames[UnityEngine.Random.Range(0, soundZoomNames.Length)]);
+		}
 	}
 
 	private void SetZoomLevel(float value)
 	{
-		SoundManager.Instance.PlayMusicByZoomIndex(Constants.Instance.GetIndexImage());
 		foreach (var level in zoomLevels)
 		{
 			int index = System.Array.IndexOf(zoomLevels, level);
