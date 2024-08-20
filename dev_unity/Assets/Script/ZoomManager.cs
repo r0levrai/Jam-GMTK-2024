@@ -27,9 +27,15 @@ public class ZoomManager : MonoBehaviour
 	{
 		get => zoomLevels[(int)targetZoomValue].refUnitInMeter / zoomLevels[(int)targetZoomValue].spriteRenderer.transform.localScale.x;
 	}
-	private float targetZoomValue { 
+	private float targetZoomValue {
 		get => Constants.Instance.targetZoomValue;
-		set => Constants.Instance.targetZoomValue = value; 
+		set => Constants.Instance.targetZoomValue = value;
+	}
+
+	private bool zoomEnable
+	{
+		get => Constants.Instance.zoomEnable;
+		set => Constants.Instance.zoomEnable = value;
 	}
 	private float zoomValue = 0f;
 	private float zoomVelocity = 0f;
@@ -84,7 +90,7 @@ public class ZoomManager : MonoBehaviour
 	private void Update()
 	{
 		//Debug.Log(currentUnitScaleInMeter);
-		if (Mathf.Abs(zoomValue - targetZoomValue) > 0.01f)
+		if (Mathf.Abs(zoomValue - targetZoomValue) > 0.01f && zoomEnable)
 		{
 			zoomValue = Mathf.SmoothDamp(zoomValue, targetZoomValue, ref zoomVelocity, zoomDuration);
 			SetZoomLevel(zoomValue);
@@ -120,16 +126,24 @@ public class ZoomManager : MonoBehaviour
 
 	private void OnZoom(InputAction.CallbackContext context)
 	{
-		Vector2 scrollInput = context.ReadValue<Vector2>();
-		zoomSlider.value += scrollInput.y * zoomScroll * Time.deltaTime;
+		if (zoomEnable)
+        {
+			Vector2 scrollInput = context.ReadValue<Vector2>();
+			zoomSlider.value += scrollInput.y * zoomScroll * Time.deltaTime;
+		}
+
 	}
 
 	private void OnZoomSliderChanged(ChangeEvent<float> evt)
 	{
-		targetZoomValue = evt.newValue;
-		//movingObject.position = ClampPositionToBounds(movingObject.position);
-		//Debug.Log(targetZoomValue);
-		SoundManager.Instance.PlaySound(soundZoomNames[Random.Range(0, soundZoomNames.Length)]);
+		if (zoomEnable)
+		{
+			targetZoomValue = evt.newValue;
+			//movingObject.position = ClampPositionToBounds(movingObject.position);
+			//Debug.Log(targetZoomValue);
+			SoundManager.Instance.PlaySound(soundZoomNames[Random.Range(0, soundZoomNames.Length)]);
+		}
+
 	}
 
 	private void SetZoomLevel(float value)
