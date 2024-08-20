@@ -1,9 +1,11 @@
-import time
+import time, datetime
 
 from flask import Flask, request, jsonify  # python -m pip install Flask
+from flask_cors import CORS
 
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*"}})  #: "https://r0levrai.itch.io/draw-to-scale"}})  # Enable Cross-Origin Requests from itch.io web builds
 
 drawings = []
 
@@ -15,7 +17,7 @@ def test():
 def receive_json():
     global drawings
     json = request.json
-    json['time'] = time.time()
+    json['createdDate'] = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.111Z") # = time.time()
     print(json)
     drawings.append(json)
     return jsonify({"message": "JSON received"}), 200

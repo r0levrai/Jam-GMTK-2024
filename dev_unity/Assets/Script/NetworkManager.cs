@@ -202,11 +202,11 @@ public class NetworkedDrawing
         }
         else if (difference.TotalMinutes >= 1)
         {
-            return $"{(int)difference.TotalMinutes} minutes ago";
+            return $"{(int)difference.TotalMinutes} min ago";
         }
         else if (difference.TotalSeconds >= 1)
         {
-            return $"{(int)difference.TotalSeconds} seconds ago";
+            return $"{(int)difference.TotalSeconds} sec ago";
         }
         else
         {

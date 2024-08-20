@@ -96,7 +96,7 @@ public class EndcardManager : MonoBehaviour
         otherCards.Add(ec);
     }
 
-    void PopulateCard(EndCard card, NetworkedDrawing drawing, string customText = null)
+    public static void PopulateCard(EndCard card, NetworkedDrawing drawing, string customText = null)
     {
         card.timeAgoText.text = customText != null ? customText : drawing.GetTimeDifference();
         int iBg = int.TryParse(drawing.data.background, out iBg) ? iBg : 0;
