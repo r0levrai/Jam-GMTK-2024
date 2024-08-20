@@ -128,7 +128,7 @@ public class SoundManager : MonoSingleton<SoundManager>
 		if (musicSource.isPlaying)
 		{
 			newMusicSource.clip = newClip.audio;
-			newMusicSource.time = musicSource.time;
+			newMusicSource.timeSamples = musicSource.timeSamples;
             newMusicSource.Play();
             while (timeElapsed < timeToFade)
             {
@@ -142,7 +142,7 @@ public class SoundManager : MonoSingleton<SoundManager>
         else
 		{
 			musicSource.clip = newClip.audio;
-            musicSource.time = newMusicSource.time;
+            musicSource.timeSamples = newMusicSource.timeSamples;
             musicSource.Play();
             while (timeElapsed < timeToFade)
             {

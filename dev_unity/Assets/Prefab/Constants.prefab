@@ -45,12 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imagesBackground:
-  - {fileID: 21300000, guid: 87eeafca63888184e88d4c32e1e9bc02, type: 3}
-  - {fileID: 21300000, guid: 87eeafca63888184e88d4c32e1e9bc02, type: 3}
+  - {fileID: 21300000, guid: dd59051c97298bb43a467afb918e02eb, type: 3}
+  - {fileID: 21300000, guid: 707f274ab7a79894c9a850804068a495, type: 3}
   - {fileID: 21300000, guid: 8cc62d1a35a453149ab4f610bf1d937a, type: 3}
   - {fileID: 21300000, guid: 4e722e81ce3e47e4f98e8b913fbe18b5, type: 3}
-  - {fileID: 21300000, guid: b331769eea941014588731c1c496ce4d, type: 3}
-  - {fileID: 21300000, guid: 8a576830d549dbf4387ce324d2f25bf7, type: 3}
+  - {fileID: 21300000, guid: 365db1d1fb3711e47a5ece6400e96985, type: 3}
+  - {fileID: 21300000, guid: aaba4ec9f7c87b741bcb9c27392218e4, type: 3}
   - {fileID: 21300000, guid: 78dec5fe9e597a34790c70ae58aaf3d6, type: 3}
   - {fileID: 21300000, guid: 7a1d074a56d3e7f419d388b1b2f36325, type: 3}
   targetZoomValue: 1
