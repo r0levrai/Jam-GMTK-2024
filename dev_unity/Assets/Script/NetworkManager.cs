@@ -15,7 +15,7 @@ public class NetworkManager : MonoSingleton<NetworkManager>
     //[TextArea(1, 1000)] public string sslCertificatePublicKey;
     void Awake()
     {
-        if (FindObjectsOfType<Constants>().Length > 1)
+        if (FindObjectsOfType<NetworkManager>().Length > 1)
         {
             Destroy(gameObject);
         }
