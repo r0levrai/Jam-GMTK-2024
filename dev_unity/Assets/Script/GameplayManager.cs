@@ -54,6 +54,8 @@ public class GameplayManager : MonoBehaviour
 		bananaFace = bananaRating.Q<VisualElement>("banana");
 		bananaScale = bananaRating.Q<Label>("bananaScale");
 		bananaCommentary = bananaRating.Q<Label>("bananaCommentary");
+		SoundManager.Instance.PlayMusicWithFade("space");
+
 
 		playerSize.localScale = Vector3.zero;
 		trueSize.localScale = Vector3.zero;
