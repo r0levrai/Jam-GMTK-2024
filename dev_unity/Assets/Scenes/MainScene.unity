@@ -984,7 +984,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectNotFoundList.Array.data[7]
-      value: Your YY looks like XX if I were standing from very far.
+      value: Your XX looks like YY if I were standing from very far.
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectNotFoundList.Array.data[8]
