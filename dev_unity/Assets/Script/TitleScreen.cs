@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class TitleScreen : MonoBehaviour
 {
@@ -16,8 +18,24 @@ public class TitleScreen : MonoBehaviour
 
     public GameObject banane;
 
-    // Start is called before the first frame update
-    void Start()
+    [Header("UI")]
+	[SerializeField] private UIDocument uiTitleSceen;
+    private Toggle volumeToggle, soundToggle;
+    private Slider volumeSlider, soundSlider;
+    private Button playButton, howToButton;
+	private void Awake()
+	{
+        VisualElement root = uiTitleSceen.rootVisualElement;
+		volumeToggle = root.Q<Toggle>("VolumeToggle");
+        volumeSlider = root.Q<Slider>("VolumeSlider");
+		soundToggle = root.Q<Toggle>("SoundToggle");
+		soundSlider = root.Q<Slider>("SoundSlider");
+		playButton = root.Q<Button>("PlayButton");
+		howToButton = root.Q<Button>("HowButton");
+	}
+
+	// Start is called before the first frame update
+	void Start()
     {
         for (int i = 0; i < 3; i++)
         {
@@ -31,7 +49,32 @@ public class TitleScreen : MonoBehaviour
 
             endCards.Add(ec2);
         }
-    }
+
+        playButton.clicked += () => SceneManager.LoadSceneAsync(1);
+        volumeSlider.RegisterValueChangedCallback((evt) =>
+		{
+			SoundManager.Instance.ChangeVolumeMusic(evt.newValue / volumeSlider.highValue);
+			SoundManager.Instance.PlaySound("click");
+		});
+		soundSlider.RegisterValueChangedCallback((evt) =>
+		{
+			SoundManager.Instance.ChangeVolumeSound(evt.newValue / soundSlider.highValue);
+			SoundManager.Instance.PlaySound("click");
+		});
+        volumeToggle.RegisterValueChangedCallback(evt =>
+        {
+            SoundManager.Instance.musicSource.mute = !evt.newValue;
+            SoundManager.Instance.newMusicSource.mute = !evt.newValue;
+			SoundManager.Instance.PlayOneShot("click");
+		});
+        soundToggle.RegisterValueChangedCallback(evt =>
+        {
+            SoundManager.Instance.soundEffectSource.mute = !evt.newValue;
+			SoundManager.Instance.PlayOneShot("click");
+		});
+		volumeSlider.value = SoundManager.Instance.volumeMusic * volumeSlider.highValue;
+        soundSlider.value = SoundManager.Instance.volumeSound * soundSlider.highValue;
+	}
 
     // Update is called once per frame
     void Update()

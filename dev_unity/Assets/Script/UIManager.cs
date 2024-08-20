@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
@@ -38,14 +39,14 @@ public class UIManager : MonoBehaviour
 	private void Start()
 	{
 		submitButton.clicked += () => GameplayManager.Instance.Submit();
-		nextButton.clicked += () => Debug.Log("next step !");
+		nextButton.clicked += () => SceneManager.LoadSceneAsync(2);
 		pensilBlack.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushBlackPress();	SoundManager.Instance.PlayOneShot("penSelect1"); });
 		pensilRed.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushRedPress();		SoundManager.Instance.PlayOneShot("penSelect2"); });
 		pensilBlue.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushBluePress();	SoundManager.Instance.PlayOneShot("penSelect3"); });
 		pensilWhite.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushWhitePress();	SoundManager.Instance.PlayOneShot("penSelect4"); });
 		eraser.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnClearButtonPress();			SoundManager.Instance.PlayOneShot("paperNoise"); });
-		undoButton.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonUndoPress();			SoundManager.Instance.PlayOneShot("clickPapier"); });
-		redoButton.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonRedoPress();			SoundManager.Instance.PlayOneShot("clickPapier"); });
+		undoButton.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonUndoPress();			SoundManager.Instance.PlayOneShot("clickPaper"); });
+		redoButton.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonRedoPress();			SoundManager.Instance.PlayOneShot("clickPaper"); });
 		smallBrush.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnSmallBrushPress();			SoundManager.Instance.PlayOneShot("penSelect1"); });
 		mediumBrush.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnMediumBrushPress();		SoundManager.Instance.PlayOneShot("penSelect2"); });
 		bigBrush.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnLargeBrushPress();			SoundManager.Instance.PlayOneShot("penSelect3"); });

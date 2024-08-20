@@ -48,10 +48,14 @@ public class SoundManager : MonoSingleton<SoundManager>
 	public List<Clip> clips = new List<Clip>();
     public List<Clip> musics = new List<Clip>();
     public List<Source> sources = new List<Source>();
+
+    public float volumeSound = 1;
+    public float volumeMusic = 0.2f;
+
     void Start()
     {
         PlayMusic("main");
-        PlayMusicWithFade("main2");
+        //PlayMusicWithFade("main2");
     }
 
     public void PlayOneShot(string audioClip)
@@ -114,16 +118,14 @@ public class SoundManager : MonoSingleton<SoundManager>
         float timeToFade = fadeTime;
         float timeElapsed = 0;
 
-        float maxVolume = newMusicSource.volume;
-
 		if (musicSource.isPlaying)
         {
             newMusicSource.clip = newClip.audio;
             newMusicSource.Play();
             while (timeElapsed < timeToFade)
             {
-                newMusicSource.volume = Mathf.Lerp(0, maxVolume, timeElapsed / timeToFade);
-                musicSource.volume = Mathf.Lerp(maxVolume, 0, timeElapsed / timeToFade);
+                newMusicSource.volume = Mathf.Lerp(0, volumeMusic, timeElapsed / timeToFade);
+                musicSource.volume = Mathf.Lerp(volumeMusic, 0, timeElapsed / timeToFade);
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }
@@ -135,8 +137,8 @@ public class SoundManager : MonoSingleton<SoundManager>
             musicSource.Play();
             while (timeElapsed < timeToFade)
             {
-                musicSource.volume = Mathf.Lerp(0, maxVolume, timeElapsed / timeToFade);
-                newMusicSource.volume = Mathf.Lerp(maxVolume, 0, timeElapsed / timeToFade);
+                musicSource.volume = Mathf.Lerp(0, volumeMusic, timeElapsed / timeToFade);
+                newMusicSource.volume = Mathf.Lerp(volumeMusic, 0, timeElapsed / timeToFade);
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }
@@ -161,5 +163,12 @@ public class SoundManager : MonoSingleton<SoundManager>
 		}
     }
 
+    public void ChangeVolumeMusic(float volume)
+    {
+        musicSource.volume = volume;
+        newMusicSource.volume = volume;
+    }
+    public void ChangeVolumeSound(float volume)
+        => soundEffectSource.volume = volume;
 }
 
