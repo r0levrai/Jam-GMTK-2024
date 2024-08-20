@@ -59,7 +59,7 @@ public class EndcardManager : MonoBehaviour
             otherCards.Add(ec2);
         }
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 2; i++)
         {
             if (drawings.Length <= 4+i) { return; }
             EndCard ec2 = Instantiate(endcard, new Vector3(0, 0, 0), Quaternion.identity);
@@ -67,7 +67,7 @@ public class EndcardManager : MonoBehaviour
             if (Random.Range(0.0f, 1.0f) < 0.5f) rot2 *= -1;
             ec2.setupRotation(rot2 * 3, -rot2);
             ec2.setupScale(0.5f, 0.5f);
-            ec2.setupPosition(new Vector3(30 / 5.0f * (i + 1) - 15, -7.5f), new Vector3(18 / 5.0f * (i + 1) - 9, -3.5f));
+            ec2.setupPosition(new Vector3(30 / 5.0f * (i + 1) - 15, -7.5f), new Vector3(18 / 4.0f * (i + 1) - 9, -3.5f));
             ec2.time_ = -1.3f - Random.Range(0.0f, 0.25f);
             PopulateCard(ec2, drawings[i + 4]);
             otherCards.Add(ec2);
