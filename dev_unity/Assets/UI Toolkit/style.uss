@@ -156,3 +156,38 @@
 .sound-toggle:checked {
     background-image: url("project://database/Assets/Texture/volumeon.png?fileID=2800000&guid=b154823559c9d224ea03859c8eba9988&type=3#volumeon");
 }
+
+.reaction-button {
+    width: 330px;
+    height: 130px;
+    background-image: url("project://database/Assets/Texture/reaction-button.png?fileID=2800000&guid=67e924a6e5b69de4c926f72630331d7b&type=3#reaction-button");
+    background-color: rgba(0, 0, 0, 0);
+    -unity-font: url("project://database/Assets/Font/NanumPenScript-Regular.ttf?fileID=12800000&guid=d341cf114415f8a41b0a11a54f6fed77&type=3#NanumPenScript-Regular");
+    -unity-font-definition: url("project://database/Assets/Font/NanumPenScript-Regular%20SDF%201.asset?fileID=11400000&guid=6a1362e9f2196ac4c9fa0ecb2c4b1338&type=2#NanumPenScript-Regular SDF 1");
+    font-size: 112px;
+    rotate: -3deg;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.reaction-button:hover {
+    scale: 1.1 1.1;
+}
+
+.reaction-button:active {
+    scale: 0.9 0.9;
+    rotate: 2deg;
+}
+
+.reaction-groupbox {
+    flex-direction: row;
+    justify-content: space-between;
+    align-self: stretch;
+}
+
+.emoji {
+    width: 80px;
+    height: 80px;
+}
