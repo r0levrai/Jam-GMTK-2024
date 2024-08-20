@@ -103,7 +103,8 @@ public class ZoomManager : MonoBehaviour
 	{
 		Vector2 delta = context.ReadValue<Vector2>();
 		Vector3 newPosition = movingObject.position + (new Vector3(delta.x * moveSpeed, delta.y * moveSpeed, 0) * Time.deltaTime);
-		movingObject.position = ClampPositionToBounds(newPosition);
+		movingObject.position = newPosition;
+		//movingObject.position = ClampPositionToBounds(newPosition);
 	}
 
 	private Vector3 ClampPositionToBounds(Vector3 newPosition)
@@ -148,6 +149,7 @@ public class ZoomManager : MonoBehaviour
 
 	private void SetZoomLevel(float value)
 	{
+		SoundManager.Instance.PlayMusicByZoomIndex(Constants.Instance.GetIndexImage());
 		foreach (var level in zoomLevels)
 		{
 			int index = System.Array.IndexOf(zoomLevels, level);

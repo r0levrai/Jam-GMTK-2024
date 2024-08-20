@@ -54,9 +54,9 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     void Start()
     {
-        PlayMusic("main");
-        //PlayMusicWithFade("main2");
-    }
+		currentIndex = 4;
+        PlayMusic("human");
+	}
 
     public void PlayOneShot(string audioClip)
     {
@@ -103,24 +103,32 @@ public class SoundManager : MonoSingleton<SoundManager>
         musicSource.pitch = pitch;
         musicSource.Play();
     }
+
     public void StopMusic()
     {
+        currentIndex = -1;
+        StopAllCoroutines();
         if (musicSource.isPlaying)
         {
-			StopAllCoroutines();
-			musicSource.Stop();
+            musicSource.Stop();
+        }
+        else if (newMusicSource.isPlaying)
+        {
+            musicSource.clip = newMusicSource.clip;
+            newMusicSource.clip = null;
+			newMusicSource.Stop();
         }
 	}
 
     private IEnumerator FadeMusic(Clip newClip, float fadeTime)
     {
-        yield return new WaitForSeconds(3);
+        //yield return new WaitForSeconds(3);
         float timeToFade = fadeTime;
         float timeElapsed = 0;
-
 		if (musicSource.isPlaying)
-        {
-            newMusicSource.clip = newClip.audio;
+		{
+			newMusicSource.clip = newClip.audio;
+			newMusicSource.time = musicSource.time;
             newMusicSource.Play();
             while (timeElapsed < timeToFade)
             {
@@ -132,8 +140,9 @@ public class SoundManager : MonoSingleton<SoundManager>
             musicSource.Stop();
         }
         else
-        {
-            musicSource.clip = newClip.audio;
+		{
+			musicSource.clip = newClip.audio;
+            musicSource.time = newMusicSource.time;
             musicSource.Play();
             while (timeElapsed < timeToFade)
             {
@@ -146,20 +155,28 @@ public class SoundManager : MonoSingleton<SoundManager>
         }
     }
 
-    public void PlayMusicWithFade(string audioClip, float timeToFade = 3)
+    public void PlayMusicWithFade(string audioClip, float timeToFade = .1f)
     {
         StopAllCoroutines();
         var newClip = musics.Find(c => c.name == audioClip);
         StartCoroutine(FadeMusic(newClip, timeToFade));
     }
 
-    public void PlayMusicByZoomIndex(int index, float timeToFade = 3)
+    private int currentIndex = 4;
+    public void PlayMusicByZoomIndex(int index, float timeToFade = .1f)
     {
+        if(currentIndex == index) return;
+        currentIndex = index;
         switch (index)
         {
-            case 0: PlayMusicWithFade("main", timeToFade); break;
-            case 1: PlayMusicWithFade("main2", timeToFade); break;
-            case 2: PlayMusicWithFade("main", timeToFade); break;
+            case 0: PlayMusicWithFade("space", timeToFade); break;
+            case 1: PlayMusicWithFade("earth", timeToFade); break;
+            case 2: PlayMusicWithFade("building", timeToFade); break;
+            case 3: PlayMusicWithFade("house", timeToFade); break;
+            case 4: PlayMusicWithFade("human", timeToFade); break;
+            case 5: PlayMusicWithFade("human", timeToFade); break;
+            case 6: PlayMusicWithFade("hairs", timeToFade); break;
+            case 7: PlayMusicWithFade("cells", timeToFade); break;
 		}
     }
 
