@@ -141,8 +141,21 @@ public class GameplayManager : MonoBehaviour
 		trueSizeText.text = FormatSize(realSize);
 		playerSizeText.text = FormatSize(sizeDrawn);
 
-        if (sizeDrawn > realSize) note = (int)((sizeDrawn - ((sizeDrawn - realSize) * 2)) * 10 / realSize) + 1;
-        else note = (int)(sizeDrawn *10 / realSize) +1;
+		float scaleRatio = sizeDrawn / realSize;
+		if (scaleRatio < 1)
+			scaleRatio = 1 / scaleRatio;
+
+		//[4-10] rating for ratio between [1,4] uniform
+		//[-10000-7] rating for ration between [3,infinity] => x10 more = -1 points
+
+		if (scaleRatio < 4f)
+        {
+			note = (int)(10f - (-1f+ scaleRatio)*6f/3f);
+        }
+		else
+        {
+			note = (int) (4f - Math.Log10(scaleRatio / 3f));
+		}
 
 		// save the drawing, drawn object, background and score for the next scene
 		Constants.Instance.SavePlayerDrawing(objectIndex, note);
