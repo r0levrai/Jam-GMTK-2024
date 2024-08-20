@@ -25,7 +25,10 @@ public class EndCard : MonoBehaviour
     public bool easingout = true;
     private bool isHover = false;
 
-    
+    public int like_score = 0;
+    public int funny_score = 0;
+    public int bad_score = 0;
+
 
     // Start is called before the first frame update
     void Start()

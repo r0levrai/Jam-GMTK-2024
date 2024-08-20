@@ -38,6 +38,9 @@ public struct ReceivedDrawing
     public string drawingName; // object the game asked to draw
     public string background;
     public float score;
+    public int like;
+    public int funny;
+    public int bad;
     public Draw.UnitySuxxWith2DVector[] linesPoints;
     public float[] linesWidth;
     public int[] linesColorIndex;
