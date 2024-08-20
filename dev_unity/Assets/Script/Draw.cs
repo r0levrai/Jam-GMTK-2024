@@ -37,6 +37,7 @@ public class Draw : MonoBehaviour
     LineRenderer currentLineRenderer;
     float currentWidth;
     int colorIndex;
+    bool enoughPoint;
 
     Vector2 lastPos;
 
@@ -49,6 +50,7 @@ public class Draw : MonoBehaviour
 
         currentWidth = 0.4f;
         colorIndex = 0;
+        enoughPoint = false;
         linesListUndo = new List<LineRenderer>();
         linesListRedo = new List<LineRenderer>();
 
@@ -93,6 +95,7 @@ public class Draw : MonoBehaviour
         currentLineRenderer = brushInstance.GetComponent<LineRenderer>();
         currentLineRenderer.startWidth = currentWidth;
         currentLineRenderer.endWidth = currentWidth;
+        enoughPoint = false;
         if (!drawable)
         {
             currentLineRenderer.transform.position = pos;
@@ -108,26 +111,34 @@ public class Draw : MonoBehaviour
             if (linesListUndo.Count == 0)
             {
                 currentLineRenderer.SetPosition(0, new Vector3(mousePos[0], mousePos[1],-0.15f));
-                currentLineRenderer.SetPosition(1, new Vector3(mousePos[0], mousePos[1],-0.15f));
             }
             else if (linesListUndo.Count == 1)
             {
                 currentLineRenderer.SetPosition(0, new Vector3(mousePos[0], mousePos[1],-0.2f));
-                currentLineRenderer.SetPosition(1, new Vector3(mousePos[0], mousePos[1],-0.2f));
             }
             else
             {
                 currentLineRenderer.SetPosition(0, new Vector3(mousePos[0], mousePos[1], 1f / linesListUndo.Count - 1));
-                currentLineRenderer.SetPosition(1, new Vector3(mousePos[0], mousePos[1], 1f / linesListUndo.Count - 1));
             }
+            currentLineRenderer.enabled = false;
         }
     }
 
     void AddAPoint(Vector3 pointPos)
     {
-        currentLineRenderer.positionCount++;
-        int positionIndex = currentLineRenderer.positionCount - 1;
-        currentLineRenderer.SetPosition(positionIndex, pointPos);
+        if (!enoughPoint)
+        {
+            int positionIndex = currentLineRenderer.positionCount - 1;
+            currentLineRenderer.SetPosition(positionIndex, pointPos);
+            currentLineRenderer.enabled = true;
+            enoughPoint = true;
+        }
+        else
+        {
+            currentLineRenderer.positionCount++;
+            int positionIndex = currentLineRenderer.positionCount - 1;
+            currentLineRenderer.SetPosition(positionIndex, pointPos);
+        }
     }
     void AddAPointSet(int positionIndex, Vector3 pointPos)
     {

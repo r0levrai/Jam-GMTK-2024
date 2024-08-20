@@ -88,12 +88,12 @@ public class GameplayManager : MonoBehaviour
 		float ClassifierScore;
 		bool objectFound = false;
 		int objectFoundIndex = -1;
-		for (int i = 0; i < 250; i++)
+		for (int i = 0; i < result.Length; i++)
 		{
 			if (result[i].label == listObjects[objectIndex].category)
 			{
 				objectFoundIndex = i;
-				if (i<10)
+				if (i<5)
 					objectFound = true;
 			}	
 		}
@@ -114,10 +114,11 @@ public class GameplayManager : MonoBehaviour
 		if (listObjects[objectIndex].category == "none")
 			ClassifierScore = UnityEngine.Random.Range(0f, 100f);
 		else
-			ClassifierScore = 100f -objectFoundIndex / 2.5f;
+			ClassifierScore = 100f - objectFoundIndex / (result.Length/100f);
 		string x = listObjects[objectIndex].name;
 		string y = "";
-		y = result[UnityEngine.Random.Range(0, 10)].label;
+		//y = result[UnityEngine.Random.Range(0, 5)].label;
+		y = result[0].label;
 		ClassifierPhrase = ClassifierPhrase.Replace("XX", x);
 		ClassifierPhrase = ClassifierPhrase.Replace("YY", y);
 		bananaFace.style.backgroundImage = new(bananaMoods[UnityEngine.Random.Range(0, bananaMoods.Count)]);
@@ -137,11 +138,24 @@ public class GameplayManager : MonoBehaviour
         }
 
         float realSize = listObjects[objectIndex].sizeInMeter;
-		trueSizeText.text = $"{realSize} m";
-		playerSizeText.text = $"{sizeDrawn} m";
+		trueSizeText.text = FormatSize(realSize);
+		playerSizeText.text = FormatSize(sizeDrawn);
 
-        if (sizeDrawn > realSize) note = (int)((sizeDrawn - ((sizeDrawn - realSize) * 2)) * 10 / realSize) + 1;
-        else note = (int)(sizeDrawn *10 / realSize) +1;
+		float scaleRatio = sizeDrawn / realSize;
+		if (scaleRatio < 1)
+			scaleRatio = 1 / scaleRatio;
+
+		//[4-10] rating for ratio between [1,11] uniform
+		//[-10000-7] rating for ration between [11,infinity] => x10 more = -1 points
+
+		if (scaleRatio < 11f)
+        {
+			note = (int)(10f - (-1f+ scaleRatio)*6f/10f);
+        }
+		else
+        {
+			note = (int) (4f - Math.Log10(scaleRatio / 10f));
+		}
 
 		// save the drawing, drawn object, background and score for the next scene
 		Constants.Instance.SavePlayerDrawing(objectIndex, note);
@@ -154,6 +168,31 @@ public class GameplayManager : MonoBehaviour
 
 	}
 	
+	private string FormatSize(float currentSize)
+    {
+		string newSize;
+		if (currentSize / 1000f > 1)
+        {
+			newSize = $"{(currentSize / 1000f)} km";
+		}
+		else if (currentSize / 1f > 1)
+		{
+			newSize = $"{(currentSize)} m";
+		}
+		else if (currentSize / 0.01f > 1)
+		{
+			newSize = $"{(currentSize / 0.01f)} cm";
+		}
+		else if (currentSize / 0.001f > 1)
+		{
+			newSize = $"{(currentSize / 0.001f)} mm";
+		}
+		else
+        {
+			newSize = $"{(currentSize / 0.000001f)} nm";
+		}
+		return newSize;
+	}
 	private IEnumerator ShowStampedText()
 	{
         switch (note)
