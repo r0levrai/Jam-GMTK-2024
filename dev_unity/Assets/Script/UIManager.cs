@@ -33,20 +33,22 @@ public class UIManager : MonoBehaviour
 	private Button undoButton, eraser, redoButton;
 	private RadioButton smallBrush, mediumBrush, bigBrush;
 
+	private readonly string[] soundHoverNames = new string[2] { "hover1", "hover2" };
+
 	private void Start()
 	{
 		submitButton.clicked += () => GameplayManager.Instance.Submit();
 		nextButton.clicked += () => Debug.Log("next step !");
-		pensilBlack.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushBlackPress();});
-		pensilRed.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushRedPress();});
-		pensilBlue.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushBluePress(); });
-		pensilWhite.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushWhitePress();});
-		eraser.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnClearButtonPress(); });
-		undoButton.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonUndoPress(); });
-		redoButton.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonRedoPress(); });
-		smallBrush.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnSmallBrushPress(); });
-		mediumBrush.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnMediumBrushPress(); });
-		bigBrush.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnLargeBrushPress(); });
+		pensilBlack.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushBlackPress();	SoundManager.Instance.PlayOneShot("penSelect1"); });
+		pensilRed.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushRedPress();		SoundManager.Instance.PlayOneShot("penSelect2"); });
+		pensilBlue.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushBluePress();	SoundManager.Instance.PlayOneShot("penSelect3"); });
+		pensilWhite.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonBrushWhitePress();	SoundManager.Instance.PlayOneShot("penSelect4"); });
+		eraser.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnClearButtonPress();			SoundManager.Instance.PlayOneShot("paperNoise"); });
+		undoButton.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonUndoPress();			SoundManager.Instance.PlayOneShot("clickPapier"); });
+		redoButton.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnButtonRedoPress();			SoundManager.Instance.PlayOneShot("clickPapier"); });
+		smallBrush.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnSmallBrushPress();			SoundManager.Instance.PlayOneShot("penSelect1"); });
+		mediumBrush.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnMediumBrushPress();		SoundManager.Instance.PlayOneShot("penSelect2"); });
+		bigBrush.RegisterCallback<ClickEvent>(evt => { Draw.Instance.OnLargeBrushPress();			SoundManager.Instance.PlayOneShot("penSelect3"); });
 
 		RegisterMouseEvent(submitButton);
 		RegisterMouseEvent(pensilBlack);
@@ -63,15 +65,13 @@ public class UIManager : MonoBehaviour
 
 	void RegisterMouseEvent(VisualElement elem)
 	{
-		elem.RegisterCallback<MouseEnterEvent>(_ => Draw.Instance.drawable = false);
+		elem.RegisterCallback<MouseEnterEvent>(_ => { Draw.Instance.drawable = false; SoundManager.Instance.PlayOneShot(soundHoverNames[Random.Range(0, soundHoverNames.Length)]); });
 		elem.RegisterCallback<MouseLeaveEvent>(_ => Draw.Instance.drawable = true);
 	}
 
 	public void FillTitle(string title)
 	{
-		//animation ???
 		promptLabel.text = title;
-		SoundManager.Instance.PlaySound("write");
 	}
 
 	public void ActiveTools(bool active = true)

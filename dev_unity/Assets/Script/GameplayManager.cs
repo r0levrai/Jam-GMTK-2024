@@ -144,6 +144,7 @@ public class GameplayManager : MonoBehaviour
         else note = (int)(sizeDrawn *10 / realSize) +1;
 
 
+		SoundManager.Instance.StopMusic();
 		StartCoroutine(EndAnimation(boundsSizeDrawing, isVertical));
 
 	}
@@ -196,6 +197,10 @@ public class GameplayManager : MonoBehaviour
 		yield return new WaitForSeconds(.6f);
 		stampedLabel.AddToClassList("stamped-text-active");
 		stampedLabel.RemoveFromClassList("stamped-text-inactive");
+		if(note>5)
+			SoundManager.Instance.PlayOneShot("applause");
+		else
+			SoundManager.Instance.PlayOneShot("awh");
 
 		stickerContainer.style.opacity = 0;
 
@@ -212,11 +217,13 @@ public class GameplayManager : MonoBehaviour
 		stickerContainer.style.width = 500;
 
 		yield return new WaitForSeconds(.6f);
+		SoundManager.Instance.PlayOneShot("stickerImpact");
 		stickerContainer.style.width = 300;
 		stickerContainer.style.height = 300;
 		stickerContainer.style.opacity = 1;
 
 		yield return new WaitForSeconds(.8f);
+		SoundManager.Instance.PlayOneShot("postIt3");
 		bananaRating.AddToClassList("banana-active");
 		bananaRating.RemoveFromClassList("stamped-text-inactive");
 	}
@@ -227,6 +234,7 @@ public class GameplayManager : MonoBehaviour
 		
 		//show player size
 		duration = .2f;
+		SoundManager.Instance.PlayOneShot("postIt1");
 		while (elapsedTime < duration)
 		{
 			elapsedTime += Time.deltaTime;
@@ -245,6 +253,7 @@ public class GameplayManager : MonoBehaviour
 		elapsedTime = 0;
 		while (elapsedTime < duration)
 		{
+			SoundManager.Instance.PlaySound("result");
 			elapsedTime += Time.deltaTime;
 			float newHeight = Mathf.Lerp(initialHeight, targetHeight*0.8f, elapsedTime / duration);
 			referenceSprite.transform.localScale = new Vector3(initialScale.x, newHeight, initialScale.z);
@@ -258,6 +267,7 @@ public class GameplayManager : MonoBehaviour
 		float sizePOVCam = Camera.main.orthographicSize;
 		while (elapsedTime < duration)
 		{
+			SoundManager.Instance.PlaySound("result");
 			elapsedTime += Time.deltaTime;
 			float newHeight = Mathf.Lerp(initialHeight, targetHeight, elapsedTime / duration);
 			referenceSprite.transform.localScale = new Vector3(initialScale.x, newHeight, initialScale.z);
@@ -270,6 +280,7 @@ public class GameplayManager : MonoBehaviour
 		Camera.main.orthographicSize = sizePOVCam;
 
 		//show true size
+		SoundManager.Instance.PlayOneShot("postIt2");
 		duration = .2f;
 		elapsedTime = 0;
 		while (elapsedTime < duration)
