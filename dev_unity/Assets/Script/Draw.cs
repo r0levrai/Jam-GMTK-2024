@@ -111,17 +111,14 @@ public class Draw : MonoBehaviour
             if (linesListUndo.Count == 0)
             {
                 currentLineRenderer.SetPosition(0, new Vector3(mousePos[0], mousePos[1],-0.15f));
-                //currentLineRenderer.SetPosition(1, new Vector3(mousePos[0], mousePos[1],-0.15f));
             }
             else if (linesListUndo.Count == 1)
             {
                 currentLineRenderer.SetPosition(0, new Vector3(mousePos[0], mousePos[1],-0.2f));
-                //currentLineRenderer.SetPosition(1, new Vector3(mousePos[0], mousePos[1],-0.2f));
             }
             else
             {
                 currentLineRenderer.SetPosition(0, new Vector3(mousePos[0], mousePos[1], 1f / linesListUndo.Count - 1));
-                //currentLineRenderer.SetPosition(1, new Vector3(mousePos[0], mousePos[1], 1f / linesListUndo.Count - 1));
             }
             currentLineRenderer.enabled = false;
         }
