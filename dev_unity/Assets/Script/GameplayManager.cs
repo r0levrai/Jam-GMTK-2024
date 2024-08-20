@@ -145,16 +145,16 @@ public class GameplayManager : MonoBehaviour
 		if (scaleRatio < 1)
 			scaleRatio = 1 / scaleRatio;
 
-		//[4-10] rating for ratio between [1,11] uniform
-		//[-10000-7] rating for ration between [11,infinity] => x10 more = -1 points
+		//[4-10] rating for ratio between [1,4] uniform
+		//[-10000-7] rating for ration between [3,infinity] => x10 more = -1 points
 
-		if (scaleRatio < 11f)
+		if (scaleRatio < 4f)
         {
-			note = (int)(10f - (-1f+ scaleRatio)*6f/10f);
+			note = (int)(10f - (-1f+ scaleRatio)*6f/3f);
         }
 		else
         {
-			note = (int) (4f - Math.Log10(scaleRatio / 10f));
+			note = (int) (4f - Math.Log10(scaleRatio / 3f));
 		}
 
 		// save the drawing, drawn object, background and score for the next scene
