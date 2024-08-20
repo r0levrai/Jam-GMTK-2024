@@ -17,5 +17,9 @@ public class Constants : MonoSingleton<Constants>
 
 	public int GetIndexImage() => (int)targetZoomValue;
 	public Sprite GetCurrentImage(int index) => imagesBackground[index];
+    public NetworkedDrawing GetPlayerDrawing() => new(
+        Draw.Instance.GetDrawingData(), null, null, "guest",
+        "TOADD: object name", GetIndexImage().ToString(), -1f
+    );
 
 }

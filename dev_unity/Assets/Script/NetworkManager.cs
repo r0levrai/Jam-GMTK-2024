@@ -194,7 +194,7 @@ public class NetworkedDrawing
         }
         else
         {
-            return "just now";
+            return "Now :)";
         }
     }
 }
