@@ -14,18 +14,19 @@ public class EndcardManager : MonoBehaviour
     // Start is called before the first frame update
     async void Start()
     {
-        canGetPlayerDrawing = Draw.Instance != null;  // skip populating main player drawing when
-                                                      // directly launching the GameOver scene
-
         playerCard = Instantiate(endcard, new Vector3(0, 0, 0), Quaternion.identity);
         playerCard.setupRotation(2, -2);
         playerCard.setupScale(0.35f, 0.7f);
         playerCard.setupPosition(new Vector3(-0, -0, 0), new Vector3(0, 0, 0));
         playerCard.time_ = -1;
 
-        if (canGetPlayerDrawing)
+        try
         {
             PopulateCard(playerCard, Constants.Instance.GetPlayerDrawing(), customText: "Now :)");
+        }
+        catch (System.NullReferenceException e)
+        {
+            Debug.LogError("[EndcardManager] Didn't find player drawing data: skipping...\n" + e);
         }
 
         // next line will take a while
