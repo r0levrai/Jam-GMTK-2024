@@ -40,7 +40,7 @@ public class GameplayManager : MonoBehaviour
 
 	private void Start()
 	{
-        NewGame();
+		NewGame();
 		var root = uiDocument.rootVisualElement;
 		stampedLabel = root.Q<Label>("stampedLabel");
 		stickerContainer = root.Q<VisualElement>("sticker");
