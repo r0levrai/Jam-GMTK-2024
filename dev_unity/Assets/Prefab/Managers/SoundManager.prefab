@@ -52,21 +52,93 @@ MonoBehaviour:
   musicSource: {fileID: 7745051755805036977}
   newMusicSource: {fileID: 6794429437675192425}
   clips:
-  - name: camera
-    audio: {fileID: 8300000, guid: e9a1f696913e68441a343d2b970981cf, type: 3}
+  - name: applause
+    audio: {fileID: 8300000, guid: 768aa3f2895fc4d41af602594d6d0d7b, type: 3}
     priority: 100
-  - name: coin
-    audio: {fileID: 8300000, guid: 58a2549ca3754dc42a76494ea239c9e4, type: 3}
-    priority: 101
-  - name: zoom
-    audio: {fileID: 8300000, guid: 58a2549ca3754dc42a76494ea239c9e4, type: 3}
-    priority: 103
+  - name: awh
+    audio: {fileID: 8300000, guid: b6e484483a35a154b8d636ef7e976388, type: 3}
+    priority: 100
+  - name: click
+    audio: {fileID: 8300000, guid: c7060a2222bf2e941bb731b2a53bc1b6, type: 3}
+    priority: 99
+  - name: clickPaper
+    audio: {fileID: 8300000, guid: d4e5d7f8e0ad87e469e67fa47ae69c29, type: 3}
+    priority: 99
+  - name: drawing
+    audio: {fileID: 8300000, guid: d3a05db4bd255704eb282ccdf3069d6c, type: 3}
+    priority: 50
+  - name: hover1
+    audio: {fileID: 8300000, guid: 8743acba5a583554ba48bc7a03f4ed09, type: 3}
+    priority: 99
+  - name: hover2
+    audio: {fileID: 8300000, guid: 52aa99e5c1fe1154296f9ee7b5e13396, type: 3}
+    priority: 99
+  - name: pageTurn
+    audio: {fileID: 8300000, guid: be6cd080a22260b44a783ff2e91dddeb, type: 3}
+    priority: 100
+  - name: paperNoise
+    audio: {fileID: 8300000, guid: 40bc707a128bdf249ade326c0fb0b002, type: 3}
+    priority: 99
+  - name: penSelect1
+    audio: {fileID: 8300000, guid: fa871695e88f81242bbf3b1d2530dd7a, type: 3}
+    priority: 98
+  - name: penSelect2
+    audio: {fileID: 8300000, guid: 3009cd049dd256a459f36bbef8672851, type: 3}
+    priority: 98
+  - name: penSelect3
+    audio: {fileID: 8300000, guid: 78c7919530e2f2f4c9bdac7a465170bf, type: 3}
+    priority: 98
+  - name: penSelect4
+    audio: {fileID: 8300000, guid: a514a226a4f5a3d42aeacd78495e532a, type: 3}
+    priority: 98
+  - name: postIt1
+    audio: {fileID: 8300000, guid: 040e83b053adf814eb0185db348f312d, type: 3}
+    priority: 98
+  - name: postIt2
+    audio: {fileID: 8300000, guid: ee3cb01aec9777e4b9db6a0dbf6f3e74, type: 3}
+    priority: 98
+  - name: postIt3
+    audio: {fileID: 8300000, guid: d01e7875b92afa542a783baf9dd6bb65, type: 3}
+    priority: 98
+  - name: result
+    audio: {fileID: 8300000, guid: a4d9bd27c49fddc43b89f2a0489daf0c, type: 3}
+    priority: 98
+  - name: scroll1
+    audio: {fileID: 8300000, guid: 2584c166a019ca04fb4915c744f19cc5, type: 3}
+    priority: 97
+  - name: scroll2
+    audio: {fileID: 8300000, guid: 973537be6d3aeae4abfdf017914361d4, type: 3}
+    priority: 97
+  - name: scroll3
+    audio: {fileID: 8300000, guid: a8f3845ada8f4e643811476a87097053, type: 3}
+    priority: 97
+  - name: scroll4
+    audio: {fileID: 8300000, guid: 13edcd1d1e0d06a48b5b53ad6a579b03, type: 3}
+    priority: 97
+  - name: scroll5
+    audio: {fileID: 8300000, guid: 2b3a25dbab5451442af7ee8afd6c983e, type: 3}
+    priority: 97
+  - name: stickerImpact
+    audio: {fileID: 8300000, guid: 579c99250f15af741a6d4d0fcad23987, type: 3}
+    priority: 100
+  - name: whoosh1
+    audio: {fileID: 8300000, guid: 9bdf74a1f2bd971448485c0bf1564cac, type: 3}
+    priority: 98
+  - name: whoosh2
+    audio: {fileID: 8300000, guid: 021e49b30acb97843bcb34ccc322a63d, type: 3}
+    priority: 98
+  - name: whooshLow1
+    audio: {fileID: 8300000, guid: 841f3400c49061a45a217f90b529cd5f, type: 3}
+    priority: 98
+  - name: whooshLow2
+    audio: {fileID: 8300000, guid: 74ce3ed28539045499eb90b5d4109617, type: 3}
+    priority: 98
   musics:
   - name: main
-    audio: {fileID: 8300000, guid: b903d84103c92ed47b3a33e061061ffa, type: 3}
+    audio: {fileID: 8300000, guid: 2985db53a34e7e745bf2e6237b6872ac, type: 3}
     priority: 0
   - name: main2
-    audio: {fileID: 8300000, guid: 29c3a6624a720344b9f139b98adadb85, type: 3}
+    audio: {fileID: 8300000, guid: d1916c83aea7ad9428e46d6dcceb767c, type: 3}
     priority: 0
 --- !u!1 &5181781325813799837
 GameObject:
@@ -240,7 +312,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -368,7 +440,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
