@@ -18,6 +18,8 @@ public class EndCard : MonoBehaviour
 
     public float time_ = 0;
 
+    public bool easingout = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -80,7 +82,8 @@ public class EndCard : MonoBehaviour
 
     float getEasing(float t)
     {
-        return t >= 1 ? 1 : t < 0 ? 0 : 1 - (float)System.Math.Pow(2, -10 * t);
+        if(easingout) return t >= 1 ? 1 : t < 0 ? 0 : 1 - (float)System.Math.Pow(2, -10 * t);
+        else return t <= 0 ? 0 : t > 1 ? 1 : (float)System.Math.Pow(2, 10 * t - 10);
     }
 
     public void setupScale(float start, float end)
@@ -105,6 +108,18 @@ public class EndCard : MonoBehaviour
     {
         positionStart_ = start;
         positionEnd_ = end;
+    }
+
+    public void move(Vector3 target)
+    {
+        positionStart_ = positionEnd_;
+        positionEnd_ = target;
+    }
+
+    public void rotate(float target)
+    {
+        rotationStart_ = rotationEnd_;
+        rotationEnd_ = rotationStart_ + target;
     }
 }
 

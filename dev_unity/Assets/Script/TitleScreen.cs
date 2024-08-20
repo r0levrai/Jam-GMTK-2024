@@ -102,9 +102,10 @@ public class TitleScreen : MonoBehaviour
             once = true;
             for(int i = 0; i < 3; i++)
             {
-                endCards[i].setupPosition(new Vector3(18 / 4.0f * (i + 1) - 9, 3.15f + Random.Range(0, 0.1f)), new Vector3(15, 2.5f));
+                endCards[i].move(new Vector3(12, 2.5f));
+                endCards[i].rotate(Random.Range(2.0f, 10.0f));
                 endCards[i].time_ = Random.Range(0.0f, 0.2f);
-                
+                endCards[i].easingout = false;
             }
         }
 
@@ -120,6 +121,7 @@ public class TitleScreen : MonoBehaviour
                 endCards[i].setupScale(0.45f, 0.45f);
                 endCards[i].setupPosition(new Vector3(-15, 4.5f), new Vector3(18 / 4.0f * (i + 1) - 9, 3.15f + Random.Range(0, 0.1f)));
                 endCards[i].time_ = Random.Range(0.0f, 0.2f);
+                endCards[i].easingout = true;
             }
         }
     }
