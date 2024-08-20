@@ -53,7 +53,7 @@ public class EndcardManager : MonoBehaviour
             if (Random.Range(0.0f, 1.0f) < 0.5f) rot2 *= -1;
             ec2.setupRotation(rot2 * 3, -rot2);
             ec2.setupScale(0.5f, 0.5f);
-            ec2.setupPosition(new Vector3(30 / 5.0f * (i + 1) - 15, 7.5f), new Vector3(18 / 5.0f * (i + 1) - 9, 3.5f));
+            ec2.setupPosition(new Vector3(30 / 5.0f * (i + 1) - 15, 7.5f), new Vector3(18 / 5.0f * (i + 1) - 9, 3.8f));
             ec2.time_ = -1.3f - Random.Range(0.0f, 0.25f);
             PopulateCard(ec2, drawings[i]);
             otherCards.Add(ec2);
@@ -96,7 +96,7 @@ public class EndcardManager : MonoBehaviour
         otherCards.Add(ec);
     }
 
-    void PopulateCard(EndCard card, NetworkedDrawing drawing, string customText = null)
+    public static void PopulateCard(EndCard card, NetworkedDrawing drawing, string customText = null)
     {
         card.timeAgoText.text = customText != null ? customText : drawing.GetTimeDifference();
         int iBg = int.TryParse(drawing.data.background, out iBg) ? iBg : 0;

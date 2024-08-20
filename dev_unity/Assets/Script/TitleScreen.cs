@@ -10,9 +10,11 @@ public class TitleScreen : MonoBehaviour
     public List<Sprite> spriteList_;
 
     public List<EndCard> endCards;
-
+    
+    public int nReceivedCards = 24;
     private float time_ = 0, timeBanane_ = 0;
-    private bool once = false;
+    private int state = 0; // 0: pre ease-in, 1: ease-in, 2: easeout
+    private int count = 0; // number of cards that have changed
     private float rotAngle_ = -10;
     private int currentSprite = 0;
 
@@ -23,7 +25,8 @@ public class TitleScreen : MonoBehaviour
     private Toggle volumeToggle, soundToggle;
     private Slider volumeSlider, soundSlider;
     private Button playButton, howToButton;
-	private void Awake()
+    private NetworkedDrawing[] drawings;
+    private void Awake()
 	{
         VisualElement root = uiTitleSceen.rootVisualElement;
 		volumeToggle = root.Q<Toggle>("VolumeToggle");
@@ -35,8 +38,10 @@ public class TitleScreen : MonoBehaviour
 	}
 
 	// Start is called before the first frame update
-	void Start()
+	async void Start()
     {
+        drawings = await NetworkedDrawing.ReceiveLasts(nReceivedCards);
+
         for (int i = 0; i < 3; i++)
         {
             EndCard ec2 = Instantiate(endcard, new Vector3(0, 0, 0), Quaternion.identity);
@@ -46,7 +51,8 @@ public class TitleScreen : MonoBehaviour
             ec2.setupScale(0.45f, 0.45f);
             ec2.setupPosition(new Vector3(-15, 4.5f), new Vector3(18 / 4.0f * (i + 1) - 9, 3.15f + Random.Range(0, 0.1f)));
             ec2.time_ = -1 + Random.Range(0.0f, 0.2f);
-
+            count ++;
+            EndcardManager.PopulateCard(ec2, drawings[count % drawings.Length]);
             endCards.Add(ec2);
         }
 
@@ -97,10 +103,22 @@ public class TitleScreen : MonoBehaviour
             currentSprite = newCurrent;
         }
 
-        if(time_ > 3 && !once)
+        // pre ease in
+        if (time_ > 1.5 && state == 0)
         {
-            once = true;
-            for(int i = 0; i < 3; i++)
+            state++;
+            for (int i = 0; i < 3; i++)
+            {
+                count++;
+                EndcardManager.PopulateCard(endCards[count], drawings[count % drawings.Length]);
+            }
+        }
+
+        // ease in
+        if (time_ > 3 && state == 1)
+        {
+            state++;
+            for (int i = 0; i < 3; i++)
             {
                 endCards[i].move(new Vector3(12, 2.5f));
                 endCards[i].rotate(Random.Range(2.0f, 10.0f));
@@ -109,10 +127,11 @@ public class TitleScreen : MonoBehaviour
             }
         }
 
-        if(time_ > 5)
+        // ease out
+        if(time_ > 5 && state == 2)
         {
+            state = 0;
             time_ = 0;
-            once = false;
             for (int i = 0; i < 3; i++)
             {
                 float rot2 = Random.Range(2.0f, 10.0f);

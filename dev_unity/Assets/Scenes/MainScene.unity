@@ -409,17 +409,81 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 136155923098055725, guid: 46b0f718d7be8594b94780cd93960b55, type: 3}
+      propertyPath: m_Size.x
+      value: 19.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 136155923098055725, guid: 46b0f718d7be8594b94780cd93960b55, type: 3}
+      propertyPath: m_Size.y
+      value: 10.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 136155923098055725, guid: 46b0f718d7be8594b94780cd93960b55, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 78dec5fe9e597a34790c70ae58aaf3d6, type: 3}
+    - target: {fileID: 136155923098055725, guid: 46b0f718d7be8594b94780cd93960b55, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 139252106588922297, guid: 46b0f718d7be8594b94780cd93960b55, type: 3}
       propertyPath: m_Name
       value: EnviromentZoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 804081732638252166, guid: 46b0f718d7be8594b94780cd93960b55, type: 3}
+      propertyPath: m_Size.x
+      value: 19.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 804081732638252166, guid: 46b0f718d7be8594b94780cd93960b55, type: 3}
+      propertyPath: m_Size.y
+      value: 10.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 804081732638252166, guid: 46b0f718d7be8594b94780cd93960b55, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7a1d074a56d3e7f419d388b1b2f36325, type: 3}
+    - target: {fileID: 804081732638252166, guid: 46b0f718d7be8594b94780cd93960b55, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913409462729607016, guid: 46b0f718d7be8594b94780cd93960b55, type: 3}
+      propertyPath: m_Size.x
+      value: 19.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913409462729607016, guid: 46b0f718d7be8594b94780cd93960b55, type: 3}
+      propertyPath: m_Size.y
+      value: 10.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913409462729607016, guid: 46b0f718d7be8594b94780cd93960b55, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4e722e81ce3e47e4f98e8b913fbe18b5, type: 3}
+    - target: {fileID: 1913409462729607016, guid: 46b0f718d7be8594b94780cd93960b55, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2367669926051622739, guid: 46b0f718d7be8594b94780cd93960b55, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7074083514492130882, guid: 46b0f718d7be8594b94780cd93960b55, type: 3}
+      propertyPath: m_Size.x
+      value: 19.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7074083514492130882, guid: 46b0f718d7be8594b94780cd93960b55, type: 3}
+      propertyPath: m_Size.y
+      value: 10.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7074083514492130882, guid: 46b0f718d7be8594b94780cd93960b55, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8cc62d1a35a453149ab4f610bf1d937a, type: 3}
+    - target: {fileID: 7074083514492130882, guid: 46b0f718d7be8594b94780cd93960b55, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7431563062118148575, guid: 46b0f718d7be8594b94780cd93960b55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7431563062118148575, guid: 46b0f718d7be8594b94780cd93960b55, type: 3}
       propertyPath: m_LocalPosition.y
@@ -646,7 +710,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectNotFoundList.Array.size
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: listObjects.Array.data[0].name
@@ -901,19 +965,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectNotFoundList.Array.data[4]
-      value: Your XX is so bad it looks like a YY.
-      objectReference: {fileID: 0}
-    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
-      propertyPath: ObjectNotFoundList.Array.data[5]
       value: "If I were to draw XX, I wouldn\u2019t draw a YY"
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
-      propertyPath: ObjectNotFoundList.Array.data[6]
+      propertyPath: ObjectNotFoundList.Array.data[5]
       value: I thought you were drawing XX, not a YY
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
-      propertyPath: ObjectNotFoundList.Array.data[7]
+      propertyPath: ObjectNotFoundList.Array.data[6]
       value: Your XX looks like YY if I were standing from very far.
+      objectReference: {fileID: 0}
+    - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
+      propertyPath: ObjectNotFoundList.Array.data[7]
+      value: That's not what XX looks like in my mind. That's just a YY.
       objectReference: {fileID: 0}
     - target: {fileID: 910243908512922236, guid: b2ccd11d792cd34428a1557031ebbe5d, type: 3}
       propertyPath: ObjectNotFoundList.Array.data[8]
@@ -1654,7 +1718,7 @@ Transform:
   m_GameObject: {fileID: 1633109608}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1747,7 +1811,7 @@ Camera:
   far clip plane: 100
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 9.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

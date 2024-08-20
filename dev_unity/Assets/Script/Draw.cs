@@ -100,8 +100,9 @@ public class Draw : MonoBehaviour
         {
             currentLineRenderer.transform.position = pos;
             currentLineRenderer.transform.rotation = rotation;
-            currentLineRenderer.transform.localScale = scale;
-            currentLineRenderer.widthMultiplier *= scale.y;
+            //currentLineRenderer.transform.localScale = scale;
+            currentLineRenderer.widthMultiplier *= transform.lossyScale.y;
+            print(transform.lossyScale.y);
         }
 
         if (drawable)
