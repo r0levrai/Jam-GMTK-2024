@@ -114,7 +114,7 @@ public class GameplayManager : MonoBehaviour
 		if (listObjects[objectIndex].category == "none")
 			ClassifierScore = UnityEngine.Random.Range(0f, 100f);
 		else
-			ClassifierScore = 100f -objectFoundIndex / (result.Length/100f);
+			ClassifierScore = 100f - objectFoundIndex / (result.Length/100f);
 		string x = listObjects[objectIndex].name;
 		string y = "";
 		//y = result[UnityEngine.Random.Range(0, 5)].label;
@@ -138,8 +138,8 @@ public class GameplayManager : MonoBehaviour
         }
 
         float realSize = listObjects[objectIndex].sizeInMeter;
-		trueSizeText.text = $"{realSize} m";
-		playerSizeText.text = $"{sizeDrawn} m";
+		trueSizeText.text = FormatSize(realSize);
+		playerSizeText.text = FormatSize(sizeDrawn);
 
         if (sizeDrawn > realSize) note = (int)((sizeDrawn - ((sizeDrawn - realSize) * 2)) * 10 / realSize) + 1;
         else note = (int)(sizeDrawn *10 / realSize) +1;
@@ -155,6 +155,31 @@ public class GameplayManager : MonoBehaviour
 
 	}
 	
+	private string FormatSize(float currentSize)
+    {
+		string newSize;
+		if (currentSize / 1000f > 1)
+        {
+			newSize = $"{(currentSize / 1000f)} km";
+		}
+		else if (currentSize / 1f > 1)
+		{
+			newSize = $"{(currentSize)} m";
+		}
+		else if (currentSize / 0.01f > 1)
+		{
+			newSize = $"{(currentSize / 0.01f)} cm";
+		}
+		else if (currentSize / 0.001f > 1)
+		{
+			newSize = $"{(currentSize / 0.001f)} mm";
+		}
+		else
+        {
+			newSize = $"{(currentSize / 0.000001f)} nm";
+		}
+		return newSize;
+	}
 	private IEnumerator ShowStampedText()
 	{
         switch (note)
