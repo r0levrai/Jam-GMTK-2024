@@ -117,7 +117,8 @@ public class GameplayManager : MonoBehaviour
 			ClassifierScore = 100f -objectFoundIndex / (result.Length/100f);
 		string x = listObjects[objectIndex].name;
 		string y = "";
-		y = result[UnityEngine.Random.Range(0, 5)].label;
+		//y = result[UnityEngine.Random.Range(0, 5)].label;
+		y = result[0].label;
 		ClassifierPhrase = ClassifierPhrase.Replace("XX", x);
 		ClassifierPhrase = ClassifierPhrase.Replace("YY", y);
 		bananaFace.style.backgroundImage = new(bananaMoods[UnityEngine.Random.Range(0, bananaMoods.Count)]);
