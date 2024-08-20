@@ -195,8 +195,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 8.26
-  m_fontSizeBase: 8.26
+  m_fontSize: 6
+  m_fontSizeBase: 6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -406,8 +406,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 8.26
-  m_fontSizeBase: 8.26
+  m_fontSize: 6
+  m_fontSizeBase: 6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -512,6 +512,11 @@ MonoBehaviour:
     sizeInMeter: 105
     spriteObject: {fileID: 21300000, guid: 181ff1388adb32643af88556d7ca5cb8, type: 3}
     category: 
+  SnarkyCommentList: []
+  IntroductionCommentList: []
+  ObjectCategeoryNoneCommentList: []
+  ObjectNotFoundList: []
+  ObjectFoundList: []
   stickers:
   - sprites:
     - {fileID: 21300000, guid: 3157a8feec6c4834591f29acb2ef1c18, type: 3}
@@ -547,6 +552,7 @@ MonoBehaviour:
   playerSizeText: {fileID: 9099363560312838513}
   trueSize: {fileID: 4049855920281557926}
   trueSizeText: {fileID: 8590777179705243651}
+  bananaMoods: []
 --- !u!1 &3494753789015044158
 GameObject:
   m_ObjectHideFlags: 0
