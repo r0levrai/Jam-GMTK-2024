@@ -9,16 +9,19 @@ public class EndCard : MonoBehaviour
 {
     private float scaleStart_ = 1, scaleEnd_ = 1, scaleOld_ = 1;
     private float rotationStart_ = 0, rotationEnd_ = 0;
-    private Vector2 positionStart_ = new Vector2(0,0), positionEnd_ = new Vector2(0, 0), positionOld_ = new Vector2(0,0);
+    private Vector3 positionStart_ = new Vector3(0,0), positionEnd_ = new Vector3(0, 0), positionOld_ = new Vector3(0,0);
     private float alphaStart_ = 1, alphaEnd_ = 1;
 
     public TMPro.TextMeshProUGUI timeAgoText;
     public UnityEngine.UI.Image background;
     public Draw draw;
     private UIDocument mainDoc;
+    private GameObject ratingUI;
     public VisualTreeAsset overlayUI;
-    private VisualTreeAsset prevUI;
     public Canvas textCanvas;
+    public PanelSettings panelSettings;
+
+    private CanvasGroup canvasGroup;
 
     public float animDuration_ = 1;
 
@@ -44,6 +47,7 @@ public class EndCard : MonoBehaviour
     {
         gameObject.transform.localPosition = new Vector3(-100, -100);
         mainDoc = GameObject.Find("UIDocument").GetComponent<UIDocument>();
+        canvasGroup = GameObject.Find("UIDocument").GetComponent<CanvasGroup>();
     }
 
     // Update is called once per frame
@@ -63,6 +67,19 @@ public class EndCard : MonoBehaviour
         gameObject.transform.localEulerAngles =  new Vector3(0, 0, currentRotation + (isHover ? 5:0));
         gameObject.transform.localPosition = currenPos;
         setAlpha(currentAlpha);
+    }
+
+
+    public void Set(NetworkedDrawing drawing, string customText = null)
+    {
+        timeAgoText.text = customText != null ? customText : drawing.GetTimeDifference();
+        int iBg = int.TryParse(drawing.data.background, out iBg) ? iBg : 0;
+        background.sprite = Constants.Instance.GetCurrentImage(iBg);
+        draw.SetDrawingData(drawing.GetDrawingData());
+        like_score = drawing.data.like;
+        funny_score = drawing.data.funny;
+        bad_score = drawing.data.bad;
+        networkedDrawing = drawing;
     }
 
     public void setAlpha(float alpha)
@@ -88,15 +105,22 @@ public class EndCard : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(mainDoc.visualTreeAsset != overlayUI)
+        if(!ratingUI)
         {
             Constants.Instance.pauseTitleAnimation = true;
             isHover = false;
             positionOld_ = positionEnd_;
             scaleOld_ = scaleEnd_;
-            prevUI = mainDoc.visualTreeAsset;
-            mainDoc.visualTreeAsset = overlayUI;
-            VisualElement root = mainDoc.rootVisualElement;
+            //mainDoc.visualTreeAsset = overlayUI;
+            //mainDoc.enabled = false;
+            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
+            canvasGroup.alpha = 0;
+            ratingUI = new GameObject();
+            ratingUI.AddComponent<UIDocument>();
+            ratingUI.GetComponent<UIDocument>().visualTreeAsset = overlayUI;
+            ratingUI.GetComponent<UIDocument>().panelSettings = panelSettings;
+            VisualElement root = ratingUI.GetComponent<UIDocument>().rootVisualElement;
             Button button = root.Q<Button>("BackButton");
 
             Button likeButton = root.Q<Button>("LoveReaction");
@@ -116,12 +140,13 @@ public class EndCard : MonoBehaviour
             laughButton.clicked += () => ClickLaugh();
             perplexedButton.clicked += () => ClickPerplexed();
 
-            move(new Vector3(0, 0));
+            move(new Vector3(0, 0, -1));
             rotate(0);
             scale(1.5f);
             time_ = 0;
 
             textCanvas.sortingOrder = 100;
+
         }
         
     }
@@ -133,7 +158,7 @@ public class EndCard : MonoBehaviour
             likeCount.text = like_score.ToString();
             blocked_like = true;
 
-            networkedDrawing.SendReaction("like");
+            _ = networkedDrawing.SendReaction("like");
         }
     }
 
@@ -145,7 +170,7 @@ public class EndCard : MonoBehaviour
             laughCount.text = funny_score.ToString();
 
             blocked_funny = true;
-            networkedDrawing.SendReaction("funny");
+            _ = networkedDrawing.SendReaction("funny");
         }
     }
 
@@ -157,34 +182,17 @@ public class EndCard : MonoBehaviour
             perplexedCount.text = bad_score.ToString();
 
             blocked_bad = true;
-            networkedDrawing.SendReaction("bad");
+            _ = networkedDrawing.SendReaction("bad");
         }
     }
     private void SetPreviousCard()
     {
         Constants.Instance.pauseTitleAnimation = false;
-        mainDoc.visualTreeAsset = prevUI;
+        //mainDoc.visualTreeAsset = prevUI;
+        mainDoc.enabled = true;
 
-        VisualElement root = mainDoc.rootVisualElement;
-
-        try
-        {
-            Button playAgainButton = root.Q<Button>("AgainButton");
-            Button mainMenuButton = root.Q<Button>("MenuButton");
-            
-
-            playAgainButton.clicked += () => SceneManager.LoadSceneAsync(1);
-            mainMenuButton.clicked += () => SceneManager.LoadSceneAsync(0);
-            
-        }
-        catch
-        {
-            Button playButton = root.Q<Button>("PlayButton");
-            Button howButton = root.Q<Button>("HowButton");
-
-            playButton.clicked += () => SceneManager.LoadSceneAsync(1);
-            howButton.clicked += () => SceneManager.LoadSceneAsync(3);
-        }
+        Destroy(ratingUI);
+        
 
         positionEnd_ = positionOld_;
         scaleEnd_ = scaleOld_;
@@ -193,23 +201,23 @@ public class EndCard : MonoBehaviour
         scale(scaleOld_);
         time_ = 0;
         textCanvas.sortingOrder = 1;
-
-        
     }
 
     private void OnMouseOver()
     {
-        if (mainDoc.visualTreeAsset != overlayUI)
+        if (!ratingUI)
         {
             isHover = true;
+            textCanvas.sortingOrder = 100;
         }
     }
 
     private void OnMouseExit()
     {
-        if (mainDoc.visualTreeAsset != overlayUI)
+        if (!ratingUI)
         {
             isHover = false;
+            textCanvas.sortingOrder = 1;
         }
     }
 

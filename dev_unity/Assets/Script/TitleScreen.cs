@@ -28,13 +28,16 @@ public class TitleScreen : MonoBehaviour
     private NetworkedDrawing[] drawings;
     private void Awake()
 	{
+
         VisualElement root = uiTitleSceen.rootVisualElement;
-		volumeToggle = root.Q<Toggle>("VolumeToggle");
+        volumeToggle = root.Q<Toggle>("VolumeToggle");
         volumeSlider = root.Q<Slider>("VolumeSlider");
-		soundToggle = root.Q<Toggle>("SoundToggle");
-		soundSlider = root.Q<Slider>("SoundSlider");
-		playButton = root.Q<Button>("PlayButton");
-		howToButton = root.Q<Button>("HowButton");
+        soundToggle = root.Q<Toggle>("SoundToggle");
+        soundSlider = root.Q<Slider>("SoundSlider");
+        playButton = root.Q<Button>("PlayButton");
+        howToButton = root.Q<Button>("HowButton");
+
+
 	}
 
 	// Start is called before the first frame update

@@ -190,12 +190,16 @@ MonoBehaviour:
   draw: {fileID: 251929675569567723}
   overlayUI: {fileID: 9197481963319205126, guid: a249b8219af5f454aafc445577ccdb98, type: 3}
   textCanvas: {fileID: 1173012027457187398}
+  panelSettings: {fileID: 11400000, guid: fe594e44b951e5b46bf129b3f6f46b23, type: 2}
   animDuration_: 1
   time_: 0
   easingout: 1
   like_score: 0
   funny_score: 0
   bad_score: 0
+  blocked_like: 0
+  blocked_funny: 0
+  blocked_bad: 0
 --- !u!61 &8090804625740779081
 BoxCollider2D:
   m_ObjectHideFlags: 0

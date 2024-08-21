@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/style.uss?fileID=7433441132597879392&amp;guid=978176127b0706241a127fd3f6e71606&amp;type=3#style" />
+    <ui:GroupBox name="Controls" style="flex-direction: row; align-self: center; margin-top: 30px;">
+        <ui:Button text="Last" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LastButton" class="basic-button" />
+        <ui:Button text="Most liked" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MostButton" class="basic-button" style="font-size: 90px;" />
+        <ui:Button text="Random" parse-escape-sequences="true" display-tooltip-when-elided="true" name="RandomButton" class="basic-button" />
+    </ui:GroupBox>
+    <ui:VisualElement style="flex-grow: 1;" />
+    <ui:GroupBox name="Nav" style="flex-direction: row; align-self: auto; justify-content: space-between; padding-right: 100px; padding-left: 100px; position: relative; bottom: 0;">
+        <ui:Button text="Prev" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PrevButton" class="basic-button" />
+        <ui:Label tabindex="-1" text="1/1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PageLabel" style="font-size: 100px; -unity-font: url(&quot;project://database/Assets/Font/NanumPenScript-Regular.ttf?fileID=12800000&amp;guid=d341cf114415f8a41b0a11a54f6fed77&amp;type=3#NanumPenScript-Regular&quot;); -unity-font-definition: url(&quot;project://database/Assets/Font/NanumPenScript-Regular%20SDF%201.asset?fileID=11400000&amp;guid=6a1362e9f2196ac4c9fa0ecb2c4b1338&amp;type=2#NanumPenScript-Regular SDF 1&quot;);" />
+        <ui:Button text="Next" parse-escape-sequences="true" display-tooltip-when-elided="true" name="NextButton" class="basic-button" />
+    </ui:GroupBox>
+</ui:UXML>

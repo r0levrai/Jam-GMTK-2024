@@ -7,11 +7,19 @@ public class UIEndScreenManager : MonoBehaviour
 	[SerializeField] private UIDocument uiTitleSceen;
 	private Button playAgainButton, mainMenuButton;
 
+	private bool hasLoaded = false;
+
 	private void Awake()
 	{
-		VisualElement root = uiTitleSceen.rootVisualElement;
-		playAgainButton = root.Q<Button>("AgainButton");
-		mainMenuButton = root.Q<Button>("MenuButton");
+		if(!hasLoaded)
+        {
+			VisualElement root = uiTitleSceen.rootVisualElement;
+			playAgainButton = root.Q<Button>("AgainButton");
+			mainMenuButton = root.Q<Button>("MenuButton");
+
+			hasLoaded = true;
+		}
+		
 	}
 
 	private void Start()
