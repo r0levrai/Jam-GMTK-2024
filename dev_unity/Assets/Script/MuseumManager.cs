@@ -40,13 +40,15 @@ public class MuseumManager : MonoBehaviour
     async void Start()
     {
         nCards = cardsPerPage * maxPage;
+        drawings = await NetworkedDrawing.ReceiveLasts(nCards);
+
         for (int i = 0; i < 8; i++)
         {
-            EndCard ec = Instantiate(endcardPrefab, new Vector3(-100, -100, 0), Quaternion.identity);
+            EndCard ec = Instantiate(endcardPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             listCards.Add(ec);
         }
 
-        drawings = await NetworkedDrawing.ReceiveLasts(nCards);
+        
         Populate(drawings);
 
         lastButton.clicked += () => LoadLast();
@@ -75,6 +77,7 @@ public class MuseumManager : MonoBehaviour
             listCards[i].setupPosition(new Vector3(30 / 5.0f * (i + 1) - 15, 7.5f), new Vector3(18 / 5.0f * (i + 1) - 9, 5.0f/3.0f));
             listCards[i].time_ = - 1 + Random.Range(0.0f, 0.25f);
             listCards[i].Set(drawings[currentPage * cardsPerPage + i]);
+            listCards[i].easingout = true;
         }
 
         for (int i = 0; i < 4; i++)
@@ -88,6 +91,7 @@ public class MuseumManager : MonoBehaviour
             listCards[i + 4].setupPosition(new Vector3(30 / 5.0f * (i + 1) - 15, -7.5f), new Vector3(18 / 5.0f * (i + 1) - 9, -5.0f / 3.0f));
             listCards[i + 4].time_ = - 1 + Random.Range(0.0f, 0.25f);
             listCards[i + 4].Set(drawings[currentPage * cardsPerPage + i + 4]);
+            listCards[i + 4].easingout = true;
         }
     }
 
@@ -102,7 +106,7 @@ public class MuseumManager : MonoBehaviour
             listCards[i].setupScale(0.5f, 0.5f);
             listCards[i].move(new Vector3(30 / 5.0f * (i + 1) - 15, 7.5f));
             listCards[i].time_ = Random.Range(0.0f, 0.2f);
-            listCards[i].easingout = true;
+            //listCards[i].easingout = false;
             listCards[i].blocked_bad = false;
             listCards[i].blocked_like = false;
             listCards[i].blocked_funny = false;
@@ -115,7 +119,7 @@ public class MuseumManager : MonoBehaviour
             listCards[i+4].setupScale(0.5f, 0.5f);
             listCards[i+4].move(new Vector3(30 / 5.0f * (i + 1) - 15, -7.5f));
             listCards[i+4].time_ = Random.Range(0.0f, 0.2f);
-            listCards[i+4].easingout = true;
+            //listCards[i+4].easingout = false;
             listCards[i+4].blocked_bad = false;
             listCards[i+4].blocked_like = false;
             listCards[i+4].blocked_funny = false;
@@ -188,7 +192,7 @@ public class MuseumManager : MonoBehaviour
     async void Update()
     {
         time += Time.deltaTime;
-        if(destroy && time > 0.25f)
+        if(destroy && time > 0.2f)
         {
             destroy = false;
             switch(menuIndex)
