@@ -1,9 +1,11 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, Query, Req } from "@nestjs/common";
+import { Controller, Get, Post, Put, Delete, Param, Body, Query, Req, BadRequestException } from "@nestjs/common";
 import { DrawingService } from "./drawing.service";
 import { Drawing } from "./drawing.entity";
 import { DrawingDto } from "./drawing.dto";
 import { Request } from 'express';
 import { DrawingResponseDto } from "./drawing.response.dto";
+import { PageOptionsDto } from "src/config/page/page-option.dto";
+import { PageDto } from "src/config/page/page.dto";
 
 
 
@@ -16,22 +18,34 @@ export class DrawingController {
         return await this.drawingService.createDrawing(drawingDto);
     }
 
-    @Get('lasts')
-    async getLastDrawings(@Query('n') n: number){
-        const drawings = await this.drawingService.getLastDrawings(n);
-        return {drawings: drawings};
+    @Get('all')
+    async getAllDrawings(@Query() pageOptionsDto: PageOptionsDto): Promise<PageDto<DrawingResponseDto>> {
+        try {
+            return await this.drawingService.getAllDrawings(pageOptionsDto);
+        } catch (error) {
+            console.error("Error fetching all drawings:", error);
+            throw new BadRequestException("Could not fetch all drawings");
+        }
     }
 
-    @Get('firsts')
-    async getFirstDrawings(@Query('n') n: number) {
-        const drawings = await this.drawingService.getFirstDrawings(n);
-        return {drawings: drawings};
+    @Get('ordered-by-likes')
+    async getDrawingsOrderedByLikes(@Query() pageOptionsDto: PageOptionsDto): Promise<PageDto<DrawingResponseDto>> {
+        try {
+            return await this.drawingService.getDrawingsOrderedByLikes(pageOptionsDto);
+        } catch (error) {
+            console.error("Error fetching drawings ordered by likes:", error);
+            throw new BadRequestException("Could not fetch drawings ordered by likes");
+        }
     }
 
     @Get('random')
-    async getRandomDrawings(@Query('n') n: number) {
-        const drawings = await this.drawingService.getRandomDrawings(n);
-        return {drawings: drawings};
+    async getRandomDrawings(@Query() pageOptionsDto: PageOptionsDto): Promise<PageDto<DrawingResponseDto>> {
+        try {
+            return await this.drawingService.getRandomDrawings(pageOptionsDto);
+        } catch (error) {
+            console.error("Error fetching random drawings:", error);
+            throw new BadRequestException("Could not fetch random drawings");
+        }
     }
 
     @Get('user/:userName')
