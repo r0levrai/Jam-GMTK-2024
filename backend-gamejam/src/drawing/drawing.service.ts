@@ -75,6 +75,15 @@ export class DrawingService {
         }
     }
 
+    async getLastDrawings(limit: number): Promise<DrawingResponseDto[]> {
+        return (await this.drawingRepository.findLastDrawings(limit)).map(convertDrawingToDto);
+    }
+
+    async getFirstDrawings(limit: number): Promise<DrawingResponseDto[]> {
+        return (await this.drawingRepository.findFirstDrawings(limit)).map(convertDrawingToDto);
+    }
+
+
     
   
 

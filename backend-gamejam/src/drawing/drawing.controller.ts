@@ -48,6 +48,18 @@ export class DrawingController {
         }
     }
 
+    @Get('lasts')
+    async getLastDrawings(@Query('n') n: number){
+        const drawings = await this.drawingService.getLastDrawings(n);
+        return {drawings: drawings};
+    }
+
+    @Get('firsts')
+    async getFirstDrawings(@Query('n') n: number) {
+        const drawings = await this.drawingService.getFirstDrawings(n);
+        return {drawings: drawings};
+    }
+
     @Get('user/:userName')
     async getDrawingsByUserName(@Param('userName') userName: string) {
         const drawings = await this.drawingService.getDrawingsByUserName(userName);

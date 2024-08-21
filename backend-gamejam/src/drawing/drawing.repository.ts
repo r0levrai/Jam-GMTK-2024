@@ -31,6 +31,33 @@ export class DrawingRepository extends Repository<Drawing> {
     }
 
   
+    async findLastDrawings(limit: number): Promise<Drawing[]> {
+        try {
+            return await this.find({
+                order: {
+                    createdDate: "DESC"
+                },
+                take: limit
+            });
+        } catch (error) {
+            console.error("Error fetching the last drawings:", error);
+            throw new Error("Could not fetch the last drawings");
+        }
+    }
+    
+    async findFirstDrawings(limit: number): Promise<Drawing[]> {
+        try {
+            return await this.find({
+                order: {
+                    createdDate: "ASC"
+                },
+                take: limit
+            });
+        } catch (error) {
+            console.error("Error fetching the first drawings:", error);
+            throw new Error("Could not fetch the first drawings");
+        }
+    }
 
     async findRandomDrawings(pageOptionsDto: PageOptionsDto): Promise<[Drawing[], number]> {
         try {
