@@ -46,6 +46,11 @@ export class DrawingController {
         return await this.drawingService.updateDrawing(id, updateData);
     }
 
+    @Get("one/:id")
+    async getDrawingById(@Param('id') id: number): Promise<DrawingResponseDto> {
+        return await this.drawingService.getDrawingById(id);
+    }
+
     @Delete(':id')
     async deleteDrawing(@Param('id') id: number): Promise<void> {
         await this.drawingService.deleteDrawing(id);
