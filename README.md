@@ -2,7 +2,7 @@ The main repo for our game 🍌 [Cavendish's Perfect Proportions](https://r0levr
 
 Rating and comments from the jam are [here](https://itch.io/jam/gmtk-2024/rate/2901708).
 
-This was made with a 4 days time liimit, so expect some messy stuff xD
+This was made with a 4 days time limit, so expect some messy stuff xD
 
 ## Features
 
@@ -29,4 +29,4 @@ Art, music and sounds are under [CC-BY](https://creativecommons.org/licenses/by/
 
 Real-world object images that we scale against your drawing in [`dev_unity/Assets/Sprites/RealObjects`](./dev_unity/Assets/Sprites/RealObjects) may need [their own attributions](./objects_attributions).
 
-If this made your day, consider droping us a message on itch gitea so we know if opensourcing is worthwile for futur jams and projects!
+If this made your day, consider dropping us a message on itch or gitea so we know if open sourcing is worthwhile for future jams and projects!
