@@ -15,13 +15,11 @@ public class EndCard : MonoBehaviour
     public TMPro.TextMeshProUGUI timeAgoText;
     public UnityEngine.UI.Image background;
     public Draw draw;
-    private UIDocument mainDoc;
-    private GameObject ratingUI;
-    public VisualTreeAsset overlayUI;
+
     public Canvas textCanvas;
     public PanelSettings panelSettings;
 
-    private CanvasGroup canvasGroup;
+    //private CanvasGroup canvasGroup;
 
     public float animDuration_ = 1;
 
@@ -35,19 +33,26 @@ public class EndCard : MonoBehaviour
     public int bad_score = 0;
     public NetworkedDrawing networkedDrawing;
 
+    private UIDocument mainDoc;
+
     public bool blocked_like = false;
     public bool blocked_funny = false;
     public bool blocked_bad = false;
 
-    private Label likeCount, laughCount, perplexedCount; 
+    public bool zoomed = false;
+
+    public GameObject likeButton, laughButton, badButton;
+
+    public TMPro.TextMeshProUGUI likeCount, laughCount, perplexedCount; 
 
 
     // Start is called before the first frame update
     void Start()
     {
         gameObject.transform.localPosition = new Vector3(-100, -100);
+        //canvasGroup = GameObject.Find("UIDocument").GetComponent<CanvasGroup>();
         mainDoc = GameObject.Find("UIDocument").GetComponent<UIDocument>();
-        canvasGroup = GameObject.Find("UIDocument").GetComponent<CanvasGroup>();
+        textCanvas.sortingOrder = 10;
     }
 
     // Update is called once per frame
@@ -67,6 +72,63 @@ public class EndCard : MonoBehaviour
         gameObject.transform.localEulerAngles =  new Vector3(0, 0, currentRotation + (isHover ? 5:0));
         gameObject.transform.localPosition = currenPos;
         setAlpha(currentAlpha);
+
+        CheckClick();
+        CheckHover();
+    }
+
+
+    private void CheckHover()
+    {
+        Vector2 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (zoomed)
+        {
+            if (likeButton.GetComponent<BoxCollider2D>().OverlapPoint(point))
+            {
+                likeButton.transform.localEulerAngles = new Vector3(0, 0, 5);
+                likeButton.transform.localScale = new Vector3(1.1f, 1.1f, 1);
+            }
+            else
+            {
+                likeButton.transform.localEulerAngles = new Vector3(0, 0, 0);
+                likeButton.transform.localScale = new Vector3(1, 1, 1);
+            }
+
+            if (laughButton.GetComponent<BoxCollider2D>().OverlapPoint(point))
+            {
+                laughButton.transform.localEulerAngles = new Vector3(0, 0, 5);
+                laughButton.transform.localScale = new Vector3(1.1f, 1.1f, 1);
+            }
+            else
+            {
+                laughButton.transform.localEulerAngles = new Vector3(0, 0, 0);
+                laughButton.transform.localScale = new Vector3(1, 1, 1);
+            }
+
+            if (badButton.GetComponent<BoxCollider2D>().OverlapPoint(point))
+            {
+                badButton.transform.localEulerAngles = new Vector3(0, 0, 5);
+                badButton.transform.localScale = new Vector3(1.1f, 1.1f, 1);
+            }
+            else
+            {
+                badButton.transform.localEulerAngles = new Vector3(0, 0, 0);
+                badButton.transform.localScale = new Vector3(1, 1, 1);
+            }
+        }
+        else if(!Constants.Instance.pauseTitleAnimation)
+        {
+            if(GetComponent<BoxCollider2D>().OverlapPoint(point))
+            {
+                isHover = true;
+                textCanvas.sortingOrder = 100;
+            }
+            else
+            {
+                isHover = false;
+                textCanvas.sortingOrder = 10;
+            }
+        }
     }
 
 
@@ -80,6 +142,11 @@ public class EndCard : MonoBehaviour
         funny_score = drawing.data.funny;
         bad_score = drawing.data.bad;
         networkedDrawing = drawing;
+
+        likeCount.text = like_score.ToString();
+        laughCount.text = like_score.ToString();
+        perplexedCount.text = like_score.ToString();
+
     }
 
     public void setAlpha(float alpha)
@@ -103,51 +170,61 @@ public class EndCard : MonoBehaviour
 
     }
 
-    private void OnMouseDown()
+    private void CheckClick()
     {
-        if(!ratingUI)
+        if (Input.GetMouseButtonDown(0))
         {
-            Constants.Instance.pauseTitleAnimation = true;
-            isHover = false;
-            positionOld_ = positionEnd_;
-            scaleOld_ = scaleEnd_;
-            //mainDoc.visualTreeAsset = overlayUI;
-            //mainDoc.enabled = false;
-            canvasGroup.interactable = false;
-            canvasGroup.blocksRaycasts = false;
-            canvasGroup.alpha = 0;
-            ratingUI = new GameObject();
-            ratingUI.AddComponent<UIDocument>();
-            ratingUI.GetComponent<UIDocument>().visualTreeAsset = overlayUI;
-            ratingUI.GetComponent<UIDocument>().panelSettings = panelSettings;
-            VisualElement root = ratingUI.GetComponent<UIDocument>().rootVisualElement;
-            Button button = root.Q<Button>("BackButton");
+            Vector2 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (!Constants.Instance.pauseTitleAnimation)
+            {
+                if(GetComponent<BoxCollider2D>().OverlapPoint(point))
+                {
+                    zoomed = true;
+                    Constants.Instance.pauseTitleAnimation = true;
+                    isHover = false;
+                    positionOld_ = positionEnd_;
+                    scaleOld_ = scaleEnd_;
 
-            Button likeButton = root.Q<Button>("LoveReaction");
-            Button laughButton = root.Q<Button>("LaughReaction");
-            Button perplexedButton = root.Q<Button>("PerplexedReaction");
+                    //canvasGroup.interactable = false;
+                    //canvasGroup.blocksRaycasts = false;
+                    //canvasGroup.alpha = 0;
 
-            likeCount = root.Q<Label>("LoveReactionCount");
-            laughCount = root.Q<Label>("LaughReactionCount");
-            perplexedCount = root.Q<Label>("PerplexedReactionCount");
+                    mainDoc.rootVisualElement.visible = false;
 
-            likeCount.text = like_score.ToString();
-            laughCount.text = funny_score.ToString();
-            perplexedCount.text = bad_score.ToString();
 
-            button.clicked += () => SetPreviousCard();
-            likeButton.clicked += () => ClickLike();
-            laughButton.clicked += () => ClickLaugh();
-            perplexedButton.clicked += () => ClickPerplexed();
+                    move(new Vector3(0, 0, -1));
+                    rotate(0);
+                    scale(1.3f);
+                    time_ = 0;
 
-            move(new Vector3(0, 0, -1));
-            rotate(0);
-            scale(1.5f);
-            time_ = 0;
-
-            textCanvas.sortingOrder = 100;
+                    textCanvas.sortingOrder = 100;
+                }
+            }
+            else
+            {
+                if(zoomed)
+                {
+                    if (likeButton.GetComponent<BoxCollider2D>().OverlapPoint(point))
+                    {
+                        ClickLike();
+                    }
+                    else if (laughButton.GetComponent<BoxCollider2D>().OverlapPoint(point))
+                    {
+                        ClickLaugh();
+                    }
+                    else if (badButton.GetComponent<BoxCollider2D>().OverlapPoint(point))
+                    {
+                        ClickPerplexed();
+                    }
+                    else if (!GetComponent<BoxCollider2D>().OverlapPoint(point))
+                    {
+                        SetPreviousCard();
+                    }
+                }
+            }
 
         }
+        
         
     }
     private void ClickLike()
@@ -188,11 +265,13 @@ public class EndCard : MonoBehaviour
     private void SetPreviousCard()
     {
         Constants.Instance.pauseTitleAnimation = false;
-        //mainDoc.visualTreeAsset = prevUI;
-        mainDoc.enabled = true;
+        zoomed = false;
 
-        Destroy(ratingUI);
-        
+        //canvasGroup.interactable = true;
+        //canvasGroup.blocksRaycasts = true;
+        //canvasGroup.alpha = 1;
+
+        mainDoc.rootVisualElement.visible = true;
 
         positionEnd_ = positionOld_;
         scaleEnd_ = scaleOld_;
@@ -200,25 +279,7 @@ public class EndCard : MonoBehaviour
         rotate(0);
         scale(scaleOld_);
         time_ = 0;
-        textCanvas.sortingOrder = 1;
-    }
-
-    private void OnMouseOver()
-    {
-        if (!ratingUI)
-        {
-            isHover = true;
-            textCanvas.sortingOrder = 100;
-        }
-    }
-
-    private void OnMouseExit()
-    {
-        if (!ratingUI)
-        {
-            isHover = false;
-            textCanvas.sortingOrder = 1;
-        }
+        textCanvas.sortingOrder = 10;
     }
 
     float getCurrentVal(float start, float end, float t)

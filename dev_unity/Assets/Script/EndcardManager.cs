@@ -22,7 +22,7 @@ public class EndcardManager : MonoBehaviour
 
         try
         {
-            PopulateCard(playerCard, Constants.Instance.GetPlayerDrawing(), customText: "Now :)");
+            playerCard.Set(Constants.Instance.GetPlayerDrawing(), customText: "Now :)");
         }
         catch (System.NullReferenceException e)
         {
@@ -55,7 +55,7 @@ public class EndcardManager : MonoBehaviour
             ec2.setupScale(0.5f, 0.5f);
             ec2.setupPosition(new Vector3(30 / 5.0f * (i + 1) - 15, 7.5f), new Vector3(18 / 5.0f * (i + 1) - 9, 3.8f));
             ec2.time_ = -1.3f - Random.Range(0.0f, 0.25f);
-            PopulateCard(ec2, drawings[i]);
+            ec2.Set(drawings[i]);
             otherCards.Add(ec2);
         }
 
@@ -69,7 +69,7 @@ public class EndcardManager : MonoBehaviour
             ec2.setupScale(0.5f, 0.5f);
             ec2.setupPosition(new Vector3(30 / 5.0f * (i + 1) - 15, -7.5f), new Vector3(18 / 4.0f * (i + 1) - 9, -3.5f));
             ec2.time_ = -1.3f - Random.Range(0.0f, 0.25f);
-            PopulateCard(ec2, drawings[i + 4]);
+            ec2.Set(drawings[i + 4]);
             otherCards.Add(ec2);
         }
 
@@ -81,7 +81,7 @@ public class EndcardManager : MonoBehaviour
         ec.setupScale(0.5f, 0.5f);
         ec.setupPosition(new Vector3(-15, 0), new Vector3(18 / 5.0f - 9, 0));
         ec.time_ = -1.3f - Random.Range(0.0f, 0.25f);
-        PopulateCard(ec, drawings[8]);
+        ec.Set(drawings[8]);
         otherCards.Add(ec);
 
         if (drawings.Length < 10) { return; }
@@ -92,19 +92,8 @@ public class EndcardManager : MonoBehaviour
         ec.setupScale(0.5f, 0.5f);
         ec.setupPosition(new Vector3(15, 0), new Vector3(18 / 5.0f * 4 - 9, 0));
         ec.time_ = -1.3f - Random.Range(0.0f, 0.25f);
-        PopulateCard(ec, drawings[9]);
+        ec.Set(drawings[9]);
         otherCards.Add(ec);
     }
 
-    public static void PopulateCard(EndCard card, NetworkedDrawing drawing, string customText = null)
-    {
-        card.timeAgoText.text = customText != null ? customText : drawing.GetTimeDifference();
-        int iBg = int.TryParse(drawing.data.background, out iBg) ? iBg : 0;
-        card.background.sprite = Constants.Instance.GetCurrentImage(iBg);
-        card.draw.SetDrawingData(drawing.GetDrawingData());
-        card.like_score = drawing.data.like;
-        card.funny_score = drawing.data.funny;
-        card.bad_score = drawing.data.bad;
-        card.networkedDrawing = drawing;
-}
 }

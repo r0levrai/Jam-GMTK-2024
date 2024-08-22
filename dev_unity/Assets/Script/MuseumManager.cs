@@ -66,19 +66,6 @@ public class MuseumManager : MonoBehaviour
 
     private void Populate(NetworkedDrawing[] drawings)
     {
-        for (int i = 0; i < 4; i++)
-        {
-            if (drawings.Length <= i) { return; }
-            
-            float rot2 = Random.Range(2.0f, 10.0f);
-            if (Random.Range(0.0f, 1.0f) < 0.5f) rot2 *= -1;
-            listCards[i].setupRotation(rot2 * 3, -rot2);
-            listCards[i].setupScale(0.5f, 0.5f);
-            listCards[i].setupPosition(new Vector3(30 / 5.0f * (i + 1) - 15, 7.5f), new Vector3(18 / 5.0f * (i + 1) - 9, 5.0f/3.0f));
-            listCards[i].time_ = -0.25f - Random.Range(0.0f, 0.25f);
-            listCards[i].Set(drawings[currentPage * cardsPerPage + i]);
-            listCards[i].easingout = true;
-        }
 
         for (int i = 0; i < 4; i++)
         {
@@ -86,13 +73,28 @@ public class MuseumManager : MonoBehaviour
 
             float rot2 = Random.Range(2.0f, 10.0f);
             if (Random.Range(0.0f, 1.0f) < 0.5f) rot2 *= -1;
-            listCards[i + 4].setupRotation(rot2 * 3, -rot2);
-            listCards[i + 4].setupScale(0.5f, 0.5f);
-            listCards[i + 4].setupPosition(new Vector3(30 / 5.0f * (i + 1) - 15, -7.5f), new Vector3(18 / 5.0f * (i + 1) - 9, -5.0f / 3.0f));
-            listCards[i + 4].time_ = -0.25f - Random.Range(0.0f, 0.25f);
-            listCards[i + 4].Set(drawings[currentPage * cardsPerPage + i + 4]);
-            listCards[i + 4].easingout = true;
+            listCards[i].setupRotation(rot2 * 3, -rot2);
+            listCards[i].setupScale(0.5f, 0.5f);
+            listCards[i].setupPosition(new Vector3(30 / 5.0f * (i + 1) - 15, -7.5f), new Vector3(18 / 5.0f * (i + 1) - 9, -5.0f / 3.0f));
+            listCards[i].time_ = -0.25f - Random.Range(0.0f, 0.25f);
+            listCards[i].Set(drawings[currentPage * cardsPerPage + i]);
+            listCards[i].easingout = true;
         }
+        for (int i = 0; i < 4; i++)
+        {
+            if (drawings.Length <= i) { return; }
+            
+            float rot2 = Random.Range(2.0f, 10.0f);
+            if (Random.Range(0.0f, 1.0f) < 0.5f) rot2 *= -1;
+            listCards[i+ 4].setupRotation(rot2 * 3, -rot2);
+            listCards[i+ 4].setupScale(0.5f, 0.5f);
+            listCards[i+ 4].setupPosition(new Vector3(30 / 5.0f * (i + 1) - 15, 7.5f), new Vector3(18 / 5.0f * (i + 1) - 9, 5.0f/3.0f));
+            listCards[i+ 4].time_ = -0.25f - Random.Range(0.0f, 0.25f);
+            listCards[i+ 4].Set(drawings[currentPage * cardsPerPage + i + 4]);
+            listCards[i+ 4].easingout = true;
+        }
+
+       
     }
 
     void Despawn()
@@ -211,5 +213,6 @@ public class MuseumManager : MonoBehaviour
 
             Populate(drawings);
         }
+        pageLabel.visible = !Constants.Instance.pauseTitleAnimation;
     }
 }

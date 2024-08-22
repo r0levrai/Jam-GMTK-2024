@@ -55,7 +55,7 @@ public class TitleScreen : MonoBehaviour
             ec2.setupPosition(new Vector3(-15, 4.5f), new Vector3(18 / 4.0f * (i + 1) - 9, 3.15f + Random.Range(0, 0.1f)));
             ec2.time_ = -1 + Random.Range(0.0f, 0.2f);
             count ++;
-            EndcardManager.PopulateCard(ec2, drawings[count % drawings.Length]);
+            ec2.Set(drawings[count % drawings.Length]);
             endCards.Add(ec2);
         }
 
@@ -121,7 +121,7 @@ public class TitleScreen : MonoBehaviour
                 count++;
                 if (drawings != null && drawings.Length > 0)
                 {
-                    EndcardManager.PopulateCard(endCards[count % 3], drawings[count % drawings.Length]);
+                    endCards[count % 3].Set(drawings[count % drawings.Length]);
                 }
             }
         }
