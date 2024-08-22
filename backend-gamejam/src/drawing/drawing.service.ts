@@ -4,6 +4,9 @@ import { DrawingRepository } from "./drawing.repository";
 import { convertDrawingToDto, Drawing, ReactionType } from "./drawing.entity";
 import { DrawingDto } from "./drawing.dto";
 import { DrawingResponseDto } from "./drawing.response.dto";
+import { PageOptionsDto } from "src/config/page/page-option.dto";
+import { PageMetaDto } from "src/config/page/page-meta.dto";
+import { PageDto } from "src/config/page/page.dto";
 
 @Injectable()
 export class DrawingService {
@@ -36,6 +39,42 @@ export class DrawingService {
         await this.drawingRepository.deleteDrawing(id);
     }
 
+
+    
+    async getRandomDrawings(pageOptionDto: PageOptionsDto): Promise<PageDto<DrawingResponseDto>> {
+        const [items, totalItems] = (await this.drawingRepository.findRandomDrawings(pageOptionDto));
+        const pageMetaDto = new PageMetaDto({ pageOptionsDto: pageOptionDto, itemCount: totalItems });
+        try {
+            return new PageDto(items.map(convertDrawingToDto), pageMetaDto);
+        }
+        catch (error) {
+            console.error("Error fetching random drawings:", error);
+            throw new Error("Could not fetch random drawings");
+        }
+    }
+    
+    async getAllDrawings(pageOptionsDto: PageOptionsDto): Promise<PageDto<DrawingResponseDto>> {
+        const [items, totalItems] = await this.drawingRepository.findAllDrawings(pageOptionsDto);
+        const pageMetaDto = new PageMetaDto({ pageOptionsDto, itemCount: totalItems });
+        try {
+            return new PageDto(items.map(convertDrawingToDto), pageMetaDto);
+        } catch (error) {
+            console.error("Error fetching all drawings:", error);
+            throw new Error("Could not fetch all drawings");
+        }
+    }
+
+    async getDrawingsOrderedByLikes(pageOptionsDto: PageOptionsDto): Promise<PageDto<DrawingResponseDto>> {
+        const [items, totalItems] = await this.drawingRepository.findDrawingsOrderedByLikes(pageOptionsDto);
+        const pageMetaDto = new PageMetaDto({ pageOptionsDto, itemCount: totalItems });
+        try {
+            return new PageDto(items.map(convertDrawingToDto), pageMetaDto);
+        } catch (error) {
+            console.error("Error fetching drawings ordered by likes:", error);
+            throw new Error("Could not fetch drawings ordered by likes");
+        }
+    }
+
     async getLastDrawings(limit: number): Promise<DrawingResponseDto[]> {
         return (await this.drawingRepository.findLastDrawings(limit)).map(convertDrawingToDto);
     }
@@ -43,10 +82,9 @@ export class DrawingService {
     async getFirstDrawings(limit: number): Promise<DrawingResponseDto[]> {
         return (await this.drawingRepository.findFirstDrawings(limit)).map(convertDrawingToDto);
     }
-    async getRandomDrawings(limit: number): Promise<DrawingResponseDto[]> {
-        const effectiveLimit = Math.min(limit, this.MAX_RANDOM_DRAWINGS);
-        return (await this.drawingRepository.findRandomDrawings(effectiveLimit)).map(convertDrawingToDto);
-    }
+
+
+    
   
 
     async addReaction(drawingId: number, reaction: string, ipAddress: string): Promise<DrawingResponseDto> {

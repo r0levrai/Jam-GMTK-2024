@@ -1,9 +1,11 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, Query, Req } from "@nestjs/common";
+import { Controller, Get, Post, Put, Delete, Param, Body, Query, Req, BadRequestException } from "@nestjs/common";
 import { DrawingService } from "./drawing.service";
 import { Drawing } from "./drawing.entity";
 import { DrawingDto } from "./drawing.dto";
 import { Request } from 'express';
 import { DrawingResponseDto } from "./drawing.response.dto";
+import { PageOptionsDto } from "src/config/page/page-option.dto";
+import { PageDto } from "src/config/page/page.dto";
 
 
 
@@ -14,6 +16,36 @@ export class DrawingController {
     @Post()
     async createDrawing(@Body() drawingDto: DrawingDto): Promise<DrawingResponseDto> {
         return await this.drawingService.createDrawing(drawingDto);
+    }
+
+    @Get('all')
+    async getAllDrawings(@Query() pageOptionsDto: PageOptionsDto): Promise<PageDto<DrawingResponseDto>> {
+        try {
+            return await this.drawingService.getAllDrawings(pageOptionsDto);
+        } catch (error) {
+            console.error("Error fetching all drawings:", error);
+            throw new BadRequestException("Could not fetch all drawings");
+        }
+    }
+
+    @Get('ordered-by-likes')
+    async getDrawingsOrderedByLikes(@Query() pageOptionsDto: PageOptionsDto): Promise<PageDto<DrawingResponseDto>> {
+        try {
+            return await this.drawingService.getDrawingsOrderedByLikes(pageOptionsDto);
+        } catch (error) {
+            console.error("Error fetching drawings ordered by likes:", error);
+            throw new BadRequestException("Could not fetch drawings ordered by likes");
+        }
+    }
+
+    @Get('random')
+    async getRandomDrawings(@Query() pageOptionsDto: PageOptionsDto): Promise<PageDto<DrawingResponseDto>> {
+        try {
+            return await this.drawingService.getRandomDrawings(pageOptionsDto);
+        } catch (error) {
+            console.error("Error fetching random drawings:", error);
+            throw new BadRequestException("Could not fetch random drawings");
+        }
     }
 
     @Get('lasts')
@@ -28,12 +60,6 @@ export class DrawingController {
         return {drawings: drawings};
     }
 
-    @Get('random')
-    async getRandomDrawings(@Query('n') n: number) {
-        const drawings = await this.drawingService.getRandomDrawings(n);
-        return {drawings: drawings};
-    }
-
     @Get('user/:userName')
     async getDrawingsByUserName(@Param('userName') userName: string) {
         const drawings = await this.drawingService.getDrawingsByUserName(userName);
@@ -44,6 +70,11 @@ export class DrawingController {
     @Put(':id')
     async updateDrawing(@Param('id') id: number, @Body() updateData: Partial<Drawing>): Promise<DrawingResponseDto> {
         return await this.drawingService.updateDrawing(id, updateData);
+    }
+
+    @Get("one/:id")
+    async getDrawingById(@Param('id') id: number): Promise<DrawingResponseDto> {
+        return await this.drawingService.getDrawingById(id);
     }
 
     @Delete(':id')
