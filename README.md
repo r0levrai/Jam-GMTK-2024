@@ -18,7 +18,7 @@ This was made with a 4 days time limit, so expect some messy stuff xD
 ## Authors (in alphabetical order)
 
 - Art: [blueswanson](https://blueswanson.tumblr.com/), [Hopeful Undead](https://hopeful-undead.itch.io/)
-- Music & Sounds: [Osun](https://osun.itch.io/)
+- Music & Sounds: [Osun](https://www.youtube.com/@Osun6)
 - Prog: [Ankos](https://ansoko.itch.io/), [MiniWall](https://miniwall.itch.io/), [misterdoug](https://linktr.ee/ddkhaled), [r0levrai](https://r0levrai.itch.io/), [SuperKuku](https://superkuku.itch.io/)
 
 ## License
