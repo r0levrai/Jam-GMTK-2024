@@ -129,12 +129,13 @@ public class NetworkedDrawing
     {
         return JsonUtility.ToJson(this.data) + "\n" + this. GetTimeDifference();
     }
-    public static async Task<NetworkedDrawing[]> ReceiveLasts(int n, int page=1)
+    public static async Task<NetworkedDrawing[]> ReceiveLasts(int n, int page=1, string category="lasts", bool reverseOrder=false)
     {
+        Debug.Assert(category == "lasts" || category == "random" || category == "ordered-by-likes", "[NetworkManager] Unknown category");
         try
         {
             string route = NetworkManager.Instance.getLastNDrawingsRoute;
-            UnityWebRequest webRequest = UnityWebRequest.Get(NetworkManager.Instance.servers[0] + $"{route}?n={n}&page={page}");
+            UnityWebRequest webRequest = UnityWebRequest.Get(NetworkManager.Instance.servers[0] + $"{route}/{category}?n={n}&page={page}&order={(reverseOrder?"ASC":"DESC")}");
             //webRequest.certificateHandler = new CustomSSLCertificate();
             var response = await webRequest.SendWebRequestAsync();
             if (response.result == UnityWebRequest.Result.ConnectionError || response.result == UnityWebRequest.Result.ProtocolError)
@@ -181,6 +182,7 @@ public class NetworkedDrawing
     }
     public async Task<bool> SendReaction(string reaction)
     {
+        Debug.Assert(reaction == "like" || reaction == "funny" || reaction == "bad", "[NetworkManager] Unknown reaction");
         try
         {
             string route = NetworkManager.Instance.postDrawingsRoute + $"/{this.data.id}/{reaction}";
