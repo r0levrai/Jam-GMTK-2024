@@ -10,7 +10,7 @@ This was made with a 4 days time limit, so expect some messy stuff xD
 
 ## Tech
 
-- Backend in Nest and TypeScript backed by MariaDB, self-hosted on a raspberry pi 5.
+- Backend in NestJs and TypeScript backed by MariaDB, self-hosted on a raspberry pi 5.
 - Frontend in Unity and C#, exported as WebGL builds, using the new UI & input system, LineRenderers for the drawing, its points bounding box for size recognition, and a 44Mb neural sketch recogniser (Resnet18) finetuned on part of [those](https://quickdraw.withgoogle.com/data/) [datasets](https://cybertron.cg.tu-berlin.de/eitz/projects/classifysketch/) during the jam for the artistic score value and the 🍌 roast generation 🍌.
 - Art drawn in Photoshop and Clip Studio, music and sound composed in FL Studio.
 - Repo initially self-hosted on gitea in case we needed more than 10Go of storage or files larger than 2Go.
@@ -19,7 +19,7 @@ This was made with a 4 days time limit, so expect some messy stuff xD
 
 - Art: [blueswanson](https://blueswanson.tumblr.com/), [Hopeful Undead](https://hopeful-undead.itch.io/)
 - Music & Sounds: [Osun](https://osun.itch.io/)
-- Prog: [Ankos](https://ansoko.itch.io/), [MiniWall](https://miniwall.itch.io/), [misterdoug](https://misterdoug.itch.io/), [r0levrai](https://r0levrai.itch.io/), [SuperKuku](https://superkuku.itch.io/)
+- Prog: [Ankos](https://ansoko.itch.io/), [MiniWall](https://miniwall.itch.io/), [misterdoug](https://linktr.ee/ddkhaled), [r0levrai](https://r0levrai.itch.io/), [SuperKuku](https://superkuku.itch.io/)
 
 ## License
 
