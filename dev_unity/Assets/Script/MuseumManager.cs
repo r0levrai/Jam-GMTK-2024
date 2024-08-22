@@ -77,7 +77,7 @@ public class MuseumManager : MonoBehaviour
             listCards[i].setupScale(0.5f, 0.5f);
             listCards[i].setupPosition(new Vector3(30 / 5.0f * (i + 1) - 15, -7.5f), new Vector3(18 / 5.0f * (i + 1) - 9, -5.0f / 3.0f));
             listCards[i].time_ = -0.25f - Random.Range(0.0f, 0.25f);
-            listCards[i].Set(drawings[currentPage * cardsPerPage + i]);
+            listCards[i].Set(drawings[currentPage * cardsPerPage + i + 4]);
             listCards[i].easingout = true;
         }
         for (int i = 0; i < 4; i++)
@@ -90,7 +90,7 @@ public class MuseumManager : MonoBehaviour
             listCards[i+ 4].setupScale(0.5f, 0.5f);
             listCards[i+ 4].setupPosition(new Vector3(30 / 5.0f * (i + 1) - 15, 7.5f), new Vector3(18 / 5.0f * (i + 1) - 9, 5.0f/3.0f));
             listCards[i+ 4].time_ = -0.25f - Random.Range(0.0f, 0.25f);
-            listCards[i+ 4].Set(drawings[currentPage * cardsPerPage + i + 4]);
+            listCards[i+ 4].Set(drawings[currentPage * cardsPerPage + i]);
             listCards[i+ 4].easingout = true;
         }
 
@@ -106,7 +106,7 @@ public class MuseumManager : MonoBehaviour
             if(i > listCards.Count) { return; }
             listCards[i].rotate(0);
             listCards[i].setupScale(0.5f, 0.5f);
-            listCards[i].move(new Vector3(30 / 5.0f * (i + 1) - 15, 7.5f));
+            listCards[i].move(new Vector3(30 / 5.0f * (i + 1) - 15, -7.5f));
             listCards[i].time_ = Random.Range(0.0f, 0.2f);
             //listCards[i].easingout = false;
             listCards[i].blocked_bad = false;
@@ -119,7 +119,7 @@ public class MuseumManager : MonoBehaviour
             if (i+4 > listCards.Count) { return; }
             listCards[i+4].rotate(0);
             listCards[i+4].setupScale(0.5f, 0.5f);
-            listCards[i+4].move(new Vector3(30 / 5.0f * (i + 1) - 15, -7.5f));
+            listCards[i+4].move(new Vector3(30 / 5.0f * (i + 1) - 15, 7.5f));
             listCards[i+4].time_ = Random.Range(0.0f, 0.2f);
             //listCards[i+4].easingout = false;
             listCards[i+4].blocked_bad = false;
@@ -202,7 +202,21 @@ public class MuseumManager : MonoBehaviour
                 case 0:
                     if(request)
                     {
-                        drawings = await NetworkedDrawing.ReceiveLasts(nCards);
+                        drawings = await NetworkedDrawing.ReceiveLasts(nCards, 1, "lasts");
+                        request = false;
+                    }
+                    break;
+                case 1:
+                    if (request)
+                    {
+                        drawings = await NetworkedDrawing.ReceiveLasts(nCards, 1, "ordered-by-likes");
+                        request = false;
+                    }
+                    break;
+                case 2:
+                    if (request)
+                    {
+                        drawings = await NetworkedDrawing.ReceiveLasts(nCards, 1, "random");
                         request = false;
                     }
                     break;

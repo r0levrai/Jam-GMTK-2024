@@ -144,8 +144,8 @@ public class EndCard : MonoBehaviour
         networkedDrawing = drawing;
 
         likeCount.text = like_score.ToString();
-        laughCount.text = like_score.ToString();
-        perplexedCount.text = like_score.ToString();
+        laughCount.text = funny_score.ToString();
+        perplexedCount.text = bad_score.ToString();
 
     }
 

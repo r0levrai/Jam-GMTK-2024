@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/style.uss?fileID=7433441132597879392&amp;guid=978176127b0706241a127fd3f6e71606&amp;type=3#style" />
     <ui:GroupBox name="Controls" style="flex-direction: row; align-self: center; margin-top: 30px;">
-        <ui:Button text="Last" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LastButton" class="basic-button" />
+        <ui:Button text="Latest" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LastButton" class="basic-button" />
         <ui:Button text="Most liked" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MostButton" class="basic-button" style="font-size: 90px;" />
         <ui:Button text="Random" parse-escape-sequences="true" display-tooltip-when-elided="true" name="RandomButton" class="basic-button" />
     </ui:GroupBox>

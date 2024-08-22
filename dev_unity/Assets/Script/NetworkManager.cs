@@ -215,6 +215,21 @@ public class NetworkedDrawing
                 return false;
             }
             Debug.Log("Success: " + response.downloadHandler.text);
+
+
+            if(reaction == "like")
+            {
+                this.data.like += 1;
+            }
+            if (reaction == "funny")
+            {
+                this.data.funny += 1;
+            }
+            if (reaction == "bad")
+            {
+                this.data.bad += 1;
+            }
+
             return true;
         }
         catch (Exception e)
