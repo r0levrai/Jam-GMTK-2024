@@ -1,8 +1,14 @@
 The main repo for our game 🍌 [Cavendish's Perfect Proportions](https://r0levrai.itch.io/cavendishs-perfect-proportions) 🍌, made in 4 days for the [GMTK 2024 Game Jam](https://itch.io/jam/gmtk-2024)!
-
 Rating and comments from the jam are [here](https://itch.io/jam/gmtk-2024/rate/2901708).
 
+This repo store the art/music/classifier using [git-lfs](https://git-lfs.com).
+If you use the command line, make sure git lfs is installed, and run `git lfs install` in the repo folder after cloning.
+If you use github desktop, you're good to go.
+
+
 This was made with a 4 days time limit, so expect some messy stuff xD
+
+If this made your day, consider dropping us a message on itch or gitea so we know if open sourcing is worthwhile for future jams and projects!
 
 ## Features
 
@@ -28,5 +34,3 @@ Code is under the [MIT License](https://opensource.org/license/mit) (~= do what 
 Art, music and sounds are under [CC-BY](https://creativecommons.org/licenses/by/4.0/) (~= do what you want but credit us!).
 
 Real-world object images that we scale against your drawing in [`dev_unity/Assets/Sprites/RealObjects`](./dev_unity/Assets/Sprites/RealObjects) may need [their own attributions](./objects_attributions).
-
-If this made your day, consider dropping us a message on itch or gitea so we know if open sourcing is worthwhile for future jams and projects!
