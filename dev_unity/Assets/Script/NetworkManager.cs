@@ -27,6 +27,17 @@ public class NetworkManager : MonoSingleton<NetworkManager>
 public struct ReceivedDrawingList
 {
     public ReceivedDrawing[] drawings;
+    public ReceivedMetadata meta;
+}
+
+public struct ReceivedMetadata
+{
+    public int page;
+    public int take; // number of drawings per page, correspon to the 'n' sent parametter
+    public int itemCount;
+    public int pageCount;
+    public bool hasPreviousPage;
+    public bool hasNextPage;
 }
 
 [Serializable]
@@ -118,12 +129,12 @@ public class NetworkedDrawing
     {
         return JsonUtility.ToJson(this.data) + "\n" + this. GetTimeDifference();
     }
-    public static async Task<NetworkedDrawing[]> ReceiveLasts(int n)
+    public static async Task<NetworkedDrawing[]> ReceiveLasts(int n, int page=1)
     {
         try
         {
             string route = NetworkManager.Instance.getLastNDrawingsRoute;
-            UnityWebRequest webRequest = UnityWebRequest.Get(NetworkManager.Instance.servers[0] + $"{route}?n={n}");
+            UnityWebRequest webRequest = UnityWebRequest.Get(NetworkManager.Instance.servers[0] + $"{route}?n={n}&page={page}");
             //webRequest.certificateHandler = new CustomSSLCertificate();
             var response = await webRequest.SendWebRequestAsync();
             if (response.result == UnityWebRequest.Result.ConnectionError || response.result == UnityWebRequest.Result.ProtocolError)
