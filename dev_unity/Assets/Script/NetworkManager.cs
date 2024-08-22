@@ -12,6 +12,8 @@ public class NetworkManager : MonoSingleton<NetworkManager>
     public string[] servers;
     public string postDrawingsRoute;
     public string getLastNDrawingsRoute;
+    public string[] categories;
+    public string[] reactions;
     //[TextArea(1, 1000)] public string sslCertificatePublicKey;
     void Awake()
     {
@@ -30,6 +32,7 @@ public struct ReceivedDrawingList
     public ReceivedMetadata meta;
 }
 
+[Serializable]
 public struct ReceivedMetadata
 {
     public int page;
@@ -129,33 +132,49 @@ public class NetworkedDrawing
     {
         return JsonUtility.ToJson(this.data) + "\n" + this. GetTimeDifference();
     }
-    public static async Task<NetworkedDrawing[]> ReceiveLasts(int n, int page=1, string category="lasts", bool reverseOrder=false)
+    private static async Task<Nullable<ReceivedDrawingList>> Receive(int n, int page = 1, string category = "lasts", bool reverseOrder = false)
     {
-        Debug.Assert(category == "lasts" || category == "random" || category == "ordered-by-likes", "[NetworkManager] Unknown category");
         try
         {
             string route = NetworkManager.Instance.getLastNDrawingsRoute;
-            UnityWebRequest webRequest = UnityWebRequest.Get(NetworkManager.Instance.servers[0] + $"{route}/{category}?n={n}&page={page}&order={(reverseOrder?"ASC":"DESC")}");
+            UnityWebRequest webRequest = UnityWebRequest.Get(NetworkManager.Instance.servers[0] + $"{route}/{category}?n={n}&page={page}&order={(reverseOrder ? "ASC" : "DESC")}");
             //webRequest.certificateHandler = new CustomSSLCertificate();
             var response = await webRequest.SendWebRequestAsync();
             if (response.result == UnityWebRequest.Result.ConnectionError || response.result == UnityWebRequest.Result.ProtocolError)
             {
                 Debug.LogError("Error: " + response.error);
-                return new NetworkedDrawing[0];
+                return null;
             }
             else
             {
                 string json = response.downloadHandler.text;
                 Debug.Log("Success: " + json);
-                ReceivedDrawing[] data = JsonUtility.FromJson<ReceivedDrawingList>(json).drawings;
-                return data.Select(rd => new NetworkedDrawing(rd)).ToArray();
+                return JsonUtility.FromJson<ReceivedDrawingList>(json);
             }
         }
         catch (Exception e)
         {
             Debug.LogError("Exception: " + e);
+            return null;
+        }
+    }
+    public static async Task<NetworkedDrawing[]> ReceiveLasts(int n, int page=1, string category="lasts", bool reverseOrder=false)
+    {
+        Debug.Assert(NetworkManager.Instance.categories.Contains(category), $"[NetworkManager] Unknown category {category}");
+        Nullable<ReceivedDrawingList> data = await Receive(n, page, category, reverseOrder);
+        if (data.HasValue)
+        {
+            return data.Value.drawings.Select(rd => new NetworkedDrawing(rd)).ToArray();
+        }
+        else
+        {
             return new NetworkedDrawing[0];
         }
+    }
+    public static async Task<int> GetTotalNumber()
+    {
+        Nullable<ReceivedDrawingList> data = await Receive(1);
+        return data.HasValue ? data.Value.meta.itemCount : 0;
     }
     public async Task<bool> Send()
     {
@@ -182,7 +201,8 @@ public class NetworkedDrawing
     }
     public async Task<bool> SendReaction(string reaction)
     {
-        Debug.Assert(reaction == "like" || reaction == "funny" || reaction == "bad", "[NetworkManager] Unknown reaction");
+        Debug.Assert(NetworkManager.Instance.reactions.Contains(reaction),
+            $"[NetworkManager] Unknown reaction {reaction}");
         try
         {
             string route = NetworkManager.Instance.postDrawingsRoute + $"/{this.data.id}/{reaction}";
