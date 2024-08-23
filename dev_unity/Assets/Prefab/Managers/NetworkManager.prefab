@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   servers:
-  - https://draw-to-scale.r0levrai.net:3000
+  - https://draw-to-scale.r0levrai.net:33333
   postDrawingsRoute: /drawings
   getLastNDrawingsRoute: /drawings
   categories:
